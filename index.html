@@ -6,19 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!--CSS Styles -->
-    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="style.css" />
 
     <!-- Favicons -->
     <link
       rel="apple-touch-icon"
       sizes="180x180"
-      href="/images/apple-touch-icon.png"
+      href="images/apple-touch-icon.png"
     />
     <link
       rel="icon"
       type="image/png"
       sizes="32x32"
-      href="/images/favicon-32x32.png"
+      href="images/favicon-32x32.png"
     />
 
     <!-- Animate CSS CDN -->
@@ -30,9 +30,14 @@
   </head>
 
   <body>
+    <!-- Go to Top Button -->
+    <button title="Go to Top" id="myBtn" onclick="topFunction()">
+      <ion-icon name="chevron-up-outline"></ion-icon>
+    </button>
+
     <!-- Navbar -->
     <nav>
-        <h1>TIM LIU</h1>
+        <h1>Timothy Haiyi Liu</h1>
         <ul class="navigation">
           <li><a href="#about" class="nav-link">About</a></li>
           <li><a href="#skills" class="nav-link">Skills</a></li>
@@ -45,10 +50,78 @@
     </nav>
     
     <!-- Hero Section -->
-
-    <!-- More about -->
+    <section class="hero">
+      <img
+        src="images/heroImage.JPG"
+        alt="tim-liu"
+        loading="lazy"
+        class="hero-img"
+      />
+      <div class="bio animate__animated animate__fadeIn">
+        <h2 class="bio-title">TIM LIU</h2>
+        <div class="bio-text"><p>Finance and entreneurship student at Boston College</p></div>
+      </div>
+      <br>
+    </section>
+    
+    <section class="about" id="about">
+      <h2>About Me</h2>
+      <p>
+        I am an avid learner who enjoys solving challenging problems, absorbing new knowledge, and working collaboratively with others. 
+        I seek to embody my leadership skills through creating a meaningful impact on others.
+        My other passions revolve around sports, fitness, and nutrition. 
+        As a food lover, I also enjoy traveling to try different cuisines from around the world and studying and cooking food.
+      </p>
+    </section>
 
     <!-- Skills section -->
+    <section class = skills>
+      <h2 class="skill-header">Technical Skills</h2>
+      <div class="skills-wrapper">
+        <div class="first-set animate__animated animate__pulse">
+          <div>
+            <img
+              src="images/r.png"
+              alt=""
+              loading="lazy"
+              class="icon icon-card"
+            />
+            R
+          </div>
+          <div>
+            <img
+              src="images/python.png"
+              alt=""
+              loading="lazy"
+              class="icon icon-card"
+            />
+            Python
+          </div>
+          <div>
+            <img
+              src="images/excel.png"
+              alt=""
+              loading="lazy"
+              class="icon icon-card"
+            />
+            Excel
+          </div>
+          <div>
+          <img
+            src="images/powerpoint.png"
+            alt=""
+            loading="lazy"
+            class="icon icon-card"
+          />
+            Powerpoint
+          </div>
+        </div>
+
+        <div class="second-set animate__animated animate__pulse">
+          
+        </div>
+      </div>
+    </section>
 
     <!-- Projects section -->
 
@@ -60,8 +133,8 @@
 
     <!-- Footer section -->
 
-    <!-- Website scripts -->
-    <script src="/script.js"></script>
+    <!-- Website scripts (PUT AT END! Needs to render everything for DOM)--> 
+    <script src="script.js"></script>
 
     <!-- Ion icons scripts -->
     <script
