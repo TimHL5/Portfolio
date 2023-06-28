@@ -8,18 +8,14 @@
     <!--CSS Styles -->
     <link rel="stylesheet" href="style.css" />
 
+    <!-- Website scripts (PUT AT END! Needs to render everything for DOM)--> 
+    <!--or use defer-->
+    <script defer  src="script.js"></script>
+
     <!-- Favicons -->
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="images/apple-touch-icon.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="images/favicon-32x32.png"
-    />
+    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png"/>
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png"/>
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 
     <!-- Animate CSS CDN -->
     <link
@@ -37,7 +33,7 @@
 
     <!-- Navbar -->
     <nav>
-        <h1>Timothy Haiyi Liu</h1>
+        <img src = "images/chrome_icon.png" alt = "logo" class = "logo">
         <ul class="navigation">
           <li><a href="#about" class="nav-link">About</a></li>
           <li><a href="#skills" class="nav-link">Skills</a></li>
@@ -57,73 +53,217 @@
         loading="lazy"
         class="hero-img"
       />
-      <div class="bio animate__animated animate__fadeIn">
+      <div class="bio typewriter">
         <h2 class="bio-title">TIM LIU</h2>
-        <div class="bio-text"><p>Finance and entreneurship student at Boston College</p></div>
+        <div class="bio-text animate__animated animate__fadeInLeft"><p>
+          Finance and entreneurship student at Boston College</p></div>
       </div>
       <br>
     </section>
     
+    <!-- About Me Section -->
     <section class="about" id="about">
       <h2>About Me</h2>
-      <p>
+      <div class = "intro">
+        <p>
         I am an avid learner who enjoys solving challenging problems, absorbing new knowledge, and working collaboratively with others. 
         I seek to embody my leadership skills through creating a meaningful impact on others.
         My other passions revolve around sports, fitness, and nutrition. 
         As a food lover, I also enjoy traveling to try different cuisines from around the world and studying and cooking food.
-      </p>
+        </p>
+      </div>
+    <section class = "linkedin-section" id = "linkedin-section">
+      <div class = "linkedin">
+        <a href="https://www.linkedin.com/in/timothyhaiyiliu/">
+          <span>Learn more about me on</span>
+          <img src="images/linkedin.png" alt="linkedin" loading="lazy" />
+        </a>
+      </div>
     </section>
 
+    <div class="education">
+      <h3>Education</h3>
+      <div class="education-container">
+        <div class="education-card">
+          <div class="education-img">
+            <img src="images/bc_logo.png" alt="bc_logo" loading="lazy" />
+          </div>
+          <div class="education-info">
+            <h4>
+              Boston College<span class = "unbold smaller">, Expected Graduation: May 2026</span>
+            </h4>
+            <p>Concentration: Finance and Entrepreneurship</p>
+            <p>Minor: Computer Science</p>
+            <p>Cumulative GPA: 3.968</p>
+          </div>
+        </div>
+        <div class="education-card">
+          <div class="education-img">
+            <img src="images/is_logo.png" alt="is_logo" loading="lazy" />
+          </div>
+          <div class="education-info">
+            <h4>
+              Island School<span class = "unbold smaller">, 2015 to 2022</span>
+            </h4>
+            <p>International Baccalaureate (IB) Diploma</p>
+            <p>HL Subjects: Maths AA, Physics, Economics</p>
+            <p>45 out of 45 points</p>
+          </div>
+        </div>
+      </div>
+    </section>
     <!-- Skills section -->
-    <section class = skills>
-      <h2 class="skill-header">Technical Skills</h2>
+    <section class = "skills" id = "skills">
+      <h2>Technical Skills</h2>
       <div class="skills-wrapper">
-        <div class="first-set animate__animated animate__pulse">
-          <div>
+        <div class="first-set">
+          <div class = "icon-box hidden">
             <img
               src="images/r.png"
               alt=""
               loading="lazy"
               class="icon icon-card"
             />
-            R
+            <span class="icon-text">R</span>
           </div>
-          <div>
+          <div class = "icon-box hidden">
             <img
               src="images/python.png"
               alt=""
               loading="lazy"
               class="icon icon-card"
             />
-            Python
+            <span class="icon-text">Python</span>
           </div>
-          <div>
+          <div class = "icon-box hidden">
             <img
               src="images/excel.png"
               alt=""
               loading="lazy"
               class="icon icon-card"
             />
-            Excel
+            <span class="icon-text">Excel</span>
           </div>
-          <div>
+          <div class = "icon-box hidden">
           <img
             src="images/powerpoint.png"
             alt=""
             loading="lazy"
             class="icon icon-card"
           />
-            Powerpoint
+          <span class="icon-text">PowerPoint</span>
           </div>
         </div>
 
         <div class="second-set animate__animated animate__pulse">
-          
+          <div class = "icon-box hidden">
+            <img
+              src="images/html.png"
+              alt=""
+              loading="lazy"
+              class="icon icon-card"
+            />
+            <span class="icon-text">HTML</span>
+          </div>
+          <div class = "icon-box hidden">
+            <img
+              src="images/css.png"
+              alt=""
+              loading="lazy"
+              class="icon icon-card"
+            />
+            <span class="icon-text">CSS</span>
+          </div>
+          <div class = "icon-box hidden">
+            <img
+              src="images/javascript.png"
+              alt=""
+              loading="lazy"
+              class="icon icon-card"
+            />
+            <span class="icon-text">Javascript</span>
+          </div>
+          <div class = "icon-box hidden">
+          <img
+            src="images/java.png"
+            alt=""
+            loading="lazy"
+            class="icon icon-card"
+          />
+          <span class="icon-text">Java</span>
+          </div>
+        </div>          
         </div>
       </div>
     </section>
 
     <!-- Projects section -->
+    <section class="projects" id="projects">
+      <h2>Recent works and projects</h2>
+      <div class="projects-container">
+        <div class="project-card">
+          <div class="project-img">
+            <a href="https://drive.google.com/file/d/1hlU7MsSnUep54E5VAmstLRH1E1ayx2rY/view?usp=sharing">
+              <img
+                src="images/oocl.png"
+                alt="stock"
+                loading="lazy"
+              />
+            </a>
+          </div>
+          <div class="project-title">
+            <h4>Consulting Presentation</h4>
+          </div>
+            <p class="project-info">
+              Working as a summer intern at OOCL, I synthesized information on the cash capabilities of 3 banks in Asia.
+              I then created a PowerPoint presentation to present my findings and provide recommendations. 
+            </p>
+          <a href="https://drive.google.com/file/d/1hlU7MsSnUep54E5VAmstLRH1E1ayx2rY/view?usp=sharing">
+            <button class="project-button">Check it out!</button>
+          </a>
+
+          <div class="project-card">
+            <div class="project-img">
+              <a href="https://www.youtube.com/watch?v=wlirwq7Wp6A">
+                <img
+                  src="images/hkust.png"
+                  alt="stock"
+                  loading="lazy"
+                />
+              </a>
+            </div>
+            <div class="project-title">
+              <h4>HKUST Video Competition</h4>
+            </div>
+              <p class="project-info">
+                Filmed and edited a 3 minute video for the HKUST School of Engineering "What is Engineering?" Video Competition
+                using Adobe Premiere Pro. Received a Merit Award.
+              </p>
+            <a href="https://www.youtube.com/watch?v=wlirwq7Wp6A">
+              <button class="project-button">Check it out!</button>
+            </a>
+
+            <div class="project-card">
+              <div class="project-img">
+                <a href="https://drive.google.com/file/d/1-1avzS6o6S2j3iPT0W6jlbBpV7sFcRBb/view?usp=sharing">
+                  <img
+                    src="images/oocl.png"
+                    alt="stock"
+                    loading="lazy"
+                  />
+                </a>
+              </div>
+              <div class="project-title">
+                <h4>Stock Price Modelling</h4>
+              </div>
+                <p class="project-info">
+                  For my IB Maths AA HL Exploration, I wrote a paper on modeling and predicting stocks and cryptocurrency 
+                  price movements using Markov chains by self-learning advanced maths topics. Achieved near full marks.
+                </p>
+              <a href="https://drive.google.com/file/d/1-1avzS6o6S2j3iPT0W6jlbBpV7sFcRBb/view?usp=sharing">
+                <button class="project-button">Check it out!</button>
+              </a>
+    </section>
 
     <!-- Contact section -->
 
@@ -132,9 +272,6 @@
     <!-- Scroll to top -->
 
     <!-- Footer section -->
-
-    <!-- Website scripts (PUT AT END! Needs to render everything for DOM)--> 
-    <script src="script.js"></script>
 
     <!-- Ion icons scripts -->
     <script

@@ -11,7 +11,7 @@
     --primary-color: #A31F34;
     --secondary-color: #C4961A;
     --primary-shadow: #8C8179;
-    --secondary-shadow: ##8996A0;
+    --secondary-shadow: #8996A0;
     --bottom-margin: 0.5rem;
     --bottom-margin-2: 1rem;
     --line-height: 1.7rem;
@@ -21,7 +21,7 @@
 
 html {
     scroll-behavior: smooth;
-    scroll-padding-top: 5.5rem; 
+    scroll-padding-top: 7rem; 
 }
 
 /* CSS Resets */
@@ -43,28 +43,47 @@ ul {
     z-index: 99;
     background-color: var(--primary-color);
     color: white;
-    border: 0;
+    border: 1.5;
     border-radius: 50%;
     padding: 0.45rem 0.8rem;
     font-size: 2rem;
     cursor: pointer;
     transition: var(--transition);
+    box-shadow: 2px 3px 3px var(--primary-shadow);
   }
 
 #myBtn:hover{
     background-color: var(--secondary-color);
+    box-shadow: 2px 3px 3px var(--secondary-color);
   } 
-a {
-    text-decoration: none;
-    color: var(--primary-color);
-}
-  
-a:hover {
-    color: var(--secondary-color);
-}
-  
+
+/* Font Settings */  
 body {
     font-family: var(--font-family);
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+h3 {
+    font-size: 1.8rem;
+}
+
+h4 {
+    font-size: 1.5rem;
+}
+
+p {
+    font-size: 1.2rem;
+    line-height: var(--line-height);
+}
+
+/* Navigation Bar */
+.logo{
+    height: 5rem;
+    width: 5rem;
+    border-radius: 10%;
 }
 
 nav {
@@ -75,7 +94,7 @@ nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1.5rem 3.5rem;
+    padding: 1rem 3rem;
     background-color: var(--bg-color);
     box-shadow: 0 3px 5px var(--primary-shadow);
 }
@@ -90,20 +109,22 @@ nav a {
     color: white;
     transition: var(--transition);
     background-color: var(--primary-color);
-    padding: 0.5rem 1rem;
+    padding: 0.7rem 2rem;
     border-radius: 0.25rem;
+    text-decoration: none;
   }
 nav a:hover {
     color: var(--secondary-color);
     border-bottom: 2px solid var(--secondary-color);
     background-color: var(--primary-color);
-    padding: 0.8rem 1.3rem;
+    padding: 1rem 2.5rem;
     box-shadow: 0 3px 5px rgb(0, 0, 0);
   }
   
 nav ul {
     display: flex;
     gap: 1.9rem;
+    transition: all var(--transition) ease;
   }
   
 nav ul li:hover{
@@ -119,6 +140,7 @@ nav ul li:hover{
     display: none;
   }
 
+/* Hero Section */
 .hero {
     align-items: center;
     justify-content: center;
@@ -139,6 +161,7 @@ nav ul li:hover{
     left: 8rem;
     color: white;
     line-height: 7rem;
+    padding-right: 1rem;
     border-bottom: 3px solid white;
 }
 
@@ -152,9 +175,32 @@ nav ul li:hover{
     color: white;
 }
 
+/*Typewriter effect */
+.typewriter h2 {
+    overflow: hidden; /* Ensures the content is not revealed until the animation */
+    border-right: .15em solid var(--primary-color); /* The typwriter cursor */
+    white-space: nowrap; /* Keeps the content on a single line */
+    margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+    animation: 
+      typing 1.5s steps(40, end),
+      blink-caret .5s step-end infinite;
+  }
+  
+  /* The typing effect */
+  @keyframes typing {
+    from { width: 0 }
+    to { width: 30rem }
+  }
+
+.animate__animated.animate__fadeInLeft{
+    --animate-duration: 2s;
+}
+
+/* About Me Section */
+
 .about {
     background-color: var(--primary-color);
-    padding: 2rem 8rem;
+    padding: 2rem 4rem;
     margin-top: 0;
   }
   
@@ -164,37 +210,184 @@ nav ul li:hover{
     color: white;
   }
   
-.about p {
+.intro{
     line-height: var(--line-height);
     font-size: 1.2rem;
     color: white;
+    padding-top: 1rem;
+    padding-bottom: 0rem;
+    border-top: 3px solid white;
+    margin-bottom: 0rem;
   }
 
+.linkedin{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    margin-bottom: 0.5rem;
+    padding: 1rem;
+    text-align: center;
+    width: 25%
+}
+
+.linkedin a {
+    text-decoration: none;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    transition: all var(--transition) ease;
+}
+  
+.linkedin a:hover {
+    text-decoration: none;
+    color: var(--secondary-color);
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.linkedin img{
+    display:block;
+    padding: 0.3rem;
+    width: 40%;
+    height: 40%;
+    margin: 0 auto; /* center the image horizontally */
+    transition: all var(--transition) ease;
+    box-shadow: 2px 2px 2px black;
+}
+
+.linkedin a:hover img {
+    width: 60%;
+    box-shadow: 2px 2px 2px black;
+    background-color: var(--secondary-color);
+}
+
+/* Education Section */
+.education{
+    border-top: 3px solid white;
+    background-color: var(--bg-color);
+    margin-bottom: 2rem;
+    padding-top: 1rem;
+}
+.education h3{
+    background-color: var(--secondary-color);
+    padding-left: 2rem;
+    padding-bottom: 0.5rem;
+    padding-top: 0.5rem;
+    color: white;
+    box-shadow: 0 3px 5px var(--primary-shadow);
+}
+.education-container{
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+.education-card{
+    display: flex;
+}
+
+.education-card img{
+    width: 6rem;
+    height: 6rem;
+    margin-right: 2rem;
+    margin-left: 2rem;
+}
+
+.education-info p{
+    color: black;
+    margin-bottom: 0.5rem;
+}
+
+.education-info h4{
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.unbold{
+    font-weight: normal;
+}
+
+.smaller{
+    font-size: 1rem;
+    color: black;
+}
+
+  /* Skills Section */
 .skills {
     background-color: var(--bg-color);
     text-align: center;
-    padding: 2.5rem;
+    padding: 2.5rem 4rem;
   }
   
-.skill-header {
-    margin-bottom: 1rem;
+.skills h2 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
   }
   
 .icon {
-    width: 12rem;
-    height: 11.5rem;
+    width: 8rem;
+    height: 7.5rem;
   }
 
 .icon-card {
     background-color: #fff;
     border-radius: 11px;
     box-shadow: 0 3px 10px var(--primary-shadow);
-    margin: 3rem 3rem;
+    margin: 1.5rem 3rem;
     padding: 1rem;
   }
 
-  .first-set {
+.first-set {
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-bottom: 1rem;
   }
+
+.second-set {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 1rem;
+  }
+.icon-text{
+    font-size: 1.5rem;
+    color: black;
+    margin-top: 0rem;
+  }
+
+.icon-box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+.hidden {
+    opacity: 0; 
+    filter: blur(5px);
+    transform: translateX(-100%);
+    transition: all 2s;
+}   
+
+.show {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateX(0);
+}
+
+@media(prefers-reduced-motion){
+    .hidden {
+        transition: none;
+    }
+}
+
+.icon-box:nth-child(2) {transition-delay: 0.2s;}
+.icon-box:nth-child(3) {transition-delay: 0.4s;} 
+.icon-box:nth-child(4) {transition-delay: 0.6s;}
+.icon-box:nth-child(5) {transition-delay: 0.8s;}
+.icon-box:nth-child(6) {transition-delay: 1s;}
+.icon-box:nth-child(7) {transition-delay: 1.2s;}
+.icon-box:nth-child(8) {transition-delay: 10s;}
+
