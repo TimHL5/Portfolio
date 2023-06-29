@@ -1,7 +1,20 @@
 let button = document.getElementById("myBtn");
 
-// Preloader Screen
+// Get a reference to the preloader element
+var preloader = document.getElementById('preloader');
 
+// Hide the preloader when the page is loaded
+window.onload = function() {
+    preloader.style.display = 'none';
+};
+
+// Delay the name showing up during delay
+const nameElement = document.getElementById("name");
+nameElement.style.visibility = "hidden";
+// Set a timeout to reveal the 'name' element after the delay
+setTimeout(function() {
+  nameElement.style.visibility = "visible";
+}, 3100);
 
 // When the user scrolls down 20px from the top of the document, show the button
 window.onscroll = function() {scrollFunction()};
