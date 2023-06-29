@@ -1,5 +1,14 @@
 let button = document.getElementById("myBtn");
 
+// Preloader Screen
+var loader = document.getElementById("preloader");
+window.addEventListener("load", function(){ 
+    loader.style.display = "none";
+})
+
+// Scroll animation for text
+
+
 // When the user scrolls down 20px from the top of the document, show the button
 window.onscroll = function() {scrollFunction()};
 
@@ -31,3 +40,4 @@ const observer = new IntersectionObserver((entries) => {
 
 const hiddenElements = document.querySelectorAll('.hidden');
 hiddenElements.forEach((el) => observer.observe(el));
+
