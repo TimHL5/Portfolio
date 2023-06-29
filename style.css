@@ -10,6 +10,8 @@
     --bg-color: #F3F3F1;
     --primary-color: #A31F34;
     --secondary-color: #C4961A;
+    --gray-color: #8A8B8C;
+    --ligher-gray-color: #C2C0BF;
     --primary-shadow: #8C8179;
     --secondary-shadow: #8996A0;
     --bottom-margin: 0.5rem;
@@ -216,7 +218,7 @@ nav ul li:hover{
     background-color: var(--primary-color);
     padding: 2rem 4rem;
     margin-top: 0;
-    min-height: 80vh;
+    min-height: 100vh;
   }
   
 .about h2 {
@@ -232,7 +234,7 @@ nav ul li:hover{
     padding-top: 1rem;
     padding-bottom: 0rem;
     border-top: 3px solid white;
-    margin-bottom: 0rem;
+    margin-bottom: 2rem;
   }
 
 .linkedin{
@@ -243,17 +245,18 @@ nav ul li:hover{
     margin-bottom: 0.5rem;
     padding: 1rem;
     text-align: center;
-    width: 25%
+    width: 25%;
+    text-align: center;
 }
 
 .linkedin a {
     text-decoration: none;
-    color: white;
+    color: black;
     font-size: 1.2rem;
     font-weight: bold;
     transition: all var(--transition) ease;
 }
-  
+
 .linkedin a:hover {
     text-decoration: none;
     color: var(--secondary-color);
@@ -264,17 +267,15 @@ nav ul li:hover{
 .linkedin img{
     display:block;
     padding: 0.3rem;
-    width: 40%;
-    height: 40%;
-    margin: 0 auto; /* center the image horizontally */
+    max-width: 50%;
+    max-height: 50%;
     transition: all var(--transition) ease;
-    box-shadow: 2px 2px 2px black;
+    margin: 0 auto;
+    border-radius: 5%;
 }
 
 .linkedin a:hover img {
-    width: 60%;
-    box-shadow: 2px 2px 2px black;
-    background-color: var(--secondary-color);
+    display:block;
 }
 
 /* Education Section */
@@ -297,7 +298,7 @@ nav ul li:hover{
     align-items: center;
     justify-content: left;
     padding-top: 2rem;
-    padding-bottom: 2rem;
+    padding-bottom: 1rem;
 }
 .education-card{
     display: flex;
@@ -329,7 +330,7 @@ nav ul li:hover{
     color: black;
 }
 
-  /* Skills Section */
+/* Skills Section */
 .skills {
     background-color: var(--bg-color);
     text-align: center;
@@ -339,6 +340,7 @@ nav ul li:hover{
 .skills h2 {
     color: var(--primary-color);
     margin-bottom: 0.5rem;
+    border-bottom: 3px solid var(--primary-color);
   }
   
 .icon {
@@ -406,3 +408,70 @@ nav ul li:hover{
 .icon-box:nth-child(7) {transition-delay: 1.2s;}
 .icon-box:nth-child(8) {transition-delay: 10s;}
 
+/* Projects Section */
+.projects {
+    background-color: var(--gray-color);
+    padding: 2.5rem 4rem;
+  }
+  
+.project-pic {
+    width: 100%;
+    height: auto;
+    padding-bottom: 0.5rem;
+}
+
+.projects-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+.projects-title {
+    text-align: center;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    color: white;
+    border-bottom: 3px solid white;
+  }
+  
+.project-container {
+    width: 25rem;
+    height: 30rem;
+  }
+
+.project-container p {
+    padding: 0.2rem;
+    text-align: center;
+    color: black;
+  }
+  
+.project-title {
+    text-align: center;
+    padding-bottom: 0.2rem;
+    color: var(--primary-color);
+  }
+  
+.project-details {
+    margin-bottom: var(--bottom-margin);
+  }
+  
+.project-card {
+    background-color: var(--bg-color);
+    border-radius: 11px;
+    box-shadow: 0 3px 10px var(--primary-shadow);
+    padding: 20px;
+    margin: 1rem;
+  }
+
+  .project-link {
+    text-decoration: none;
+    color: inherit;
+    transition: all var(--transition) ease;
+  }
+  .project-link:hover {
+    text-decoration: none;
+    color: inherit;
+  }
+  .project-link:hover .project-container{
+   box-shadow: 0 0px 20px 5px var(--secondary-color);
+}
