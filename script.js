@@ -1,13 +1,5 @@
 let button = document.getElementById("myBtn");
 
-// Get a reference to the preloader element
-var preloader = document.getElementById('preloader');
-
-// Hide the preloader when the page is loaded
-window.onload = function() {
-    preloader.style.display = 'none';
-};
-
 // Delay the name showing up during delay
 const nameElement = document.getElementById("name");
 nameElement.style.visibility = "hidden";
@@ -74,4 +66,20 @@ form.addEventListener("submit", async (event) => {
   thankYouMessage.style.display = "block";
 });
 
+// Nav hamburgerburger selections
 
+const burger = document.querySelector("#burger-menu");
+const ul = document.querySelector("nav ul");
+const nav = document.querySelector("nav");
+
+burger.addEventListener("click", () => {
+    ul.classList.toggle("show");
+  });
+  
+const navLink = document.querySelectorAll(".nav-link");
+
+navLink.forEach((link) =>
+  link.addEventListener("click", () => {
+    ul.classList.remove("show");
+  })
+);

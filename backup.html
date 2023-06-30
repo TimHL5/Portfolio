@@ -48,3 +48,14 @@
       </div>
     </div>
   </section>
+
+    <!-- Pre Load Screen -->
+    <div id = "preloader"></div>
+    
+// Get a reference to the preloader element
+var preloader = document.getElementById('preloader');
+
+// Hide the preloader when the page is loaded
+window.onload = function() {
+    preloader.style.display = 'none';
+};

@@ -142,7 +142,8 @@ nav a:hover {
   
 nav ul {
     display: flex;
-    gap: 1.9rem;
+    grid-auto-flow: column;
+    gap: 2rem;
     transition: all var(--transition) ease;
   }
   
@@ -159,6 +160,15 @@ nav ul li:hover{
     display: none;
   }
 
+.bars{
+    font-size: 3rem;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+
+.bars:hover{
+    color: var(--secondary-color);
+  }
 /* Hero Section */
 .hero {
     align-items: center;
@@ -236,58 +246,17 @@ nav ul li:hover{
     font-size: 1.2rem;
     color: white;
     padding-top: 1rem;
-    padding-bottom: 0rem;
+    padding-bottom: 1rem;
     border-top: 3px solid white;
+    border-bottom: 3px solid white;
     margin-bottom: 2rem;
   }
 
-.linkedin{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto;
-    margin-bottom: 0.5rem;
-    padding: 1rem;
-    text-align: center;
-    width: 25%;
-    text-align: center;
-}
-
-.linkedin a {
-    text-decoration: none;
-    color: black;
-    font-size: 1.2rem;
-    font-weight: bold;
-    transition: all var(--transition) ease;
-}
-
-.linkedin a:hover {
-    text-decoration: none;
-    color: var(--secondary-color);
-    font-size: 1.2rem;
-    font-weight: bold;
-}
-
-.linkedin img{
-    display:block;
-    padding: 0.3rem;
-    max-width: 50%;
-    max-height: 50%;
-    transition: all var(--transition) ease;
-    margin: 0 auto;
-    border-radius: 5%;
-}
-
-.linkedin a:hover img {
-    display:block;
-}
-
 /* Education Section */
 .education{
-    border-top: 3px solid white;
     background-color: var(--bg-color);
     margin-bottom: 2rem;
-    padding-top: 1rem;
+    padding-top: 0rem;
 }
 .education h3{
     background-color: var(--secondary-color);
@@ -304,7 +273,7 @@ nav ul li:hover{
     align-items: center;
     justify-content: left;
     padding-top: 2rem;
-    padding-bottom: 1rem;
+    padding-bottom: 2rem;
 }
 .education-card{
     display: flex;
@@ -318,7 +287,7 @@ nav ul li:hover{
 }
 
 .education-info p{
-    color: black;
+    color: var(--black-color);
     margin-bottom: 0.5rem;
 }
 
@@ -333,7 +302,82 @@ nav ul li:hover{
 
 .smaller{
     font-size: 1rem;
-    color: black;
+    color: var(--gray-color);
+}
+
+/* Awards Section */
+.awards-container{
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 2rem 0.5rem 2rem;
+    text-align: center;
+}
+.awards-card{
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+.awards-card img{
+    height: 6rem;
+    width: auto;
+    margin: 1rem 2rem 1rem 2rem;
+}
+
+.awards-card img:hover{
+    height: 7rem;
+    width: auto;
+    margin: 0.5rem 2rem 0.5rem 2rem;
+}
+
+.awards span{
+    color: var(--black-color);
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+/* More About Me Section */
+.more-about-me{
+    margin-top: 2rem;
+    padding-bottom: 1.5rem;
+}
+
+.more-about-me-text {
+    text-decoration: none;
+    color: var(--primary-color);
+    font-size: 1.25em;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+.more-about-me-container{
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.linkedin img{
+    width: 10rem;
+    height: auto;
+    transition: all var(--transition) ease;
+    margin-right: 2rem;
+}
+
+.resume-link{
+    font-size: 2.5rem;
+    text-decoration: none;
+    font-weight: bold;
+    color: var(--blue-color);
+    margin-bottom: 1rem;
+    margin-left: 2rem;
+}
+
+.resume-link:hover{
+    color: var(--secondary-color);
 }
 
 /* Skills Section */
@@ -380,7 +424,7 @@ nav ul li:hover{
   }
 .icon-text{
     font-size: 1.5rem;
-    color: black;
+    color: var(--black-color);
     margin-top: 0rem;
   }
 
@@ -417,6 +461,18 @@ nav ul li:hover{
 .icon-box:nth-child(7) {transition-delay: 1.2s;}
 .icon-box:nth-child(8) {transition-delay: 10s;}
 
+.skills-wrapper p {
+    color: var(--primary-color);
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    transition: var(--transition);
+}
+
+.animate__animated.animate__fadeInRight {
+    animation-delay: 1s;
+    animation-duration: 2s;
+}
+
 /* Projects Section */
 .projects {
     background-color: var(--darkgray-color);
@@ -425,8 +481,8 @@ nav ul li:hover{
   }
   
 .project-pic {
-    width: 100%;
-    height: auto;
+    max-width: 100%;
+    height: 100%;
     padding-bottom: 0.5rem;
 }
 
@@ -456,7 +512,7 @@ nav ul li:hover{
 .project-container p {
     padding: 0.2rem;
     text-align: center;
-    color: black;
+    color: var(--black-color);
   }
   
 .project-title {
@@ -555,7 +611,7 @@ nav ul li:hover{
     padding: 10px;
     margin: 10px 0;
     background-color: #fff;
-    border: 2px solid black;
+    border: 2px solid var(--black-color);
     border-radius: 5px;
     font-size: 1rem;
     font-weight: var(--bold-font);
@@ -598,4 +654,450 @@ footer{
 .copy{
     font-size: 1rem;
     color: white;
+}
+
+/* RESPONSIVE WEBSITE DESIGN */
+
+@media screen and (max-width: 720px) {
+/*changes reflects on screen with a width of 720px and below*/
+/* Font Settings */  
+    body {
+        font-family: var(--font-family);
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    h3 {
+        font-size: 1.5rem;
+    }
+
+    h4 {
+        font-size: 1.2rem;
+    }
+
+    p {
+        font-size: 1rem;
+        line-height: var(--line-height);
+    }
+    nav ul {
+        position: fixed;
+        background-color: var(--bg-color);
+        flex-direction: column;
+        text-align: center;
+        top: 7.0rem;
+        right: 0;
+        transform: translateX(100%);
+        transition: transform 0.5s ease-in;
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+        width: 100%;
+        border-top: 5px solid var(--primary-color);
+      }
+    
+    nav ul li {
+        margin: 0.5rem 1rem 0.5rem 1rem;
+        display: grid;
+        grid-auto-flow: column;
+        grid-auto-columns: 0.5fr;
+        align-items: center;
+        justify-content: center;
+      }
+    
+    nav a{
+        border-bottom: 2px solid var(--secondary-color);
+    }
+
+    nav a:hover {
+        color: var(--secondary-color);
+        border-bottom: 2px solid var(--secondary-color);
+        background-color: var(--primary-color);
+        box-shadow: 0 3px 5px rgb(0, 0, 0);
+      }
+
+    .burger-menu {
+        display: block;
+        cursor: pointer;
+      }
+    
+    nav ul.show {
+        transform: translateX(0);
+      }
+
+    /* Hero Section */
+    .hero {
+        align-items: center;
+        justify-content: center;
+        position: relative;
+    }
+
+    .hero img {
+        width: 100%;
+        height: 100%;
+    }
+
+    .bio h2{
+        font-size: 3.5rem;
+        position: absolute;
+        bottom: 80vh;
+        left: 2rem;
+        color: white;
+        line-height: 5rem;
+        padding-right: 1rem;
+        border-bottom: 3px solid white;
+    }
+
+    .bio p{
+        font-size: 1.2rem;
+        width: 15rem;
+        position: absolute;
+        bottom: 70vh;
+        left: 2rem;
+        line-height: 2rem;
+        color: white;
+    }
+    /*Typewriter effect */
+    .typewriter h2 {
+        overflow: hidden; /* Ensures the content is not revealed until the animation */
+        border-right: .15em solid var(--primary-color); /* The typwriter cursor */
+        white-space: nowrap; /* Keeps the content on a single line */
+        margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+        animation: 
+            typing 1.5s steps(40, end) 3s,
+            blink-caret .5s step-end infinite;
+    }
+  
+    /* The typing effect */
+    @keyframes typing {
+        from { width: 0 }
+        to { width: 15rem }
+    }
+
+    .animate__animated.animate__fadeInLeft{
+        --animate-duration: 2s;
+        animation-delay: 3s;
+    }
+
+    /* About Me Section */
+
+    .about {
+        background-color: var(--primary-color);
+        padding: 2rem 2rem;
+        margin-top: 0;
+        min-height: 90vh;
+    }
+    
+    .about h2 {
+        margin-bottom: var(--bottom-margin);
+        text-align: center;
+        color: white;
+    }
+    
+    .intro{
+        line-height: var(--line-height);
+        color: white;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        border-top: 3px solid white;
+        border-bottom: 3px solid white;
+        margin-bottom: 2rem;
+    }
+
+    /* Education Section */
+    .education{
+        background-color: var(--bg-color);
+        margin-bottom: 2rem;
+        padding-top: 0rem;
+    }
+    .education h3{
+        background-color: var(--secondary-color);
+        padding-left: 2rem;
+        padding-bottom: 0.5rem;
+        padding-top: 0.5rem;
+        color: white;
+        box-shadow: 0 3px 5px var(--primary-shadow);
+    }
+    .education-container{
+        display: grid;
+        grid-auto-flow: row;
+        grid-auto-columns: 1fr;
+        align-items: center;
+        justify-content: left;
+        padding-top: 2rem;
+        padding-bottom: 0.5rem;
+        padding-right: 2rem;
+    }
+    .education-card{
+        display: flex;
+        margin-bottom: 2rem;
+    }
+
+    .education-card img{
+        width: 5rem;
+        height: 5rem;
+        margin-right: 1rem;
+        margin-left: 2rem;
+    }
+
+    .education-info p{
+        color: var(--black-color);
+        margin-bottom: 0.3rem;
+    }
+
+    .education-info h4{
+        color: var(--primary-color);
+        margin-bottom: 0.5rem;
+    }
+
+    .unbold{
+        font-weight: normal;
+    }
+
+    .smaller{
+        font-size: 0.8rem;
+        color: var(--gray-color);
+    }
+
+    /* Awards Section */
+    .awards-container{
+        display: grid;
+        grid-auto-flow: row;
+        grid-auto-columns: 1fr;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem 2rem 0rem 2rem;
+        text-align: center;
+    }
+    .awards-card{
+        padding-left: 2rem;
+        padding-right: 2rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .awards-card img{
+        height: 6rem;
+        width: auto;
+        margin: 1rem 2rem 1rem 2rem;
+    }
+
+    .awards-card img:hover{
+        height: 7rem;
+        width: auto;
+        margin: 0.5rem 2rem 0.5rem 2rem;
+    }
+
+    .awards span{
+        color: var(--black-color);
+        font-size: 1rem;
+        font-weight: bold;
+    }
+
+    /* More About Me Section */
+    .more-about-me{
+        margin-top: 1rem;
+        padding-bottom: 1.5rem;
+    }
+
+    .more-about-me-text {
+        text-decoration: none;
+        color: var(--primary-color);
+        font-size: 1.25em;
+        align-items: center;
+        text-align: center;
+        margin-bottom: 1.5rem;
+    }
+    .more-about-me-container{
+        display: grid;
+        grid-auto-flow: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .linkedin img{
+        width: 8rem;
+        height: auto;
+        transition: all var(--transition) ease;
+        margin-right: 1rem;
+    }
+
+    .resume-link{
+        font-size: 2rem;
+        text-decoration: none;
+        font-weight: bold;
+        color: var(--blue-color);
+        margin-bottom: 1rem;
+        margin-left: 1rem;
+    }
+
+    .resume-link:hover{
+        color: var(--secondary-color);
+    }
+
+    /* Skills Section */
+    .skills {
+        background-color: white;
+        text-align: center;
+        margin-bottom: -1rem;
+    }
+    .skills-wrapper{
+        padding: 1rem 1rem;
+    }
+
+    .skills h2 {
+        color: var(--primary-color);
+        border-bottom: 3px solid var(--primary-color);
+    }
+    
+    .icon {
+        width: 7rem;
+        height: 6.5rem;
+    }
+
+    .icon-card {
+        background-color: white;
+        border-radius: 11px;
+        box-shadow: 0 3px 10px 3px var(--primary-shadow);
+        margin: 1rem 1.5rem;
+    }
+
+    .first-set {
+        display: grid;
+        grid-auto-flow: row;
+        grid-template-columns: 1fr 1fr;
+        grid-row-gap: 0.5rem;
+        align-items: center;
+    }
+
+    .second-set {
+        display: grid;
+        grid-auto-flow: row;
+        grid-template-columns: 1fr 1fr;
+        grid-row-gap: 0.5rem;
+        align-items: center;
+    }
+    .icon-text{
+        font-size: 1rem;
+        color: var(--black-color);
+    }
+
+    .icon-box{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .hidden {
+        opacity: 0; 
+        filter: blur(5px);
+        transform: translateX(-100%);
+        transition: all 2s;
+    }   
+
+    .show {
+        opacity: 1;
+        filter: blur(0);
+        transform: translateX(0);
+    }
+
+    @media(prefers-reduced-motion){
+        .hidden {
+            transition: none;
+        }
+    }
+
+    .icon-box:nth-child(2) {transition-delay: 0.2s;}
+    .icon-box:nth-child(3) {transition-delay: 0.4s;} 
+    .icon-box:nth-child(4) {transition-delay: 0.6s;}
+    .icon-box:nth-child(5) {transition-delay: 0.8s;}
+    .icon-box:nth-child(6) {transition-delay: 1s;}
+    .icon-box:nth-child(7) {transition-delay: 1.2s;}
+    .icon-box:nth-child(8) {transition-delay: 10s;}
+
+    .skills-wrapper p {
+        color: var(--primary-color);
+        margin-top: 1rem;
+        margin-bottom: 0rem;
+        transition: var(--transition);
+    }
+
+    .animate__animated.animate__fadeInRight {
+        animation-delay: 1s;
+        animation-duration: 2s;
+    }
+
+    /* Projects Section */
+    .projects {
+        background-color: var(--darkgray-color);
+        padding: 2rem 2rem;
+        min-height: 85vh;
+    }
+    
+    .project-pic {
+        max-width: 100%;
+        height: 100%;
+        padding-bottom: 0.5rem;
+    }
+
+    .projects-container {
+        display: grid;
+        grid-auto-flow: row;
+        grid-auto-columns: 1fr;
+        grid-auto-rows: 1fr;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+    .projects-title {
+        text-align: center;
+        padding-bottom: 0.5rem;
+        margin-bottom: 1rem;
+        color: var(--secondary-color);
+        border-bottom: 3px solid white;
+    }
+    
+    .project-container {
+        width: auto;
+        height: auto;
+    }
+
+    .project-container p {
+        padding: 0.2rem;
+        text-align: center;
+        color: var(--black-color);
+    }
+    
+    .project-title {
+        text-align: center;
+        padding-bottom: 0.2rem;
+        color: var(--primary-color);
+    }
+    
+    .project-details {
+        margin-bottom: var(--bottom-margin);
+    }
+    
+    .project-card {
+        background-color: var(--bg-color);
+        border-radius: 11px;
+        box-shadow: 0 3px 10px var(--primary-shadow);
+        padding: 20px;
+        margin: 1rem;
+    }
+
+    .project-link {
+    text-decoration: none;
+    color: inherit;
+    transition: all var(--transition) ease;
+    }
+    .project-link:hover {
+    text-decoration: none;
+    color: inherit;
+    }
+    .project-link:hover .project-container{
+    box-shadow: 0 0px 20px 5px var(--secondary-color);
+    }
+
 }
