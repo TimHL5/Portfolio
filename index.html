@@ -266,13 +266,15 @@
       <h2>Let's Connect!</h2>
       <div class="contact-form-container">
         <div class="contact-form">
-          <form action="https://formspree.io/f/xyylngw" method="POST">
+          <form id="my-form" 
+          action="https://docs.google.com/forms/d/e/1FAIpQLSfnwRXqzLCxREF-frlYiR8HdwJ4ipSPR3nlxkCx23HxJLwTgg/formResponse?embedded=true" 
+          method="POST">
             <div class="form-control">
               <label for="name">Name</label>
               <input
                 type="text"
                 id="name"
-                name="sender-name"
+                name="entry.1234567890"
                 placeholder="Enter Your Name"
                 class="input-field"
                 required
@@ -283,7 +285,7 @@
               <input
                 type="email"
                 id="email"
-                name="sender-email"
+                name="entry.0987654321"
                 placeholder="Enter Your Email"
                 class="input-field"
                 required
@@ -296,9 +298,8 @@
                 cols="40"
                 rows="10"
                 placeholder="Enter Your Message"
-                name="message"
+                name="entry.2468013579"
                 class="input-field"
-                required
               ></textarea>
             </div>
             <input
@@ -309,6 +310,9 @@
             />
           </form>
         </div>
+      </div>
+      <div id="thank-you-message" style="display:none;">
+        <p>Thank you for submitting the form!</p>
       </div>
     </section>
 

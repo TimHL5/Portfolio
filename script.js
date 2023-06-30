@@ -48,3 +48,30 @@ const observer = new IntersectionObserver((entries) => {
 const hiddenElements = document.querySelectorAll('.hidden');
 hiddenElements.forEach((el) => observer.observe(el));
 
+// Google Form
+const form = document.getElementById("my-form");
+const thankYouMessage = document.getElementById("thank-you-message");
+
+form.addEventListener("submit", async (event) => {
+  event.preventDefault();
+
+  const formData = new FormData(form);
+  const data = Object.fromEntries(formData.entries());
+
+  const preFilledUrl = "https://docs.google.com/forms/d/e/1FAIpQLSfnwRXqzLCxREF-frlYiR8HdwJ4ipSPR3nlxkCx23HxJLwTgg/formResponse?entry.1234567890=" 
+  + encodeURIComponent(data["entry.1234567890"]) + "&entry.0987654321=" + encodeURIComponent(data["entry.0987654321"]) + "&entry.2468013579=" 
+  + encodeURIComponent(data["entry.2468013579"]);
+
+  const response = await fetch(preFilledUrl, {
+    mode: 'no-cors'
+  });
+  const text = await response.text();
+
+  console.log(text);
+
+  // you can redirect to a thank you page or display a message to the user here
+  form.style.display = "none";
+  thankYouMessage.style.display = "block";
+});
+
+
