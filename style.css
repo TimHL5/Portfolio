@@ -142,7 +142,6 @@ nav a:hover {
   
 nav ul {
     display: flex;
-    grid-auto-flow: column;
     gap: 2rem;
     transition: all var(--transition) ease;
   }
@@ -459,7 +458,7 @@ nav ul li:hover{
 .icon-box:nth-child(5) {transition-delay: 0.8s;}
 .icon-box:nth-child(6) {transition-delay: 1s;}
 .icon-box:nth-child(7) {transition-delay: 1.2s;}
-.icon-box:nth-child(8) {transition-delay: 10s;}
+.icon-box:nth-child(8) {transition-delay: 1.4s;}
 
 .skills-wrapper p {
     color: var(--primary-color);
@@ -476,23 +475,25 @@ nav ul li:hover{
 /* Projects Section */
 .projects {
     background-color: var(--darkgray-color);
-    padding: 2.5rem 4rem;
+    padding: 2rem 4rem;
     min-height: 85vh;
   }
   
 .project-pic {
     max-width: 100%;
-    height: 100%;
+    height: auto;
     padding-bottom: 0.5rem;
 }
 
 .projects-container {
     display: grid;
     justify-content: center;
-    align-items: center;
     grid-auto-flow: column;
     grid-auto-columns: 1fr;
-    grid-auto-rows: 1fr
+    grid-auto-rows: minmax(0,auto);
+    grid-gap: 1.5rem;
+    align-items: stretch;
+    padding-bottom: 2rem;
   }
 
 
@@ -502,11 +503,6 @@ nav ul li:hover{
     margin-bottom: 1rem;
     color: var(--secondary-color);
     border-bottom: 3px solid white;
-  }
-  
-.project-container {
-    width: auto;
-    height: auto;
   }
 
 .project-container p {
@@ -522,15 +518,17 @@ nav ul li:hover{
   }
   
 .project-details {
-    margin-bottom: var(--bottom-margin);
+    margin-bottom: 0.2rem;
   }
   
 .project-card {
     background-color: var(--bg-color);
     border-radius: 11px;
     box-shadow: 0 3px 10px var(--primary-shadow);
-    padding: 20px;
+    padding: 1rem;
     margin: 1rem;
+    transition: all var(--transition) ease;
+    height: 100%;
   }
 
   .project-link {
@@ -658,8 +656,8 @@ footer{
 
 /* RESPONSIVE WEBSITE DESIGN */
 
-@media screen and (max-width: 720px) {
-/*changes reflects on screen with a width of 720px and below*/
+@media screen and (max-width: 800px) {
+/*changes reflects on screen with a width of 800px and below*/
 /* Font Settings */  
     body {
         font-family: var(--font-family);
@@ -729,18 +727,22 @@ footer{
     .hero {
         align-items: center;
         justify-content: center;
-        position: relative;
+        height: 50rem;
     }
 
     .hero img {
         width: 100%;
-        height: 100%;
+        max-height: 100%;
+        object-fit: cover; 
+        object-position: 50% 0;
+        display: absolute;
     }
 
     .bio h2{
-        font-size: 3.5rem;
+        font-size: 3rem;
+        font-display: wrap;
         position: absolute;
-        bottom: 80vh;
+        bottom: 30rem;
         left: 2rem;
         color: white;
         line-height: 5rem;
@@ -752,7 +754,7 @@ footer{
         font-size: 1.2rem;
         width: 15rem;
         position: absolute;
-        bottom: 70vh;
+        bottom: 25rem;
         left: 2rem;
         line-height: 2rem;
         color: white;
@@ -771,7 +773,7 @@ footer{
     /* The typing effect */
     @keyframes typing {
         from { width: 0 }
-        to { width: 15rem }
+        to { width: 12rem }
     }
 
     .animate__animated.animate__fadeInLeft{
@@ -802,6 +804,7 @@ footer{
         border-top: 3px solid white;
         border-bottom: 3px solid white;
         margin-bottom: 2rem;
+        text-align: justify;
     }
 
     /* Education Section */
@@ -1010,10 +1013,7 @@ footer{
     .icon-box:nth-child(2) {transition-delay: 0.2s;}
     .icon-box:nth-child(3) {transition-delay: 0.4s;} 
     .icon-box:nth-child(4) {transition-delay: 0.6s;}
-    .icon-box:nth-child(5) {transition-delay: 0.8s;}
-    .icon-box:nth-child(6) {transition-delay: 1s;}
-    .icon-box:nth-child(7) {transition-delay: 1.2s;}
-    .icon-box:nth-child(8) {transition-delay: 10s;}
+
 
     .skills-wrapper p {
         color: var(--primary-color);
@@ -1042,11 +1042,12 @@ footer{
 
     .projects-container {
         display: grid;
+        justify-content: center;
         grid-auto-flow: row;
         grid-auto-columns: 1fr;
-        grid-auto-rows: 1fr;
-        justify-content: center;
-        align-items: center;
+        grid-auto-rows: minmax(0, auto);
+        grid-gap: 2rem; /* adjust this line */
+        align-items: stretch; /* adjust this line */
     }
 
 
@@ -1084,7 +1085,7 @@ footer{
         border-radius: 11px;
         box-shadow: 0 3px 10px var(--primary-shadow);
         padding: 20px;
-        margin: 1rem;
+        margin: 1rem 1rem 0rem 1rem;
     }
 
     .project-link {
