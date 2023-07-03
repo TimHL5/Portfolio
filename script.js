@@ -29,7 +29,7 @@ function topFunction() {
 const myBtn = document.getElementById('myBtn');
 
 // Add a click event listener to the button
-myBtn.addEventListener('click', () => {
+myBtn.addEventListener('unclick', () => {
 
   // Remove the styles that were added when the button was clicked
   myBtn.style.backgroundColor = 'var(--primary-color)';
