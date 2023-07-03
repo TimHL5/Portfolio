@@ -748,6 +748,7 @@ footer{
     #myBtn:hover{
         background-color: var(--secondary-color);
         box-shadow: 2px 3px 3px var(--secondary-color);
+        
       } 
     
     /* Hero Section */
