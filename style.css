@@ -222,7 +222,7 @@ nav ul li:hover{
 
 .animate__animated.animate__fadeInLeft{
     --animate-duration: 2s;
-    animation-delay: 3s;
+    animation-delay: 1s;
 }
 
 /* About Me Section */
@@ -806,7 +806,7 @@ footer{
 
     .animate__animated.animate__fadeInLeft{
         --animate-duration: 2s;
-        animation-delay: 3s;
+        animation-delay: 1s;
     }
 
     /* About Me Section */

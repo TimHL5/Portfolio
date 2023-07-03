@@ -6,7 +6,7 @@ nameElement.style.visibility = "hidden";
 // Set a timeout to reveal the 'name' element after the delay
 setTimeout(function() {
   nameElement.style.visibility = "visible";
-}, 3100);
+}, 1100);
 
 // When the user scrolls down 20px from the top of the document, show the button
 window.onscroll = function() {scrollFunction()};
