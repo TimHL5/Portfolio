@@ -722,7 +722,28 @@ footer{
     nav ul.show {
         transform: translateX(0);
       }
-
+      #myBtn {
+        display: none;
+        position: fixed;
+        bottom: 1rem;
+        right: 1rem;
+        z-index: 99;
+        background-color: var(--primary-color);
+        color: white;
+        border: 1.5;
+        border-radius: 50%;
+        padding: 0.45rem 0.8rem;
+        font-size: 2rem;
+        cursor: pointer;
+        transition: var(--transition);
+        box-shadow: 2px 3px 3px var(--primary-shadow);
+      }
+    
+    #myBtn:hover{
+        background-color: var(--secondary-color);
+        box-shadow: 2px 3px 3px var(--secondary-color);
+      } 
+    
     /* Hero Section */
     .hero {
         align-items: center;
@@ -1031,7 +1052,6 @@ footer{
     .projects {
         background-color: var(--darkgray-color);
         padding: 2rem 2rem;
-        min-height: 85vh;
     }
     
     .project-pic {
