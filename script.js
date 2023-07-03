@@ -49,6 +49,7 @@ hiddenElements.forEach((el) => observer.observe(el));
 // Google Form
 const form = document.getElementById("my-form");
 const thankYouMessage = document.getElementById("thank-you-message");
+const formContainer = document.querySelector(".contact-form-container");
 
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
@@ -69,6 +70,7 @@ form.addEventListener("submit", async (event) => {
 
   // you can redirect to a thank you page or display a message to the user here
   form.style.display = "none";
+  formContainer.classList.add("hidden"); // add the hidden class to the form container
   thankYouMessage.style.display = "block";
 });
 

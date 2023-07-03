@@ -561,6 +561,17 @@ nav ul li:hover{
     box-shadow: 0 3px 10px var(--secondary-shadow);
   }
 
+  .contact-form-container.hidden {
+    height: 0;
+    padding: 0;
+    margin: 0;
+    border: none;
+    box-shadow: none;
+    opacity: 0;
+    transform: translateX(100%);
+    transition: all 0.3s ease-out;
+  }
+
 .contact-form-container label {
     display: grid;
     line-height: 2em;
@@ -617,6 +628,11 @@ nav ul li:hover{
     background-color: var(--secondary-color);
     cursor: pointer;
     box-shadow: 3px 3px 10px var(--secondary-shadow);
+}
+
+.thank-you-message{
+    padding: 1rem;
+    text-align: center;
 }
 
 .socials {
