@@ -775,7 +775,7 @@ footer{
     }
 
     .bio p{
-        font-size: 1.2rem;
+        font-size: 1rem;
         width: 15rem;
         position: absolute;
         bottom: 25rem;
@@ -1196,7 +1196,7 @@ footer{
         color: var(--black-color)
     }
 
-    .submit-btn:hover {
+    .submit-btn.active {
         background-color: var(--secondary-color);
         cursor: pointer;
         box-shadow: 3px 3px 10px var(--secondary-shadow);

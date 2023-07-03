@@ -25,15 +25,10 @@ function topFunction() {
   document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 }
 
-// Get the myBtn element
-const myBtn = document.getElementById('myBtn');
+const submitBtn = document.querySelector('.submit-btn');
 
-// Add a click event listener to the button
-myBtn.addEventListener('unclick', () => {
-
-  // Remove the styles that were added when the button was clicked
-  myBtn.style.backgroundColor = 'var(--primary-color)';
-  myBtn.style.boxShadow = '2px 3px 3px var(--primary-shadow)';
+submitBtn.addEventListener('click', () => {
+  submitBtn.classList.toggle('active');
 });
 
 // Scroll animation for icons
