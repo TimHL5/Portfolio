@@ -1071,7 +1071,6 @@ footer{
         align-items: stretch; /* adjust this line */
     }
 
-
     .projects-title {
         text-align: center;
         padding-bottom: 0.5rem;
@@ -1125,7 +1124,7 @@ footer{
     /* Contacts Section */
 
     .contact {
-        padding: 2.5rem 4rem;
+        padding: 2.5rem 2rem;
         background-color: var(--bg-color);
     }
     
@@ -1136,9 +1135,8 @@ footer{
     
     .contact-form-container {
         background-color: var(--primary-color);
-        max-width: 40.75rem;
         margin: 0 auto;
-        padding: 0.938rem;
+        padding: 1rem 1rem;
         border-radius: 5px;
         box-shadow: 0 3px 10px var(--secondary-shadow);
     }
