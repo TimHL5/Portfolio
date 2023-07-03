@@ -493,13 +493,12 @@ nav ul li:hover{
     grid-auto-rows: minmax(0,auto);
     grid-gap: 1.5rem;
     align-items: stretch;
-    padding-bottom: 2rem;
   }
 
 
 .projects-title {
     text-align: center;
-    padding-bottom: 0.5rem;
+    padding-bottom: 1rem;
     margin-bottom: 1rem;
     color: var(--secondary-color);
     border-bottom: 3px solid white;
@@ -513,19 +512,16 @@ nav ul li:hover{
   
 .project-title {
     text-align: center;
-    padding-bottom: 0.2rem;
+    padding-bottom: 0.5rem;
     color: var(--primary-color);
   }
   
-.project-details {
-    margin-bottom: 0.2rem;
-  }
   
 .project-card {
     background-color: var(--bg-color);
     border-radius: 11px;
     box-shadow: 0 3px 10px var(--primary-shadow);
-    padding: 1rem;
+    padding: 1rem 1rem 0rem 1rem;
     margin: 1rem;
     transition: all var(--transition) ease;
     height: 100%;
