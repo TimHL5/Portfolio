@@ -760,15 +760,15 @@ footer{
     }
 
     .bio h2{
-        font-size: 3rem;
+        font-size: 2.5rem;
         font-display: wrap;
         position: absolute;
         bottom: 30rem;
         left: 2rem;
         color: white;
-        line-height: 5rem;
+        line-height: 4rem;
         padding-right: 1rem;
-        border-bottom: 3px solid white;
+        border-bottom: 2px solid white;
     }
 
     .bio p{
@@ -783,7 +783,7 @@ footer{
     /*Typewriter effect */
     .typewriter h2 {
         overflow: hidden; /* Ensures the content is not revealed until the animation */
-        border-right: .15em solid var(--primary-color); /* The typwriter cursor */
+        border-right: .1em solid var(--primary-color); /* The typwriter cursor */
         white-space: nowrap; /* Keeps the content on a single line */
         margin: 0 auto; /* Gives that scrolling effect as the typing happens */
         animation: 
@@ -794,7 +794,7 @@ footer{
     /* The typing effect */
     @keyframes typing {
         from { width: 0 }
-        to { width: 12rem }
+        to { width: 10rem }
     }
 
     .animate__animated.animate__fadeInLeft{
