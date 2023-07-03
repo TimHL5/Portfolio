@@ -688,7 +688,7 @@ footer{
         top: 7.0rem;
         right: 0;
         transform: translateX(100%);
-        transition: transform 0.5s ease-in;
+        transition: transform 0.1s ease-out opacity 0.1s ease-out;
         padding-top: 2rem;
         padding-bottom: 2rem;
         width: 100%;
@@ -720,8 +720,10 @@ footer{
         cursor: pointer;
       }
     
-    nav ul.show {
-        transform: translateX(0);
+    nav.my-nav ul.show {
+        transform: translateX(0) ease-out;
+        opacity: 1;
+        transition-duration: 0.5s;
       }
     
     #myBtn {
