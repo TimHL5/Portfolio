@@ -210,7 +210,7 @@ nav ul li:hover{
     white-space: nowrap; /* Keeps the content on a single line */
     margin: 0 auto; /* Gives that scrolling effect as the typing happens */
     animation: 
-        typing 1.5s steps(40, end) 3s,
+        typing 1.5s steps(40, end) 1s,
         blink-caret .5s step-end infinite;
   }
   
@@ -794,7 +794,7 @@ footer{
         white-space: nowrap; /* Keeps the content on a single line */
         margin: 0 auto; /* Gives that scrolling effect as the typing happens */
         animation: 
-            typing 1.5s steps(40, end) 3s,
+            typing 1.5s steps(40, end) 1s,
             blink-caret .5s step-end infinite;
     }
   
