@@ -47,7 +47,7 @@ const hiddenElements = document.querySelectorAll('.hidden');
 hiddenElements.forEach((el) => observer.observe(el));
 
 // Google Form
-const form = document.getElementById("my-form");
+const form = document.getElementById("myForm");
 const thankYouMessage = document.getElementById("thank-you-message");
 const formContainer = document.querySelector(".contact-form-container");
 
@@ -74,6 +74,7 @@ form.addEventListener("submit", async (event) => {
   thankYouMessage.style.display = "block";
 });
 
+
 // Nav hamburgerburger selections
 
 const burger = document.querySelector("#burger-menu");
@@ -91,3 +92,4 @@ navLink.forEach((link) =>
     ul.classList.remove("show");
   })
 );
+

@@ -5,6 +5,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.js"
+    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
+
+    <script>
+      function SubForm (){
+          $.ajax({
+              url:'https://api.apispreadsheets.com/data/xvmvKYq3MdmcyKTg/',
+              type:'post',
+              data:$("#myForm").serializeArray(),
+              success: function(){
+                alert("Form Submitted :)")
+              },
+              error: function(){
+                alert("There was an error :(")
+              }
+          });
+      }
+      </script>
+
     <!--CSS Styles -->
     <link rel="stylesheet" href="style.css" />
 
@@ -327,15 +348,13 @@
       <h2>Let's Connect!</h2>
       <div class="contact-form-container">
         <div class="contact-form">
-          <form id="my-form" 
-          action="https://docs.google.com/forms/d/e/1FAIpQLSfnwRXqzLCxREF-frlYiR8HdwJ4ipSPR3nlxkCx23HxJLwTgg/viewform?embedded=true" 
-          method="POST">
+          <form id="myForm">
             <div class="form-control">
               <label for="name">Name</label>
               <input
                 type="text"
                 id="name"
-                name="entry.1234567890"
+                name="name"
                 placeholder="Enter Your Name"
                 class="input-field"
                 required
@@ -346,7 +365,7 @@
               <input
                 type="email"
                 id="email"
-                name="entry.0987654321"
+                name="email"
                 placeholder="Enter Your Email"
                 class="input-field"
                 required
@@ -359,16 +378,18 @@
                 cols="40"
                 rows="10"
                 placeholder="Enter Your Message"
-                name="entry.2468013579"
+                name="message"
                 class="input-field"
               ></textarea>
             </div>
-            <input
+            <button
               type="submit"
               value="Submit"
               id="submit-btn"
               class="submit-btn"
-            />
+              onclick="SubForm()";
+            ><span>Submit</span
+            ></button>
           </form>
         </div>
       </div>
@@ -430,5 +451,6 @@
       nomodule
       src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
     ></script>
+
   </body>
 </html>
