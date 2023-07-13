@@ -239,7 +239,23 @@ nav ul li:hover{
     text-align: center;
     color: white;
   }
-  
+
+.about span{
+    color: var(--black-color);
+}
+
+.about span a{
+    text-decoration: none;
+    color: var(--black-color);
+    font-weight: var(--bold-font);
+}
+
+.about span a:hover{
+    text-decoration: none;
+    color: var(--secondary-color);
+    font-weight: var(--bold-font);
+}
+
 .intro{
     line-height: var(--line-height);
     font-size: 1.2rem;
