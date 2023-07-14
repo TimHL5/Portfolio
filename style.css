@@ -240,17 +240,16 @@ nav ul li:hover{
     color: white;
   }
 
-.about span{
-    color: var(--black-color);
+.MLV{
+    color: var(--ligher-gray-color);
 }
 
-.about span a{
+.MLV a{
     text-decoration: none;
-    color: var(--black-color);
-    font-weight: var(--bold-font);
+    color: var(---ligher-gray-color);
 }
 
-.about span a:hover{
+.MLV a:hover{
     text-decoration: none;
     color: var(--secondary-color);
     font-weight: var(--bold-font);
