@@ -267,12 +267,19 @@ strong {
 .hero {
     padding: 120px 20px 80px;
     background: linear-gradient(135deg, var(--light-gray) 0%, var(--white) 100%);
-    text-align: center;
+}
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: 60% 40%;
+    gap: 3rem;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .hero-content {
-    max-width: 900px;
-    margin: 0 auto;
+    text-align: left;
 }
 
 .hero-headline {
@@ -295,6 +302,85 @@ strong {
     font-size: 0.95rem;
     color: var(--charcoal);
     font-style: italic;
+}
+
+.hero-image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-profile-image {
+    max-width: 400px;
+    max-height: 500px;
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    border: 3px solid var(--primary-maroon);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    object-fit: cover;
+}
+
+/* ==========================================
+   INSIDER PERSPECTIVE SECTION
+   ========================================== */
+
+.insider-section {
+    background-color: var(--light-gray);
+    padding: 4rem 2rem;
+    text-align: center;
+}
+
+.insider-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.insider-headline {
+    color: var(--primary-maroon);
+    font-size: clamp(1.75rem, 4vw, 2.25rem);
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+.insider-subheadline {
+    max-width: 800px;
+    margin: 0 auto 2rem;
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: var(--charcoal);
+}
+
+.insider-label {
+    font-size: 0.875rem;
+    color: var(--charcoal);
+    opacity: 0.8;
+    margin-top: 2rem;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.company-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}
+
+.company-logo {
+    height: 50px;
+    width: auto;
+    filter: grayscale(100%) opacity(0.7);
+    transition: all 0.3s ease;
+    object-fit: contain;
+}
+
+.company-logo:hover {
+    filter: grayscale(0%) opacity(1);
+    transform: scale(1.05);
 }
 
 /* ==========================================
@@ -1074,6 +1160,12 @@ strong {
         --section-padding: 60px 20px;
     }
 
+    /* Hero section - tablet layout */
+    .hero-grid {
+        grid-template-columns: 55% 45%;
+        gap: 2rem;
+    }
+
     .pricing-card.featured {
         transform: scale(1);
     }
@@ -1127,6 +1219,34 @@ strong {
     /* Hero */
     .hero {
         padding: 80px 20px 60px;
+    }
+
+    .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .hero-image-container {
+        order: -1; /* Move image above text */
+    }
+
+    .hero-content {
+        text-align: center;
+    }
+
+    .hero-profile-image {
+        max-width: 280px;
+        max-height: 350px;
+        margin: 0 auto;
+    }
+
+    /* Insider Perspective - Mobile */
+    .company-logos {
+        gap: 1.5rem;
+    }
+
+    .company-logo {
+        height: 35px;
     }
 
     /* Grids */
