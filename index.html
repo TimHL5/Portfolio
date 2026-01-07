@@ -1,469 +1,533 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" 
-    content="Hi, my name is Tim Liu and I am currently a sophomore studying finance and entrepreneurship at Boston College (BC). 
-    I am an avid learner who enjoys solving challenging problems, absorbing new knowledge, and working collaboratively with others."
-    >
-    <meta name="keywords" content="Timothy Haiyi Liu, Timothy Liu, Timothy H Liu, Tim Liu, Tim H Liu, ">
-    <meta name="author" content="Timothy Haiyi Liu (Tim Liu)">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tim Liu - Senior at Boston College studying finance, entrepreneurship, and computer science. Incoming PwC Technology Consultant and founder of MLV, an edtech solution helping students and first-time founders navigate building their first startup. Offering personalized consulting recruiting mentorship.">
+    <meta name="keywords" content="Tim Liu, Timothy Liu, Boston College, PwC Technology Consulting, MLV, edtech, consulting recruiting, case interview prep, entrepreneurship, startup founder, consulting mentorship">
+    <meta name="author" content="Timothy Liu">
 
-    <script
-    src="https://code.jquery.com/jquery-3.4.1.js"
-    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-    crossorigin="anonymous"></script>
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Tim Liu - PwC Consultant | MLV Founder | Consulting Recruiting Mentorship">
+    <meta property="og:description" content="Senior at Boston College. Incoming PwC Technology Consultant. Founder of MLV - an edtech solution helping students build their first startup. Personalized consulting recruiting mentorship.">
+    <meta property="og:url" content="https://timothyhaiyiliu.com">
 
-    <script>
-      function SubForm (){
-          $.ajax({
-              url:'https://api.apispreadsheets.com/data/xvmvKYq3MdmcyKTg/',
-              type:'post',
-              data:$("#myForm").serializeArray(),
-              success: function(){
-                alert("Form Submitted :)")
-              },
-              error: function(){
-                alert("There was an error :(")
-              }
-          });
-      }
-      </script>
+    <title>Timothy Liu - Consulting Recruiting Mentorship</title>
 
-    <!--CSS Styles -->
-    <link rel="stylesheet" href="style.css" />
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23822433'/%3E%3Ctext x='50' y='65' font-family='Arial, sans-serif' font-size='60' font-weight='bold' fill='white' text-anchor='middle'%3ETL%3C/text%3E%3C/svg%3E">
 
-    <!-- Website scripts (PUT AT END! Needs to render everything for DOM)--> 
-    <!--or use defer-->
-    <script defer  src="script.js"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- Favicons -->
-    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
-    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
-    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#hero" class="nav-logo">Timothy Liu</a>
 
-    <!-- Animate CSS CDN -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-    />
-    <title>Timothy H. Liu</title>
-  </head>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
 
-  <body>
-    <!-- Go to Top Button -->
-    <button title="Go to Top" id="myBtn" onclick="topFunction()">
-      <ion-icon name="chevron-up-outline"></ion-icon>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#services" class="nav-link">Services</a></li>
+                <li><a href="#faq" class="nav-link">FAQ</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+                <li><a href="https://cal.com/timh.liu/intro" class="nav-cta">Book Free Call</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <h1 class="hero-headline">Most students think they need a perfect GPA to land consulting offers.</h1>
+                    <p class="hero-subheadline">I landed mine with proof I could build things.</p>
+                    <a href="https://cal.com/timh.liu/intro" class="btn btn-primary btn-large">Book Your Free 15-Min Call</a>
+                    <p class="hero-secondary">Limited availability for January 2026</p>
+                </div>
+                <div class="hero-image-container">
+                    <img src="main_profile_image.jpeg" alt="Timothy Liu - Consulting Recruiting Mentor" class="hero-profile-image" loading="eager">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Insider Perspective Section -->
+    <section class="insider-section">
+        <div class="container">
+            <div class="insider-icon">🎯</div>
+            <h2 class="insider-headline">Insider Perspective</h2>
+            <p class="insider-subheadline">I know what PwC, Deloitte, and KPMG interviewers are looking for because I sat across from them. I'll teach you how to give it to them.</p>
+            <p class="insider-label">Final round interview experience at:</p>
+            <div class="company-logos">
+                <img src="PwC-new-logo-2025-1-e1758057436114.png" alt="PwC" class="company-logo" loading="lazy">
+                <img src="DeloitteNewLogo.png" alt="Deloitte" class="company-logo" loading="lazy">
+                <img src="KPMG_blue_logo.svg.png" alt="KPMG" class="company-logo" loading="lazy">
+                <img src="MassMutual_logo.svg.png" alt="MassMutual" class="company-logo" loading="lazy">
+                <img src="Alphasights.png" alt="AlphaSights" class="company-logo" loading="lazy">
+            </div>
+        </div>
+    </section>
+
+    <!-- Introduction Section -->
+    <section id="about" class="intro">
+        <div class="container">
+            <h2>Hi, I'm Tim.</h2>
+            <div class="intro-content">
+                <p>Last semester, I went through 15+ interview rounds with PwC, Deloitte, KPMG, and MassMutual.</p>
+
+                <p>I secured my top choice offer at PwC Technology Consulting.</p>
+
+                <p>Not because I had a flawless resume. Because I had a story that proved I think like a consultant.</p>
+
+                <p>While my classmates competed on GPA, I co-founded MLV - an edtech startup that scaled to $50K+ revenue teaching entrepreneurship to 500+ students across Asia.</p>
+
+                <p class="highlight">That's what separated me in every interview room.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Problem Section -->
+    <section class="problem">
+        <div class="container">
+            <h2>Here's the truth about consulting recruiting:</h2>
+            <div class="problem-content">
+                <p class="lead">Everyone can learn to case.</p>
+
+                <p>But firms don't hire case frameworks. They hire people who can identify problems, build solutions, and create value.</p>
+
+                <p>The candidates who get offers have one thing in common: They have proof they can do this.</p>
+
+                <p>Whether it's:</p>
+                <ul class="problem-list">
+                    <li>Starting a side project that generated real revenue</li>
+                    <li>Leading a club initiative that delivered measurable impact</li>
+                    <li>Building something—anything—that shows entrepreneurial thinking</li>
+                </ul>
+
+                <p class="highlight">That's your edge.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section class="solution">
+        <div class="container">
+            <h2>I help college students land consulting offers by building the profile that makes them unforgettable.</h2>
+            <p class="solution-subheader">This isn't generic case prep. This is:</p>
+
+            <ul class="solution-list">
+                <li>
+                    <svg class="checkmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    <span><strong>Strategic positioning</strong> - How to frame your story so interviewers see you differently</span>
+                </li>
+                <li>
+                    <svg class="checkmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    <span><strong>Entrepreneurial proof</strong> - What to build (even if small) to demonstrate real skills</span>
+                </li>
+                <li>
+                    <svg class="checkmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    <span><strong>Case mastery</strong> - Frameworks from every firm, practiced until they're second nature</span>
+                </li>
+                <li>
+                    <svg class="checkmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    <span><strong>Resume transformation</strong> - Turning your experiences into consultant-speak that passes screening</span>
+                </li>
+                <li>
+                    <svg class="checkmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    <span><strong>Networking strategy</strong> - How to get coffee chats that actually lead to referrals</span>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Who This Is For Section -->
+    <section class="who-for">
+        <div class="container">
+            <h2>Who This Is For</h2>
+            <div class="who-grid">
+                <div class="who-card">
+                    <h3>Recruiting For:</h3>
+                    <ul>
+                        <li>Summer internships at consulting firms</li>
+                        <li>Full-time analyst/associate roles</li>
+                        <li>MBB, Big 4, or boutique consulting positions</li>
+                    </ul>
+                </div>
+
+                <div class="who-card">
+                    <h3>You Should Work With Me If:</h3>
+                    <ul>
+                        <li>You're getting cut after first rounds and don't know why</li>
+                        <li>You have interviews coming up and feel unprepared</li>
+                        <li>You want personalized strategy, not generic advice</li>
+                        <li>You're willing to put in the work between sessions</li>
+                    </ul>
+                </div>
+
+                <div class="who-card">
+                    <h3>This Is NOT For You If:</h3>
+                    <ul>
+                        <li>You're casually "exploring" consulting</li>
+                        <li>You expect me to do your prep for you</li>
+                        <li>You're not serious about landing an offer</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2>What You Get</h2>
+
+            <!-- Free Intro Call Card -->
+            <div class="free-call-card">
+                <div class="badge">Limited Availability</div>
+                <h3>FREE 15-Minute Intro Call</h3>
+                <p>Let's talk about where you are in recruiting and what your biggest gap is right now. No pitch. No pressure. Just clarity on what you need to focus on.</p>
+                <a href="https://cal.com/timh.liu/intro" class="btn btn-primary">Book Your Free Call</a>
+            </div>
+
+            <!-- Pricing Cards -->
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3 class="package-label">STARTER</h3>
+                    <h4 class="package-name">Strategy Session</h4>
+                    <div class="price">$97</div>
+                    <ul class="package-features">
+                        <li>Single 60-minute deep dive</li>
+                        <li>Choose your focus: Resume OR Case OR Behavioral</li>
+                        <li>Personalized action plan</li>
+                        <li><strong>Best for:</strong> Students who know their exact gap</li>
+                    </ul>
+                    <a href="mailto:timothy.liu@bc.edu?subject=Starter Package Inquiry" class="btn btn-secondary">Get Started</a>
+                </div>
+
+                <div class="pricing-card featured">
+                    <div class="badge popular-badge">MOST POPULAR</div>
+                    <h3 class="package-label">RECRUITING READY</h3>
+                    <h4 class="package-name">Complete Interview Prep</h4>
+                    <div class="price">$297</div>
+                    <ul class="package-features">
+                        <li>3 sessions over 2 weeks</li>
+                        <li><strong>Session 1:</strong> Strategy + resume positioning (60 min)</li>
+                        <li><strong>Session 2:</strong> Mock case interview (60 min)</li>
+                        <li><strong>Session 3:</strong> Behavioral prep + execution plan (45 min)</li>
+                        <li>Email support between sessions</li>
+                        <li><strong>Best for:</strong> Students actively recruiting</li>
+                    </ul>
+                    <a href="mailto:timothy.liu@bc.edu?subject=Recruiting Ready Package Inquiry" class="btn btn-primary">Get Started</a>
+                </div>
+
+                <div class="pricing-card">
+                    <h3 class="package-label">PREMIUM</h3>
+                    <h4 class="package-name">Full Offer Pipeline</h4>
+                    <div class="price">$597</div>
+                    <ul class="package-features">
+                        <li>6 sessions over 4 weeks</li>
+                        <li>Everything in Recruiting Ready PLUS:</li>
+                        <li>Additional mock case (different firm style)</li>
+                        <li>Networking strategy + outreach templates</li>
+                        <li>Post-interview debriefs (2 sessions)</li>
+                        <li>Priority scheduling + direct text support</li>
+                        <li><strong>Best for:</strong> Students targeting top-tier offers</li>
+                    </ul>
+                    <a href="mailto:timothy.liu@bc.edu?subject=Premium Package Inquiry" class="btn btn-secondary">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Me Section -->
+    <section class="why-me">
+        <div class="container">
+            <h2>Why Work With Me?</h2>
+            <div class="why-grid">
+                <div class="why-card">
+                    <div class="icon">📅</div>
+                    <h3>Recent Success You Can Trust</h3>
+                    <p>I just went through recruiting. I remember exactly what works and what doesn't because I lived it months ago—not years ago.</p>
+                </div>
+
+                <div class="why-card">
+                    <div class="icon">💼</div>
+                    <h3>Real Experience, Not Theory</h3>
+                    <p>I don't just teach frameworks. I've scaled a real business, made real hiring decisions, and solved real problems. That's what consulting firms actually care about.</p>
+                </div>
+
+                <div class="why-card">
+                    <div class="icon">✨</div>
+                    <h3>Personalized, Not Cookie-Cutter</h3>
+                    <p>No generic templates. We build YOUR story, YOUR positioning, YOUR strategy based on your actual experiences.</p>
+                </div>
+
+                <div class="why-card">
+                    <div class="icon">🎯</div>
+                    <h3>Insider Perspective</h3>
+                    <p>I've been through 15+ rounds of interviews at top firms. I know the exact questions they ask, the frameworks they want to see, and the red flags that get candidates cut.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Background Section -->
+    <section class="background">
+        <div class="container">
+            <h2>My Background</h2>
+            <div class="background-grid">
+                <div class="background-item">
+                    <div class="bg-icon">🎓</div>
+                    <h3>Senior at Boston College</h3>
+                    <p>Finance, Entrepreneurship, CS Minor (3.93 GPA)</p>
+                </div>
+
+                <div class="background-item">
+                    <div class="bg-icon">💼</div>
+                    <h3>Incoming Technology Consultant at PwC</h3>
+                    <p>Starting Summer 2026</p>
+                </div>
+
+                <div class="background-item">
+                    <div class="bg-icon">🚀</div>
+                    <h3>Co-Founder & CFO of MLV</h3>
+                    <p>$50K+ revenue, 500+ students across Hong Kong, Vietnam, Singapore</p>
+                </div>
+
+                <div class="background-item">
+                    <div class="bg-icon">📊</div>
+                    <h3>Data Analyst at BC's Center for Corporate Citizenship</h3>
+                    <p>Leading tech transformation projects</p>
+                </div>
+
+                <div class="background-item">
+                    <div class="bg-icon">🎯</div>
+                    <h3>Final Rounds at Multiple Top Firms</h3>
+                    <p>Deloitte, KPMG, MassMutual, AlphaSights</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <h2>What Students Are Saying</h2>
+            <p class="testimonials-subtext">First client testimonials coming soon</p>
+            <div class="testimonials-grid">
+                <div class="testimonial-card placeholder">
+                    <p class="testimonial-text">Your success story will be featured here</p>
+                    <div class="testimonial-author">
+                        <p class="author-name">— Future Client</p>
+                        <p class="author-title">Consulting Analyst</p>
+                    </div>
+                </div>
+
+                <div class="testimonial-card placeholder">
+                    <p class="testimonial-text">Your success story will be featured here</p>
+                    <div class="testimonial-author">
+                        <p class="author-name">— Future Client</p>
+                        <p class="author-title">Consulting Analyst</p>
+                    </div>
+                </div>
+
+                <div class="testimonial-card placeholder">
+                    <p class="testimonial-text">Your success story will be featured here</p>
+                    <div class="testimonial-author">
+                        <p class="author-name">— Future Client</p>
+                        <p class="author-title">Consulting Analyst</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Start?</h2>
+            <div class="cta-steps">
+                <div class="cta-step">
+                    <div class="step-number">1</div>
+                    <h3>Book a Free 15-Minute Intro Call</h3>
+                    <p>Let's diagnose your biggest recruiting challenge and see if we're a fit.</p>
+                </div>
+
+                <div class="cta-step">
+                    <div class="step-number">2</div>
+                    <h3>Choose Your Package</h3>
+                    <p>After our intro call, I'll recommend which package makes sense for your timeline and goals.</p>
+                </div>
+
+                <div class="cta-step">
+                    <div class="step-number">3</div>
+                    <h3>Land Your Offer</h3>
+                    <p>Execute the strategy, put in the work, and walk into interviews with confidence.</p>
+                </div>
+            </div>
+            <a href="https://cal.com/timh.liu/intro" class="btn btn-cta-large">Book Free Call - Limited Slots</a>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="faq">
+        <div class="container">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>I don't have entrepreneurial experience. Can you still help me?</span>
+                        <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Absolutely. Part of what I do is help you identify and position experiences you already have in ways that demonstrate entrepreneurial thinking. We'll also discuss quick wins you can build before interviews.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>How is this different from other case prep services?</span>
+                        <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Most services teach you cases in isolation. I teach you how to build a complete profile that makes firms want to hire you—THEN we perfect your cases. The story comes first.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>Do you guarantee I'll get an offer?</span>
+                        <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>No one can guarantee that. But I can guarantee you'll have a clearer strategy, better positioning, and stronger execution than 95% of candidates. The rest is up to you.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>What if I'm recruiting for a firm you didn't interview with?</span>
+                        <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>The fundamentals are the same across all consulting firms. I've researched and practiced cases from MBB, Big 4, and boutiques. I'll tailor our prep to your target firms.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>How quickly can we start?</span>
+                        <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>I typically have availability within 3-5 days of booking. If you have urgent interviews, let me know and I'll do my best to accommodate.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>What if I've already done some recruiting prep?</span>
+                        <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Great. We'll build on what you know and fill the gaps. Many of my best clients have done generic prep but needed personalized strategy to break through.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <h3>Timothy Liu</h3>
+                    <p>Consulting Recruiting Mentorship</p>
+                    <p class="copyright">© 2026 All rights reserved</p>
+                </div>
+
+                <div class="footer-center">
+                    <nav class="footer-nav">
+                        <a href="#about">About</a>
+                        <a href="#services">Services</a>
+                        <a href="#faq">FAQ</a>
+                        <a href="#contact">Contact</a>
+                    </nav>
+                </div>
+
+                <div class="footer-right">
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/in/timothyhaiyiliu" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                            </svg>
+                        </a>
+                        <a href="https://www.instagram.com/timh.liu" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+                            </svg>
+                        </a>
+                        <a href="mailto:timothy.liu@bc.edu" aria-label="Email">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-quote">
+                <p>"The safe corporate path is actually the riskiest bet you can make. Job security is dead. Skill security is everything."</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button id="scroll-top" class="scroll-top" aria-label="Scroll to top">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
     </button>
 
-    <!-- Navbar -->
-    <nav>
-        <div class = "logo-container">
-          <img src = "images/android-chrome-512x512.png" alt = "logo" class = "logo">
-        </div>
-        <ul class="navigation container">
-          <li><a href="#about" class="nav-link">About</a></li>
-          <li><a href="#skills" class="nav-link">Skills</a></li>
-          <li><a href="#projects" class="nav-link">Projects</a></li>
-          <li><a href="#contact" class="nav-link">Contact</a></li>
-        </ul>
-        <button class="burger-menu" id="burger-menu">
-          <ion-icon class="bars" name="menu-outline"></ion-icon>
-        </button>
-    </nav>
-    
-    <!-- Hero Section -->
-    <section class="hero">
-      <img
-        src="images/heroImage.JPG"
-        alt="tim-liu"
-        loading="lazy"
-        class="hero-img"
-      />
-      <div class="bio typewriter">
-        <h2 class="bio-title" id = "name">TIM LIU</h2>
-        <div class="bio-text animate__animated animate__fadeInLeft">
-          <p>Finance and entrepreneurship student at Boston College</p>
-        </div>
-      </div>
-      <br>
-    </section>
-    
-    <!-- About Me Section -->
-    <section class="about container" id="about">
-      <h2>About Me</h2>
-      <div class = "intro">
-        <p>
-        Hi, my name is Tim Liu and I am currently a sophomore studying finance and entrepreneurship at Boston College (BC). 
-        I am an avid learner who enjoys solving challenging problems, absorbing new knowledge, and working collaboratively with others. 
-        I seek to embody my leadership skills through creating a meaningful impact on others. 
-        My experience as a volunteer mentor at the Work Force and Student Success Coach at The Academy has allowed me to foster personal connections and empower individuals. 
-        I am currently co-founding a startup called Mam Le Viet (MLV).
-        My other passions revolve around sports, fitness, and nutrition. 
-        As a food lover, I also enjoy traveling to try different cuisines from around the world and studying and cooking food.
-        </p>
-        <br>
-        <span class="MLV">
-          Check out MLV @ <a href = "https://www.mlvignite.com" target="_blank">mlvignite.com</a>
-        </span>
-      </div>
-
-    <div class="education">
-      <h3>Education</h3>
-      <div class="education-container">
-        <div class="education-card">
-          <div class="education-img">
-            <img src="images/bc_logo.png" alt="bc_logo" loading="lazy" />
-          </div>
-          <div class="education-info">
-            <h4>
-              Boston College<span class = "unbold smaller">, Expected Graduation: May 2026</span>
-            </h4>
-            <p><b>Concentration: </b>Finance and Entrepreneurship</p>
-            <p><b>Minor: </b>Computer Science</p>
-            <p><b>Cumulative GPA: </b>3.968</p>
-          </div>
-        </div>
-        <div class="education-card">
-          <div class="education-img">
-            <img src="images/is_logo.png" alt="is_logo" loading="lazy" />
-          </div>
-          <div class="education-info">
-            <h4>
-              Island School<span class = "unbold smaller">, 2015 to 2022</span>
-            </h4>
-            <p>International Baccalaureate (IB) Diploma</p>
-            <p><b>HL Subjects: </b>Maths AA, Physics, Economics</p>
-            <p><b>IB Score: </b>45 out of 45 points</p>
-          </div>
-        </div>
-      </div>
-        
-      <div class = "awards" id = "awards">
-        <h3>Awards</h3>
-        <div class = "awards-container">          
-          <div class = "awards-card">
-            <div class = "awards-img">
-              <a href="#">
-                <img 
-                src = "icons/ayp_bronze.png" 
-                alt = "AYP Bronze" 
-                loading = "lazy">              
-              </a>
-            </div>
-            <div class = "awards-info">
-              <span>Hong Kong Award for Young People (AYP) Bronze</span>
-            </div>
-          </div>
-              
-          <div class = "awards-card">
-            <div class = "awards-img">
-              <a href="#">
-                <img 
-                  src = "icons/ayp_silver.png" 
-                  alt = "AYP Silver"                   
-                  loading = "lazy">
-              </a>
-            </div>
-            <div class = "awards-info">
-              <span>Hong Kong Award for Young People (AYP) Silver</span>
-            </div>
-          </div>
-                
-          <div class = "awards-card">
-            <div class = "awards-img">
-              <a href="https://drive.google.com/file/d/1GLPy6HM-j8Bg5i1Xs19Z8qWdwwUV5bwx/view?usp=drive_link">
-                <img 
-                  src = "icons/amc.png" 
-                  alt = "AMC 12"                   
-                  loading = "lazy"
-                  class = "amc">
-              </a>
-            </div>
-            <div class = "awards-info">
-              <span>American Mathematics Competitions (AMC) 12 School First Place Finisher</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <section class = "more-about-me" id = "more-about-me">
-        <div class = "more-about-me-text">
-          <span>
-            Learn more about me:
-          </span>
-        </div>
-        <div class="more-about-me-container">
-          <div class = "linkedin">
-            <a href="https://www.linkedin.com/in/timothyhaiyiliu/" target="_blank">
-              <img src="images/linkedin.png" alt="linkedin" loading="lazy"/>
-            </a>
-          </div>
-          <div class = "resume">
-            <a class = "resume-link"
-              href = "https://drive.google.com/file/d/1MTdDLZiO_iVoJT8IF9usp-9OAzvRmBIv/view?usp=sharing"
-              target="_blank">
-              Resume
-            </a>
-          </div>
-        </div>
-      </section>
-    </section>
-
-
-    <!-- Skills section -->
-    <section class = "skills" id = "skills">
-      <h2>Technical Skills</h2>
-      <div class="skills-wrapper">
-        <div class="first-set">
-          <div class = "icon-box hidden">
-            <img
-              src="images/r.png"
-              alt=""
-              loading="lazy"
-              class="icon icon-card"
-            />
-            <span class="icon-text">R</span>
-          </div>
-          <div class = "icon-box hidden">
-            <img
-              src="images/python.png"
-              alt=""
-              loading="lazy"
-              class="icon icon-card"
-            />
-            <span class="icon-text">Python</span>
-          </div>
-          <div class = "icon-box hidden">
-            <img
-              src="images/excel.png"
-              alt=""
-              loading="lazy"
-              class="icon icon-card"
-            />
-            <span class="icon-text">Excel</span>
-          </div>
-          <div class = "icon-box hidden">
-          <img
-            src="images/powerpoint.png"
-            alt=""
-            loading="lazy"
-            class="icon icon-card"
-          />
-          <span class="icon-text">PowerPoint</span>
-          </div>
-        </div>
-
-        <div class="second-set animate__animated animate__pulse">
-          <div class = "icon-box hidden">
-            <img
-              src="images/html.png"
-              alt=""
-              loading="lazy"
-              class="icon icon-card"
-            />
-            <span class="icon-text">HTML</span>
-          </div>
-          <div class = "icon-box hidden">
-            <img
-              src="images/css.png"
-              alt=""
-              loading="lazy"
-              class="icon icon-card"
-            />
-            <span class="icon-text">CSS</span>
-          </div>
-          <div class = "icon-box hidden">
-            <img
-              src="images/javascript.png"
-              alt=""
-              loading="lazy"
-              class="icon icon-card"
-            />
-            <span class="icon-text">Javascript</span>
-          </div>
-          <div class = "icon-box hidden">
-          <img
-            src="images/java.png"
-            alt=""
-            loading="lazy"
-            class="icon icon-card"
-          />
-          <span class="icon-text">Java</span>
-          </div>
-        </div>          
-        <p 
-        class = "skills-wrapper more-skills animate__animated animate__fadeInRight"
-        >+constantly learning more...
-        </p>
-      </div>
-    </section>
-
-    <!-- Projects section -->
-    <section class="projects" id="projects">
-      <h2 class="projects-title">Recent works and projects</h2>
-      <div class="projects-container">
-        <a href="https://drive.google.com/file/d/1hlU7MsSnUep54E5VAmstLRH1E1ayx2rY/view?usp=sharing" target="_blank"
-        class = "project-link">
-          <div class="project-container project-card">
-            <img 
-              src="images/oocl.png"
-              alt="consulting-presentation"
-              loading="lazy"
-              class="project-pic"
-            />
-           <h4 class="project-title">Consulting Presentation</h4>
-           <p class="project-details">
-              Working as a summer intern at OOCL, I synthesized information on the cash capabilities of 3 banks in Asia.
-              I then created a PowerPoint presentation to present my findings and provide recommendations. 
-            </p>
-          </div>
-        </a>
-        <a href="https://www.youtube.com/watch?v=wlirwq7Wp6A" target="_blank"
-        class = "project-link">
-          <div class="project-container project-card">
-            <img
-              src="images/hkust.png"
-              alt="netflic-clone"
-              loading="lazy"
-              class="project-pic"
-            />
-            <h4 class="project-title">HKUST Video Competition</h4>
-            <p class="project-details">
-              Filmed and edited a 3 minute video for the HKUST School of Engineering "What is Engineering?" Video Competition
-              using Adobe Premiere Pro. Received a Merit Award (1 of 5).
-            </p>
-          </div>
-        </a>
-        <a href="https://drive.google.com/file/d/1-1avzS6o6S2j3iPT0W6jlbBpV7sFcRBb/view?usp=sharing" target="_blank"
-        class = "project-link">
-          <div class="project-container project-card">
-            <img
-              src="images/stock.png"
-              alt="greeny-earth"
-              loading="lazy"
-              class="project-pic"
-            />
-            <h4 class="project-title">Stock Price Modelling</h4>
-            <p class="project-details">
-              For my IB Maths AA HL Exploration, I wrote a paper on modeling and predicting stocks and cryptocurrency 
-              price movements using Markov chains by self-learning advanced maths topics. Achieved near full marks.
-            </p>
-          </div>
-        </a>
-      </div>
-    </section>
-  
-    <!-- Contact section -->
-    <section class="contact" id="contact">
-      <h2>Let's Connect!</h2>
-      <div class="contact-form-container">
-        <div class="contact-form">
-          <form id="myForm">
-            <div class="form-control">
-              <label for="name">Name</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                placeholder="Enter Your Name"
-                class="input-field"
-                required
-              />
-            </div>
-            <div class="form-control">
-              <label for="email">Email</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                placeholder="Enter Your Email"
-                class="input-field"
-                required
-              />
-            </div>
-            <div class="form-control">
-              <label for="message">Message</label>
-              <textarea
-                id="message"
-                cols="40"
-                rows="10"
-                placeholder="Enter Your Message"
-                name="message"
-                class="input-field"
-              ></textarea>
-            </div>
-            <button
-              type="submit"
-              value="Submit"
-              id="submit-btn"
-              class="submit-btn"
-              onclick="SubForm()";
-            ><span>Submit</span
-            ></button>
-          </form>
-        </div>
-      </div>
-      <div id="thank-you-message" style="display:none;">
-        <div class="thank-you-message">
-          <h4>Thank you for reaching out!</h4>
-          <p>I will get back to you as soon as possible.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Socials -->
-    <link href='https://unpkg.com/css.gg@2.0.0/icons/css/mail.css' rel='stylesheet'>
-
-    <div class="socials">
-      <a href="mailto:timothy.liu@bc.edu" target="_blank"
-        ><img
-          src="icons/gmail.png"
-          alt="Email"
-          loading="lazy"
-          class="socicon"
-      /></a>
-      <a href="https://www.linkedin.com/in/timothyhaiyiliu/" target="_blank"
-        ><img
-          src="icons/linkedin.png"
-          alt="Linkedin"
-          loading="lazy"
-          class="socicon"
-      /></a>
-      <a href="https://github.com/TimHL5" target="_blank"
-        ><img
-          src="icons/github.png"
-          alt="Github"
-          loading="lazy"
-          class="socicon"
-      /></a>
-      <a href="https://www.instagram.com/timh.liu/" target="_blank"
-        ><img 
-        src="icons/instagram.png" 
-        alt="Instagram" 
-        class="socicon"
-      /></a>
-    </div>
-
-    <!-- Footer section -->
-    <footer>
-      <p class="copy">&copy; Copyright 2023</p>
-      <p class="copy">
-        Timothy Haiyi Liu
-      </p>
-    </footer> 
-
-    <!-- Ion icons scripts -->
-    <script
-      type="module"
-      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
-    ></script>
-    <script
-      nomodule
-      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
-    ></script>
-
-  </body>
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
 </html>

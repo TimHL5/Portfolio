@@ -1,95 +1,219 @@
-let button = document.getElementById("myBtn");
+/**
+ * Consulting Recruiting Mentorship - Interactive Scripts
+ * Author: Timothy Liu
+ * No jQuery - Pure Vanilla JavaScript
+ */
 
-// Delay the name showing up during delay
-const nameElement = document.getElementById("name");
-nameElement.style.visibility = "hidden";
-// Set a timeout to reveal the 'name' element after the delay
-setTimeout(function() {
-  nameElement.style.visibility = "visible";
-}, 1150);
+// ==========================================
+// MOBILE NAVIGATION MENU
+// ==========================================
 
-// When the user scrolls down 20px from the top of the document, show the button
-window.onscroll = function() {scrollFunction()};
+const navToggle = document.getElementById('nav-toggle');
+const navMenu = document.getElementById('nav-menu');
+const navLinks = document.querySelectorAll('.nav-link');
 
-function scrollFunction() {
-    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-      button.style.display = "block";
-    } else {
-      button.style.display = "none";
-    }
-  }
-  
-// When the user clicks on the button, scroll to the top of the document
-function topFunction() {
-  document.body.scrollTop = 0; // For Safari
-  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+// Toggle mobile menu
+if (navToggle) {
+    navToggle.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+        navToggle.classList.toggle('active');
+    });
 }
 
-const submitBtn = document.querySelector('.submit-btn');
-
-submitBtn.addEventListener('click', () => {
-  submitBtn.classList.toggle('active');
+// Close mobile menu when clicking on a link
+navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+        navToggle.classList.remove('active');
+    });
 });
 
-// Scroll animation for icons
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-        console.log(entry);
-        if (entry.isIntersecting) {
-            entry.target.classList.add('show');
-        } else {
-            entry.target.classList.remove('show');
+// Close mobile menu when clicking outside
+document.addEventListener('click', (e) => {
+    if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
+        navMenu.classList.remove('active');
+        navToggle.classList.remove('active');
+    }
+});
+
+// ==========================================
+// NAVBAR SCROLL EFFECT
+// ==========================================
+
+const navbar = document.getElementById('navbar');
+let lastScrollY = window.scrollY;
+
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+    } else {
+        navbar.classList.remove('scrolled');
+    }
+    lastScrollY = window.scrollY;
+});
+
+// ==========================================
+// FAQ ACCORDION
+// ==========================================
+
+const faqQuestions = document.querySelectorAll('.faq-question');
+
+faqQuestions.forEach(question => {
+    question.addEventListener('click', () => {
+        const faqItem = question.parentElement;
+        const isActive = faqItem.classList.contains('active');
+
+        // Close all FAQ items
+        document.querySelectorAll('.faq-item').forEach(item => {
+            item.classList.remove('active');
+            item.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+        });
+
+        // Open clicked item if it wasn't active
+        if (!isActive) {
+            faqItem.classList.add('active');
+            question.setAttribute('aria-expanded', 'true');
         }
     });
 });
 
-const hiddenElements = document.querySelectorAll('.hidden');
-hiddenElements.forEach((el) => observer.observe(el));
+// ==========================================
+// SCROLL TO TOP BUTTON
+// ==========================================
 
-// Google Form
-const form = document.getElementById("myForm");
-const thankYouMessage = document.getElementById("thank-you-message");
-const formContainer = document.querySelector(".contact-form-container");
+const scrollTopBtn = document.getElementById('scroll-top');
 
-form.addEventListener("submit", async (event) => {
-  event.preventDefault();
-
-  const formData = new FormData(form);
-  const data = Object.fromEntries(formData.entries());
-
-  const preFilledUrl = "https://docs.google.com/forms/d/e/1FAIpQLSfnwRXqzLCxREF-frlYiR8HdwJ4ipSPR3nlxkCx23HxJLwTgg/formResponse?entry.1234567890=" 
-  + encodeURIComponent(data["entry.1234567890"]) + "&entry.0987654321=" + encodeURIComponent(data["entry.0987654321"]) + "&entry.2468013579=" 
-  + encodeURIComponent(data["entry.2468013579"]);
-
-  const response = await fetch(preFilledUrl, {
-    mode: 'no-cors'
-  });
-  const text = await response.text();
-
-  console.log(text);
-
-  // you can redirect to a thank you page or display a message to the user here
-  form.style.display = "none";
-  formContainer.classList.add("hidden"); // add the hidden class to the form container
-  thankYouMessage.style.display = "block";
+// Show/hide scroll to top button
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) {
+        scrollTopBtn.classList.add('visible');
+    } else {
+        scrollTopBtn.classList.remove('visible');
+    }
 });
 
+// Scroll to top when button is clicked
+if (scrollTopBtn) {
+    scrollTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+}
 
-// Nav hamburgerburger selections
+// ==========================================
+// SMOOTH SCROLL FOR ANCHOR LINKS
+// ==========================================
 
-const burger = document.querySelector("#burger-menu");
-const ul = document.querySelector("nav ul");
-const nav = document.querySelector("nav");
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
 
-burger.addEventListener("click", () => {
-    ul.classList.toggle("show");
-  });
-  
-const navLink = document.querySelectorAll(".nav-link");
+        // Only handle internal anchor links
+        if (href !== '#' && href.length > 1) {
+            e.preventDefault();
 
-navLink.forEach((link) =>
-  link.addEventListener("click", () => {
-    ul.classList.remove("show");
-  })
-);
+            const targetId = href.substring(1);
+            const targetElement = document.getElementById(targetId);
 
+            if (targetElement) {
+                // Calculate offset for sticky navbar
+                const navbarHeight = navbar.offsetHeight;
+                const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - navbarHeight - 20;
+
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        }
+    });
+});
+
+// ==========================================
+// INTERSECTION OBSERVER FOR FADE-IN ANIMATIONS (Optional)
+// ==========================================
+
+// Add fade-in animation to sections as they come into view
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('fade-in');
+            observer.unobserve(entry.target);
+        }
+    });
+}, observerOptions);
+
+// Observe all sections (optional - can be enabled for subtle animations)
+// Uncomment the lines below to enable fade-in animations
+/*
+const sections = document.querySelectorAll('section');
+sections.forEach(section => {
+    observer.observe(section);
+});
+*/
+
+// ==========================================
+// KEYBOARD ACCESSIBILITY
+// ==========================================
+
+// Add keyboard support for FAQ items
+faqQuestions.forEach(question => {
+    question.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            question.click();
+        }
+    });
+});
+
+// ==========================================
+// PREVENT FOUC (Flash of Unstyled Content)
+// ==========================================
+
+// Add loaded class to body when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+    document.body.classList.add('loaded');
+});
+
+// ==========================================
+// PERFORMANCE: DEBOUNCE SCROLL EVENTS
+// ==========================================
+
+function debounce(func, wait = 10, immediate = true) {
+    let timeout;
+    return function() {
+        const context = this;
+        const args = arguments;
+        const later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        const callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+
+// Apply debounce to scroll-intensive functions for better performance
+const debouncedScrollHandler = debounce(() => {
+    // Any additional scroll handling can go here
+}, 20);
+
+window.addEventListener('scroll', debouncedScrollHandler);
+
+// ==========================================
+// CONSOLE MESSAGE (Optional branding)
+// ==========================================
+
+console.log('%c🎯 Built with precision | Timothy Liu Consulting',
+    'color: #822433; font-size: 14px; font-weight: bold; padding: 10px;');
+console.log('%cInterested in consulting recruiting mentorship? Book a call at https://cal.com/timh.liu/intro',
+    'color: #333; font-size: 12px; padding: 5px;');
