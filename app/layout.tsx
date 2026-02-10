@@ -5,6 +5,10 @@ import './globals.css';
 export const metadata: Metadata = {
   title: `${PERSONAL.name} — ${PERSONAL.tagline}`,
   description: PERSONAL.bio,
+  icons: {
+    icon: '/favicon.ico',
+    apple: '/apple-touch-icon.png',
+  },
   openGraph: {
     title: `${PERSONAL.name} — ${PERSONAL.tagline}`,
     description: PERSONAL.bio,
