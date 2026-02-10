@@ -3,6 +3,7 @@ import { PERSONAL } from '@/lib/constants';
 import './globals.css';
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://timhl.com'),
   title: `${PERSONAL.name} — ${PERSONAL.tagline}`,
   description: PERSONAL.bio,
   icons: {
@@ -13,6 +14,7 @@ export const metadata: Metadata = {
     title: `${PERSONAL.name} — ${PERSONAL.tagline}`,
     description: PERSONAL.bio,
     type: 'website',
+    images: ['/profile.png'],
   },
 };
 

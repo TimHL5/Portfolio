@@ -39,29 +39,23 @@ export default function About() {
             &ldquo;{PERSONAL.pullQuote}&rdquo;
           </motion.blockquote>
 
-          {/* Photo placeholder */}
+          {/* Profile photo */}
           <motion.div
             className="mt-12 relative aspect-[4/5] max-w-sm bg-charcoal-mid rounded-sm overflow-hidden"
             initial={{ opacity: 0, y: 30 }}
             animate={quoteInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.3, duration: 0.8 }}
           >
-            <div className="absolute inset-0 flex items-center justify-center border border-offwhite/10">
-              <div className="text-center">
-                <div className="font-mono text-caption text-offwhite/30 uppercase tracking-widest">
-                  Profile Photo
-                </div>
-                <div className="font-mono text-caption text-offwhite/20 mt-1">
-                  4:5 Portrait
-                </div>
-              </div>
-            </div>
-            {/* Ken Burns effect container - slow zoom */}
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-br from-amber/5 to-transparent"
+            {/* Ken Burns slow zoom on the image */}
+            <motion.img
+              src="/profile.png"
+              alt={PERSONAL.name}
+              className="absolute inset-0 w-full h-full object-cover"
               animate={{ scale: [1, 1.05, 1] }}
               transition={{ duration: 20, repeat: Infinity, ease: 'easeInOut' }}
             />
+            {/* Subtle bottom gradient for depth against dark bg */}
+            <div className="absolute inset-0 bg-gradient-to-t from-charcoal/40 via-transparent to-transparent" />
           </motion.div>
         </div>
 
