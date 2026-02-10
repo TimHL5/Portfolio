@@ -203,3 +203,13 @@ body {
 .venture-glow:hover::after {
   opacity: 1;
 }
+
+/* Touch device optimizations */
+@media (hover: none) {
+  .magnetic-btn::before {
+    display: none;
+  }
+  .venture-glow:hover::after {
+    opacity: 0;
+  }
+}

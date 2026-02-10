@@ -25,7 +25,7 @@ export default function Leadership() {
         S.06 &mdash; Leadership
       </motion.div>
       <motion.h2
-        className="text-heading font-serif mb-16"
+        className="text-heading font-serif mb-10 md:mb-16"
         initial={{ opacity: 0, y: 30 }}
         animate={sectionInView ? { opacity: 1, y: 0 } : {}}
         transition={{ delay: 0.2, duration: 0.8 }}
@@ -38,7 +38,7 @@ export default function Leadership() {
         {LEADERSHIP.map((item, i) => (
           <motion.div
             key={item.org}
-            className="group flex items-start gap-4 p-5 bg-charcoal-mid/50 border border-offwhite/5 rounded-sm hover:border-offwhite/10 transition-all duration-300"
+            className="group flex items-start gap-3 md:gap-4 p-3 md:p-5 bg-charcoal-mid/50 border border-offwhite/5 rounded-sm hover:border-offwhite/10 transition-all duration-300"
             initial={{ opacity: 0, y: 20 }}
             animate={sectionInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.3 + i * 0.08, duration: 0.6 }}

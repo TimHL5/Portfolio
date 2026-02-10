@@ -21,7 +21,7 @@ function EntryCard({
 }) {
   const config = statusConfig[entry.status];
   return (
-    <div className={`bg-charcoal-mid border border-offwhite/5 rounded-sm p-6 max-w-md w-full ${className}`}>
+    <div className={`bg-charcoal-mid border border-offwhite/5 rounded-sm p-4 md:p-6 max-w-md w-full ${className}`}>
       <div className={`flex items-center gap-2 mb-3 ${align === 'right' ? 'md:justify-end' : ''}`}>
         <span className={`status-dot ${config.className}`} />
         <span className="font-mono text-caption text-offwhite/30 uppercase tracking-widest">
@@ -55,7 +55,7 @@ function TimelineEntry({
   const isEven = index % 2 === 0;
 
   return (
-    <div ref={ref} className="mb-16 last:mb-0">
+    <div ref={ref} className="mb-8 md:mb-16 last:mb-0">
       {/* Mobile layout - simple stack */}
       <div className="md:hidden">
         <motion.div
@@ -142,7 +142,7 @@ export default function Timeline() {
         S.04 &mdash; Experience
       </motion.div>
       <motion.h2
-        className="text-heading font-serif mb-20"
+        className="text-heading font-serif mb-12 md:mb-20"
         initial={{ opacity: 0, y: 30 }}
         animate={sectionInView ? { opacity: 1, y: 0 } : {}}
         transition={{ delay: 0.2, duration: 0.8 }}

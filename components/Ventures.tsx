@@ -55,10 +55,10 @@ export default function Ventures() {
     <section
       id="ventures"
       ref={sectionRef}
-      className="relative py-32 md:py-48"
+      className="relative py-20 md:py-32 lg:py-48"
     >
       {/* Section header */}
-      <div className="px-6 md:px-12 lg:px-24 mb-16">
+      <div className="px-6 md:px-12 lg:px-24 mb-10 md:mb-16">
         <motion.div
           className="font-mono text-caption text-offwhite/30 uppercase tracking-[0.3em] mb-6"
           initial={{ opacity: 0 }}
@@ -88,7 +88,7 @@ export default function Ventures() {
       {/* Horizontal scroll container */}
       <motion.div
         ref={scrollContainerRef}
-        className="flex gap-6 px-6 md:px-12 lg:px-24 overflow-x-auto horizontal-scroll snap-x snap-mandatory pb-8"
+        className="flex gap-4 md:gap-6 px-6 md:px-12 lg:px-24 overflow-x-auto horizontal-scroll snap-x snap-mandatory pb-8"
         style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
@@ -121,9 +121,9 @@ export default function Ventures() {
           <button
             key={i}
             onClick={() => scrollTo(i)}
-            className={`w-2 h-2 rounded-full transition-all duration-300 ${
+            className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
               i === activeIndex
-                ? 'bg-amber w-8'
+                ? 'bg-amber w-6 md:w-8'
                 : 'bg-offwhite/20 hover:bg-offwhite/40'
             }`}
             aria-label={`Go to venture ${i + 1}`}

@@ -23,9 +23,9 @@ const config: Config = {
         mono: ['var(--font-jetbrains-mono)', 'Courier New', 'monospace'],
       },
       fontSize: {
-        'display': ['clamp(3.5rem, 10vw, 10rem)', { lineHeight: '0.95', letterSpacing: '-0.03em' }],
-        'heading': ['clamp(2rem, 5vw, 4.5rem)', { lineHeight: '1.05', letterSpacing: '-0.02em' }],
-        'subheading': ['clamp(1.25rem, 2.5vw, 2rem)', { lineHeight: '1.2', letterSpacing: '-0.01em' }],
+        'display': ['clamp(2.25rem, 10vw, 10rem)', { lineHeight: '0.95', letterSpacing: '-0.03em' }],
+        'heading': ['clamp(1.5rem, 5vw, 4.5rem)', { lineHeight: '1.05', letterSpacing: '-0.02em' }],
+        'subheading': ['clamp(1.1rem, 2.5vw, 2rem)', { lineHeight: '1.2', letterSpacing: '-0.01em' }],
         'body-lg': ['clamp(1rem, 1.25vw, 1.25rem)', { lineHeight: '1.7' }],
         'body': ['clamp(0.875rem, 1vw, 1rem)', { lineHeight: '1.7' }],
         'caption': ['0.75rem', { lineHeight: '1.5', letterSpacing: '0.08em' }],

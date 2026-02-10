@@ -84,7 +84,7 @@ export default function Navigation() {
             exit={{ clipPath: 'circle(0% at calc(100% - 2rem) 2rem)' }}
             transition={{ duration: 0.6, ease: [0.77, 0, 0.175, 1] }}
           >
-            <nav className="flex flex-col items-center gap-8">
+            <nav className="flex flex-col items-center gap-6 md:gap-8">
               {NAV_SECTIONS.map((section, i) => (
                 <motion.button
                   key={section.id}

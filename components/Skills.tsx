@@ -44,7 +44,7 @@ export default function Skills() {
         S.05 &mdash; Skills
       </motion.div>
       <motion.h2
-        className="text-heading font-serif mb-16"
+        className="text-heading font-serif mb-10 md:mb-16"
         initial={{ opacity: 0, y: 30 }}
         animate={sectionInView ? { opacity: 1, y: 0 } : {}}
         transition={{ delay: 0.2, duration: 0.8 }}
@@ -55,7 +55,7 @@ export default function Skills() {
       <div className="max-w-4xl">
         {/* Category tabs */}
         <motion.div
-          className="flex flex-wrap gap-2 mb-12"
+          className="flex flex-wrap gap-2 mb-8 md:mb-12"
           initial={{ opacity: 0 }}
           animate={sectionInView ? { opacity: 1 } : {}}
           transition={{ delay: 0.3, duration: 0.8 }}
@@ -64,7 +64,7 @@ export default function Skills() {
             <button
               key={cat.key}
               onClick={() => setActiveCategory(cat.key)}
-              className={`font-mono text-caption uppercase tracking-widest px-4 py-2 rounded-sm border transition-all duration-300 ${
+              className={`font-mono text-caption uppercase tracking-widest px-3 py-1.5 md:px-4 md:py-2 rounded-sm border transition-all duration-300 ${
                 activeCategory === cat.key
                   ? 'border-current text-offwhite bg-offwhite/5'
                   : 'border-offwhite/10 text-offwhite/30 hover:text-offwhite/50 hover:border-offwhite/20'
@@ -93,7 +93,7 @@ export default function Skills() {
             {items.map((item, i) => (
               <motion.div
                 key={item}
-                className="group relative bg-charcoal-mid border border-offwhite/5 rounded-sm p-4 hover:border-offwhite/15 transition-all duration-300"
+                className="group relative bg-charcoal-mid border border-offwhite/5 rounded-sm p-3 md:p-4 hover:border-offwhite/15 transition-all duration-300"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.05, duration: 0.4 }}
@@ -113,7 +113,7 @@ export default function Skills() {
 
         {/* All skills dense view */}
         <motion.div
-          className="mt-16 pt-8 border-t border-offwhite/5"
+          className="mt-10 md:mt-16 pt-8 border-t border-offwhite/5"
           initial={{ opacity: 0 }}
           animate={sectionInView ? { opacity: 1 } : {}}
           transition={{ delay: 0.6, duration: 0.8 }}

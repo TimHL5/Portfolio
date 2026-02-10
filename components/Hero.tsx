@@ -142,7 +142,7 @@ export default function Hero() {
       {/* Top bar - coordinates and clock */}
       <div className="absolute top-6 left-6 md:left-12 lg:left-24 flex items-center gap-6">
         <BostonClock />
-        <span className="font-mono text-caption text-offwhite/20 tracking-widest">
+        <span className="hidden sm:inline font-mono text-caption text-offwhite/20 tracking-widest">
           42.3601°N 71.0589°W
         </span>
       </div>
@@ -151,7 +151,7 @@ export default function Hero() {
       <div className="relative z-10 mt-20 md:mt-0">
         {/* Small label above name */}
         <motion.div
-          className="font-mono text-caption text-offwhite/40 uppercase tracking-[0.3em] mb-6"
+          className="font-mono text-caption text-offwhite/40 uppercase tracking-[0.15em] md:tracking-[0.3em] mb-6"
           initial={{ opacity: 0, y: 20 }}
           animate={loaded ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.5, duration: 0.8 }}
@@ -189,7 +189,7 @@ export default function Hero() {
 
         {/* Role rotator */}
         <motion.div
-          className="text-subheading font-sans mb-12"
+          className="text-subheading font-sans mb-6 md:mb-12"
           initial={{ opacity: 0 }}
           animate={loaded ? { opacity: 1 } : {}}
           transition={{ delay: 1.5, duration: 0.8 }}

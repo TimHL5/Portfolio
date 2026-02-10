@@ -54,13 +54,13 @@ export default function VentureCard({
       transition={{ duration: 0.5 }}
     >
       <div
-        className="relative rounded-sm overflow-hidden p-8 md:p-12 h-full border border-offwhite/5"
+        className="relative rounded-sm overflow-hidden p-5 md:p-8 lg:p-12 h-full border border-offwhite/5"
         style={{
           background: `linear-gradient(135deg, rgba(${hexToRgb(accentColor)}, 0.05) 0%, rgba(20,20,20,1) 60%)`,
         }}
       >
         {/* Status indicator */}
-        <div className="flex items-center gap-2 mb-8">
+        <div className="flex items-center gap-2 mb-4 md:mb-8">
           <span
             className={`status-dot ${
               status === 'active' ? 'status-active' : 'status-upcoming'
@@ -89,17 +89,17 @@ export default function VentureCard({
         <div className="font-sans text-body-lg text-offwhite/60 mb-2">
           {tagline}
         </div>
-        <div className="font-mono text-caption text-offwhite/30 uppercase tracking-widest mb-8">
+        <div className="font-mono text-caption text-offwhite/30 uppercase tracking-widest mb-4 md:mb-8">
           {role}
         </div>
 
         {/* Description */}
-        <p className="text-body text-offwhite/50 font-sans max-w-lg mb-8 leading-relaxed">
+        <p className="text-body text-offwhite/50 font-sans max-w-lg mb-4 md:mb-8 leading-relaxed">
           {description}
         </p>
 
         {/* Metrics grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4 mb-4 md:mb-8">
           {metrics.map((metric) => (
             <div
               key={metric.label}
@@ -117,15 +117,15 @@ export default function VentureCard({
 
         {/* Programs */}
         {programs && programs.length > 0 && (
-          <div className="mb-8">
+          <div className="mb-4 md:mb-8">
             <div className="font-mono text-caption text-offwhite/20 uppercase tracking-widest mb-3">
               Programs
             </div>
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-2 md:gap-3">
               {programs.map((program) => (
                 <div
                   key={program.name}
-                  className="bg-offwhite/[0.03] border border-offwhite/5 rounded-sm px-4 py-2"
+                  className="bg-offwhite/[0.03] border border-offwhite/5 rounded-sm px-3 py-1.5 md:px-4 md:py-2"
                 >
                   <div className="font-sans text-body text-offwhite/70">
                     {program.name}
@@ -167,7 +167,7 @@ export default function VentureCard({
         {link && (
           <MagneticButton
             href={link}
-            className="inline-flex items-center gap-2 px-6 py-3 border rounded-sm text-body font-mono uppercase tracking-widest transition-colors duration-300"
+            className="inline-flex items-center gap-2 px-4 py-2.5 md:px-6 md:py-3 border rounded-sm text-body font-mono uppercase tracking-widest transition-colors duration-300"
             strength={0.2}
           >
             <span style={{ color: accentColor, borderColor: `${accentColor}33` }}>

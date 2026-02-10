@@ -27,7 +27,7 @@ export default function About() {
       </motion.div>
 
       {/* Editorial layout - asymmetric grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-12 lg:gap-8">
         {/* Pull quote - spans left side */}
         <div className="lg:col-span-5 lg:col-start-1" ref={quoteRef}>
           <motion.blockquote
@@ -41,7 +41,7 @@ export default function About() {
 
           {/* Profile photo */}
           <motion.div
-            className="mt-12 relative aspect-[4/5] max-w-sm bg-charcoal-mid rounded-sm overflow-hidden"
+            className="mt-8 md:mt-12 relative aspect-[4/5] max-w-sm bg-charcoal-mid rounded-sm overflow-hidden"
             initial={{ opacity: 0, y: 30 }}
             animate={quoteInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.3, duration: 0.8 }}
@@ -87,7 +87,7 @@ export default function About() {
           {/* Stats dashboard */}
           <div ref={statsRef} className="mt-16">
             <motion.div
-              className="grid grid-cols-2 md:grid-cols-5 gap-px bg-offwhite/5 rounded-sm overflow-hidden"
+              className="grid grid-cols-3 md:grid-cols-5 gap-px bg-offwhite/5 rounded-sm overflow-hidden"
               initial={{ opacity: 0, y: 20 }}
               animate={statsInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.2, duration: 0.8 }}
@@ -95,7 +95,7 @@ export default function About() {
               {PERSONAL.stats.map((stat, i) => (
                 <motion.div
                   key={stat.label}
-                  className="bg-charcoal p-5 text-center"
+                  className="bg-charcoal p-3 md:p-5 text-center"
                   initial={{ opacity: 0, y: 20 }}
                   animate={statsInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ delay: 0.3 + i * 0.1, duration: 0.6 }}

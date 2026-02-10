@@ -21,7 +21,7 @@ export default function Contact() {
     <section
       id="contact"
       ref={sectionRef}
-      className="relative min-h-screen flex flex-col justify-center px-6 md:px-12 lg:px-24 py-32"
+      className="relative min-h-screen flex flex-col justify-center px-6 md:px-12 lg:px-24 py-20 md:py-32"
     >
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal to-transparent" />
@@ -29,7 +29,7 @@ export default function Contact() {
       <div className="relative z-10">
         {/* Section label */}
         <motion.div
-          className="font-mono text-caption text-offwhite/30 uppercase tracking-[0.3em] mb-12"
+          className="font-mono text-caption text-offwhite/30 uppercase tracking-[0.15em] md:tracking-[0.3em] mb-8 md:mb-12"
           initial={{ opacity: 0 }}
           animate={sectionInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.8 }}
@@ -39,7 +39,7 @@ export default function Contact() {
 
         {/* Large CTA text */}
         <motion.h2
-          className="text-display font-serif mb-8 max-w-4xl"
+          className="text-display font-serif mb-6 md:mb-8 max-w-4xl"
           initial={{ opacity: 0, y: 40 }}
           animate={sectionInView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.2, duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
@@ -50,7 +50,7 @@ export default function Contact() {
 
         {/* Email */}
         <motion.div
-          className="mb-12 flex items-baseline gap-4 flex-wrap"
+          className="mb-8 md:mb-12 flex items-baseline gap-4 flex-wrap"
           initial={{ opacity: 0, y: 20 }}
           animate={sectionInView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.4, duration: 0.8 }}
@@ -78,7 +78,7 @@ export default function Contact() {
         >
           <MagneticButton
             href={PERSONAL.socials.bookCall}
-            className="inline-flex items-center gap-3 px-8 py-4 bg-amber text-charcoal font-mono text-body uppercase tracking-widest rounded-sm hover:bg-amber/90 transition-colors"
+            className="inline-flex items-center gap-2 md:gap-3 px-6 py-3 md:px-8 md:py-4 bg-amber text-charcoal font-mono text-body uppercase tracking-widest rounded-sm hover:bg-amber/90 transition-colors"
           >
             <span>Book a Call</span>
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -89,7 +89,7 @@ export default function Contact() {
 
         {/* Social links */}
         <motion.div
-          className="flex items-center gap-6 mb-20"
+          className="flex items-center gap-3 md:gap-6 mb-12 md:mb-20"
           initial={{ opacity: 0 }}
           animate={sectionInView ? { opacity: 1 } : {}}
           transition={{ delay: 0.6, duration: 0.8 }}
@@ -102,7 +102,7 @@ export default function Contact() {
             <MagneticButton
               key={social.name}
               href={social.url}
-              className="px-4 py-2 border border-offwhite/10 rounded-sm font-mono text-caption uppercase tracking-widest text-offwhite/40 hover:text-offwhite hover:border-offwhite/30 transition-all duration-300"
+              className="px-3 py-2 md:px-4 border border-offwhite/10 rounded-sm font-mono text-caption uppercase tracking-widest text-offwhite/40 hover:text-offwhite hover:border-offwhite/30 transition-all duration-300"
               strength={0.4}
             >
               <span>{social.name}</span>
@@ -129,7 +129,7 @@ export default function Contact() {
       {/* Toast notification */}
       {copied && (
         <motion.div
-          className="fixed bottom-8 left-1/2 -translate-x-1/2 z-[200] bg-offwhite text-charcoal font-mono text-caption px-4 py-2 rounded-sm"
+          className="fixed bottom-20 md:bottom-8 left-1/2 -translate-x-1/2 z-[200] bg-offwhite text-charcoal font-mono text-caption px-4 py-2 rounded-sm"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 20 }}

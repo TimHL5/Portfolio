@@ -70,7 +70,7 @@ export const VENTURES = [
     programs: [],
     markets: [],
     cofounders: ["Ethan Foreman", "Alex Amaral", "Dean Kaduboski"],
-    link: "",
+    link: "https://www.reachadmissions.app/",
     press: "",
     status: "building" as const,
     accentColor: "#00C9A7",
@@ -131,7 +131,7 @@ export const EXPERIENCE = [
   {
     company: "UCL London",
     role: "Study Abroad \u2014 Entrepreneurial Finance",
-    period: "Spring 2024",
+    period: "Spring 2025",
     description:
       "Studied entrepreneurial finance at University College London while building MLV remotely.",
     status: "completed" as const,
