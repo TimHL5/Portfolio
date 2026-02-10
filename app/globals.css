@@ -9,6 +9,9 @@
   --color-teal: #00C9A7;
   --color-muted: #888888;
   --cursor-size: 16px;
+  --font-instrument-serif: 'Instrument Serif', Georgia, serif;
+  --font-general-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  --font-jetbrains-mono: 'JetBrains Mono', 'Courier New', monospace;
 }
 
 * {

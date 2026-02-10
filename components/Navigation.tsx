@@ -8,13 +8,6 @@ import { useScrollProgress } from '@/hooks/useScrollProgress';
 export default function Navigation() {
   const { activeSection } = useScrollProgress();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 100);
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   useEffect(() => {
     if (menuOpen) {
@@ -61,9 +54,7 @@ export default function Navigation() {
       {/* Hamburger button */}
       <button
         onClick={() => setMenuOpen(!menuOpen)}
-        className={`fixed top-6 right-6 z-[200] w-12 h-12 flex flex-col items-center justify-center gap-1.5 transition-opacity duration-300 ${
-          scrolled || menuOpen ? 'opacity-100' : 'opacity-100'
-        }`}
+        className="fixed top-6 right-6 z-[200] w-12 h-12 flex flex-col items-center justify-center gap-1.5"
         aria-label="Toggle menu"
       >
         <motion.span

@@ -16,7 +16,7 @@ export default function CustomCursor() {
 
     const handleMouseMove = (e: MouseEvent) => {
       target.current = { x: e.clientX, y: e.clientY };
-      if (!isVisible) setIsVisible(true);
+      setIsVisible(true);
     };
 
     const handleMouseEnter = () => setIsVisible(true);
@@ -24,12 +24,12 @@ export default function CustomCursor() {
 
     // Detect hoverable elements
     const handleMouseOver = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
+      const el = e.target as HTMLElement;
       const isInteractive =
-        target.closest('a') ||
-        target.closest('button') ||
-        target.closest('[role="button"]') ||
-        target.closest('.magnetic-btn');
+        el.closest('a') ||
+        el.closest('button') ||
+        el.closest('[role="button"]') ||
+        el.closest('.magnetic-btn');
       setIsHovering(!!isInteractive);
     };
 
@@ -62,7 +62,7 @@ export default function CustomCursor() {
       document.removeEventListener('mouseover', handleMouseOver);
       cancelAnimationFrame(raf);
     };
-  }, [isVisible]);
+  }, []);
 
   return (
     <>

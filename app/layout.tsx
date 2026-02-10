@@ -26,20 +26,10 @@ export default function RootLayout({
           href="https://fonts.gstatic.com"
           crossOrigin="anonymous"
         />
+        {/* eslint-disable-next-line @next/next/no-page-custom-font */}
         <link
           href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@300;400;500&display=swap"
           rel="stylesheet"
-        />
-        <style
-          dangerouslySetInnerHTML={{
-            __html: `
-              :root {
-                --font-instrument-serif: 'Instrument Serif', Georgia, serif;
-                --font-general-sans: 'General Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, sans-serif;
-                --font-jetbrains-mono: 'JetBrains Mono', 'Courier New', monospace;
-              }
-            `,
-          }}
         />
       </head>
       <body className="bg-charcoal text-offwhite font-sans">

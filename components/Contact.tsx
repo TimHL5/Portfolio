@@ -50,28 +50,22 @@ export default function Contact() {
 
         {/* Email */}
         <motion.div
-          className="mb-12"
+          className="mb-12 flex items-baseline gap-4 flex-wrap"
           initial={{ opacity: 0, y: 20 }}
           animate={sectionInView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.4, duration: 0.8 }}
         >
+          <a
+            href={`mailto:${PERSONAL.email}`}
+            className="font-sans text-subheading text-offwhite/60 hover:text-amber transition-colors duration-300"
+          >
+            {PERSONAL.email}
+          </a>
           <button
             onClick={copyEmail}
-            className="group relative font-sans text-subheading text-offwhite/60 hover:text-offwhite transition-colors duration-300"
+            className="font-mono text-caption text-offwhite/20 hover:text-amber cursor-pointer transition-colors uppercase tracking-widest"
           >
-            <a href={`mailto:${PERSONAL.email}`} className="hover:text-amber transition-colors">
-              {PERSONAL.email}
-            </a>
-            <span
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                copyEmail();
-              }}
-              className="ml-3 font-mono text-caption text-offwhite/20 hover:text-amber cursor-pointer transition-colors uppercase tracking-widest"
-            >
-              {copied ? 'Copied!' : 'Copy'}
-            </span>
+            {copied ? 'Copied!' : 'Copy'}
           </button>
         </motion.div>
 
