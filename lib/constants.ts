@@ -7,7 +7,7 @@ export const PERSONAL = {
   location: "Boston, MA",
   tagline: "Builder. Founder. Consultant. Maker.",
   roles: ["Builder", "Founder", "Consultant", "Maker"],
-  bio: "Tim Liu is a senior at Boston College studying Finance, Entrepreneurship, and Computer Science. At 21, he co-founded MLV \u2014 an edtech company that\u2019s taught 500+ students across 6 countries how to build real startups. He\u2019s interned at PwC (where he built an AI tool that improved SOX testing efficiency by 15%) and OOCL in Hong Kong. He speaks three languages, studied at UCL London, and has a habit of turning side projects into revenue-generating businesses. He starts at PwC Technology Consulting in Summer 2026.",
+  bio: "Tim Liu is a senior at Boston College studying Finance, Entrepreneurship, and Computer Science. At 21, he co-founded MLV \u2014 an edtech company that\u2019s taught 500+ students across 6 countries how to build real startups. He\u2019s interned at PwC (where he built an AI tool that improved SOX testing efficiency by 15%) and OOCL in Hong Kong. He speaks three languages, studied at UCL London, and has a habit of turning side projects into revenue-generating businesses. He\u2019s currently building MLV full time.",
   pullQuote: "I don\u2019t wait for permission to build things.",
   stats: [
     { label: "GPA", value: 3.93, prefix: "", suffix: "", decimals: 2 },
@@ -97,12 +97,12 @@ export const VENTURES = [
 
 export const EXPERIENCE = [
   {
-    company: "PwC",
-    role: "Technology Consulting",
-    period: "Starting Summer 2026",
+    company: "MLV",
+    role: "Co-Founder & CFO",
+    period: "2023 \u2013 Present",
     description:
-      "Incoming consultant. Previously interned and built an AI tool that improved SOX testing efficiency by 15%.",
-    status: "upcoming" as const,
+      "Building MLV full time \u2014 scaled edtech startup to $50K+ revenue serving 500+ students across Asia.",
+    status: "active" as const,
   },
   {
     company: "Boston College",
@@ -113,12 +113,12 @@ export const EXPERIENCE = [
     status: "active" as const,
   },
   {
-    company: "MLV",
-    role: "Co-Founder & CFO",
-    period: "2023 \u2013 Present",
+    company: "PwC",
+    role: "Technology Consulting Intern",
+    period: "Summer 2024",
     description:
-      "Scaled edtech startup to $50K+ revenue serving 500+ students across Asia.",
-    status: "active" as const,
+      "Built an AI tool that improved SOX testing efficiency by 15%.",
+    status: "completed" as const,
   },
   {
     company: "OOCL",

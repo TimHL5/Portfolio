@@ -86,9 +86,7 @@ function TimelineEntry({
             className="w-3 h-3 rounded-full border-2 z-10"
             style={{
               borderColor:
-                entry.status === 'upcoming'
-                  ? '#FF9500'
-                  : entry.status === 'active'
+                entry.status === 'active'
                   ? '#00C9A7'
                   : '#888888',
               backgroundColor:
