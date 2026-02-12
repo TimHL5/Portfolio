@@ -18,9 +18,7 @@ const statusConfig = {
 
 function GlobeLoading() {
   return (
-    <div
-      className="w-full h-full flex items-center justify-center"
-    >
+    <div className="w-full h-full flex items-center justify-center">
       <div className="font-mono text-caption text-offwhite/20 tracking-widest animate-pulse">
         LOADING GLOBE...
       </div>
@@ -91,6 +89,7 @@ export default function Globe() {
   const scrollRef = useRef<HTMLElement>(null);
   const scrollProgress = useSectionScroll(scrollRef);
   const [activeLocation, setActiveLocation] = useState<LocationGroup | null>(null);
+  const [targetLocationName, setTargetLocationName] = useState<string | undefined>(undefined);
   const isMobile = useIsMobile();
   const locations = useMemo(() => groupExperiencesByLocation(), []);
 
@@ -98,6 +97,12 @@ export default function Globe() {
   const setRefs = (el: HTMLElement | null) => {
     (sectionRef as React.MutableRefObject<HTMLElement | null>).current = el;
     (scrollRef as React.MutableRefObject<HTMLElement | null>).current = el;
+  };
+
+  const handleCityClick = (loc: LocationGroup) => {
+    setTargetLocationName(loc.name);
+    // Clear target after globe has had time to rotate, so auto-rotate resumes
+    setTimeout(() => setTargetLocationName(undefined), 2000);
   };
 
   return (
@@ -131,7 +136,7 @@ export default function Globe() {
       >
         {isMobile
           ? 'Tap a card to explore my experience around the world.'
-          : 'Drag the globe or let it rotate to explore my experience across the world.'}
+          : 'Select a city or drag the globe to explore my experience across the world.'}
       </motion.p>
 
       {/* Mobile: interactive timeline cards */}
@@ -145,7 +150,7 @@ export default function Globe() {
         </motion.div>
       )}
 
-      {/* Desktop: Globe + Detail Panel side-by-side */}
+      {/* Desktop: City Menu + Globe + Detail Panel */}
       {!isMobile && (
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
@@ -153,9 +158,48 @@ export default function Globe() {
           transition={{ delay: 0.3, duration: 1, ease: [0.23, 1, 0.32, 1] }}
         >
           <div
-            className="grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-6 lg:gap-8"
+            className="grid grid-cols-1 lg:grid-cols-[160px_1fr_360px] gap-4 lg:gap-6"
             style={{ height: 'clamp(400px, 60vh, 700px)' }}
           >
+            {/* City selection menu */}
+            <div className="flex flex-col justify-center gap-1">
+              {locations.map((loc) => {
+                const isActive = activeLocation?.name === loc.name;
+                return (
+                  <button
+                    key={loc.name}
+                    onClick={() => handleCityClick(loc)}
+                    className={`group relative text-left px-4 py-3 rounded-sm transition-all duration-400 ${
+                      isActive
+                        ? 'bg-[#FF9500]/10 border border-[#FF9500]/30'
+                        : 'border border-transparent hover:bg-offwhite/[0.03] hover:border-offwhite/5'
+                    }`}
+                  >
+                    <div
+                      className={`font-mono text-[11px] uppercase tracking-widest transition-colors duration-400 ${
+                        isActive ? 'text-[#FF9500]' : 'text-offwhite/30 group-hover:text-offwhite/50'
+                      }`}
+                    >
+                      {loc.name}
+                    </div>
+                    <div
+                      className={`font-mono text-[10px] mt-0.5 transition-colors duration-400 ${
+                        isActive ? 'text-[#FF9500]/50' : 'text-offwhite/15'
+                      }`}
+                    >
+                      {loc.experiences.length} {loc.experiences.length === 1 ? 'role' : 'roles'}
+                    </div>
+                    {/* Active indicator bar */}
+                    <div
+                      className={`absolute left-0 top-1/2 -translate-y-1/2 w-[2px] rounded-full transition-all duration-400 ${
+                        isActive ? 'h-6 bg-[#FF9500]' : 'h-0 bg-transparent'
+                      }`}
+                    />
+                  </button>
+                );
+              })}
+            </div>
+
             {/* Globe */}
             <div className="relative w-full h-full min-h-[400px]">
               <Suspense fallback={<GlobeLoading />}>
@@ -163,6 +207,7 @@ export default function Globe() {
                   scrollProgress={scrollProgress}
                   onActiveLocationChange={setActiveLocation}
                   activeLocationName={activeLocation?.name ?? ''}
+                  targetLocationName={targetLocationName}
                 />
               </Suspense>
             </div>

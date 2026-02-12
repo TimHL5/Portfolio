@@ -8,12 +8,14 @@ interface GlobeCanvasProps {
   scrollProgress: number;
   onActiveLocationChange: (location: LocationGroup) => void;
   activeLocationName: string;
+  targetLocationName?: string;
 }
 
 export default function GlobeCanvas({
   scrollProgress,
   onActiveLocationChange,
   activeLocationName,
+  targetLocationName,
 }: GlobeCanvasProps) {
   return (
     <Canvas
@@ -26,6 +28,7 @@ export default function GlobeCanvas({
         scrollProgress={scrollProgress}
         onActiveLocationChange={onActiveLocationChange}
         activeLocationName={activeLocationName}
+        targetLocationName={targetLocationName}
       />
     </Canvas>
   );
