@@ -5,21 +5,21 @@ export const PERSONAL = {
   email: "timothy.liu@bc.edu",
   phone: null,
   location: "Boston, MA",
-  tagline: "Builder. Founder. Consultant. Maker.",
-  roles: ["Builder", "Founder", "Consultant", "Maker"],
+  tagline: "Builder. Founder. Creator. Maker.",
+  roles: ["Builder", "Founder", "Creator", "Maker"],
   bio: "Tim Liu is a senior at Boston College studying Finance, Entrepreneurship, and Computer Science. At 21, he co-founded MLV \u2014 an edtech company that\u2019s taught 500+ students across 6 countries how to build real startups. He\u2019s interned at PwC (where he built an AI tool that improved SOX testing efficiency by 15%) and OOCL in Hong Kong. He speaks three languages, studied at UCL London, and has a habit of turning side projects into revenue-generating businesses. He\u2019s currently building MLV full time.",
   pullQuote: "I don\u2019t wait for permission to build things.",
   stats: [
     { label: "GPA", value: 3.93, prefix: "", suffix: "", decimals: 2 },
     { label: "Students Taught", value: 500, prefix: "", suffix: "+", decimals: 0 },
     { label: "Revenue Generated", value: 50, prefix: "$", suffix: "K+", decimals: 0 },
-    { label: "Countries", value: 6, prefix: "", suffix: "", decimals: 0 },
+    { label: "Content Views", value: 5, prefix: "", suffix: "M+", decimals: 0 },
     { label: "Languages Spoken", value: 3, prefix: "", suffix: "", decimals: 0 },
   ],
   socials: {
-    linkedin: "https://linkedin.com/in/timothyhaiyiliu",
-    instagram: "https://instagram.com/timhliu",
-    tiktok: "https://tiktok.com/@timhliu",
+    linkedin: "https://www.linkedin.com/in/timothyhaiyiliu",
+    instagram: "https://www.instagram.com/timhliu",
+    tiktok: "https://www.tiktok.com/@timhliu",
     bookCall: "https://cal.com/timh.liu/intro",
   },
   places: [
@@ -58,7 +58,6 @@ export const VENTURES = [
   },
   {
     name: "Reach Admissions",
-    fullName: "Reach Admissions",
     tagline: "AI-powered college admissions guidance",
     role: "Co-Founder",
     description:
@@ -67,17 +66,13 @@ export const VENTURES = [
       { label: "Launch", value: "Spring 2026" },
       { label: "Model", value: "$199/yr" },
     ],
-    programs: [],
-    markets: [],
     cofounders: ["Ethan Foreman", "Alex Amaral", "Dean Kaduboski"],
     link: "https://www.reachadmissions.app/",
-    press: "",
     status: "building" as const,
     accentColor: "#00C9A7",
   },
   {
     name: "Consulting Mentorship",
-    fullName: "Consulting Mentorship",
     tagline: "Land consulting offers by building an unforgettable profile",
     role: "Founder & Mentor",
     description:
@@ -86,10 +81,7 @@ export const VENTURES = [
       { label: "Interview Rounds Navigated", value: "15+" },
       { label: "Result", value: "Top Choice Offer" },
     ],
-    programs: [],
-    markets: [],
     link: "https://cal.com/timh.liu/intro",
-    press: "",
     status: "active" as const,
     accentColor: "#6366F1",
   },
@@ -101,7 +93,7 @@ export const EXPERIENCE = [
     role: "Co-Founder & CFO",
     period: "2023 \u2013 Present",
     description:
-      "Building MLV full time \u2014 scaled edtech startup to $50K+ revenue serving 500+ students across Asia.",
+      "Building MLV full time \u2014 scaled edtech startup with team of 50 from concept to $50K+ in revenue. Secured $10K pre-seed from SSC Venture Partners. Launched international case competition with 460+ participants across 10 countries.",
     status: "active" as const,
   },
   {
@@ -117,16 +109,24 @@ export const EXPERIENCE = [
     role: "Technology Consulting Intern",
     period: "Summer 2024",
     description:
-      "Built an AI tool that improved SOX testing efficiency by 15%.",
+      "Created an AI tool that increased testing efficiency by ~15%. Executed testing on 20+ IT and business process controls for Fortune 500 client for SOX compliance.",
     status: "completed" as const,
   },
   {
     company: "OOCL",
-    role: "Strategy Intern \u2014 Hong Kong",
+    role: "Corporate Finance Intern \u2014 Hong Kong",
     period: "Summer 2023",
     description:
-      "Analyzed payment capabilities and cash management strategies across 3 Asian banks.",
+      "Researched 30+ international digital payment solutions for $11B shipping company. Delivered 64-slide strategy deck to senior management on financial transformation initiatives.",
     status: "completed" as const,
+  },
+  {
+    company: "Messina College",
+    role: "Volunteer Success Coach",
+    period: "Sep 2022 \u2013 Present",
+    description:
+      "Mentored 20 students in underserved communities through weekly academic tutoring. Designed and led weekly cooking lessons teaching essential life skills.",
+    status: "active" as const,
   },
   {
     company: "UCL London",
@@ -140,7 +140,7 @@ export const EXPERIENCE = [
 
 export const SKILLS = {
   programming: ["Python", "R", "Java", "SQL", "JavaScript", "HTML/CSS"],
-  tools: ["Advanced Excel", "Tableau", "Bloomberg Terminal", "Figma", "Git"],
+  tools: ["Advanced Excel", "PowerPoint", "Tableau", "Bloomberg Terminal", "Figma", "Git", "Video Editing"],
   business: [
     "Financial Modeling",
     "LBO Analysis",
@@ -158,17 +158,20 @@ export const SKILLS = {
 export const LEADERSHIP = [
   { title: "Co-President", org: "BC Consulting Club" },
   { title: "Member", org: "Alpha Sigma Nu (Jesuit Honor Society)" },
-  { title: "Leader", org: "BC Cooking Club" },
+  { title: "Executive Board", org: "BC Cooking Club" },
   { title: "Winner", org: "AlphaSights Case Challenge" },
-  { title: "Member", org: "Fulton Leadership Society" },
+  { title: "Runner-Up", org: "Templeton Business Ethics Case Competition" },
+  { title: "Professional Development Co-Chair", org: "Fulton Leadership Society" },
   { title: "Grant Recipient", org: "Winston Center \u2014 ASU+GSV AIR Show" },
 ];
 
 export const EDUCATION = {
   school: "Boston College \u2014 Carroll School of Management",
-  degree: "Finance & Entrepreneurship, Computer Science Minor",
+  degree: "B.S. in Management (Finance & Entrepreneurship), Computer Science Minor",
   gpa: "3.93",
   graduation: "2026",
+  honors: "Dean's List First Honors, Alpha Sigma Nu Honor Society",
+  ib: "45/45 (top 0.5% worldwide)",
 };
 
 export const NAV_SECTIONS = [

@@ -102,11 +102,6 @@ export default function Ventures() {
           <VentureCard
             key={venture.name}
             {...venture}
-            fullName={venture.fullName}
-            programs={venture.programs}
-            markets={venture.markets}
-            link={venture.link}
-            press={venture.press}
             index={i}
             isActive={i === activeIndex}
           />
