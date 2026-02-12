@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { LEADERSHIP } from '@/lib/constants';
 import { useInView } from '@/hooks/useInView';
 
-const icons = ['\u2606', '\u25C8', '\u2302', '\u2605', '\u25CE', '\u2691'];
+const icons = ['\u2606', '\u25C8', '\u2302', '\u2605', '\u25CE', '\u2691', '\u2726'];
 
 export default function Leadership() {
   const [sectionRef, sectionInView] = useInView<HTMLElement>({ threshold: 0.1 });
@@ -13,7 +13,7 @@ export default function Leadership() {
     <section
       id="leadership"
       ref={sectionRef}
-      className="relative py-32 md:py-48 px-6 md:px-12 lg:px-24"
+      className="relative py-20 md:py-32 lg:py-48 px-6 md:px-12 lg:px-24"
     >
       {/* Section header */}
       <motion.div
@@ -34,7 +34,7 @@ export default function Leadership() {
       </motion.h2>
 
       {/* Two-column grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 max-w-3xl">
         {LEADERSHIP.map((item, i) => (
           <motion.div
             key={item.org}

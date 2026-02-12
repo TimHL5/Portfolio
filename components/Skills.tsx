@@ -32,7 +32,7 @@ export default function Skills() {
     <section
       id="skills"
       ref={sectionRef}
-      className="relative py-32 md:py-48 px-6 md:px-12 lg:px-24"
+      className="relative py-20 md:py-32 lg:py-48 px-6 md:px-12 lg:px-24"
     >
       {/* Section header */}
       <motion.div

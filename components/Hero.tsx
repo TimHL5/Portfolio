@@ -199,7 +199,7 @@ export default function Hero() {
 
         {/* Brief tagline */}
         <motion.p
-          className="max-w-md text-body-lg text-offwhite/50 font-sans"
+          className="max-w-md text-body-lg text-offwhite/50 font-sans mb-6 md:mb-8"
           initial={{ opacity: 0, y: 20 }}
           animate={loaded ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 1.8, duration: 0.8 }}
@@ -207,6 +207,44 @@ export default function Hero() {
           Senior at Boston College. Co-founder of MLV.
           Building things that matter.
         </motion.p>
+
+        {/* Social links + contact */}
+        <motion.div
+          className="flex items-center gap-3 flex-wrap"
+          initial={{ opacity: 0, y: 15 }}
+          animate={loaded ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 2.0, duration: 0.8 }}
+        >
+          {[
+            { name: 'LinkedIn', url: PERSONAL.socials.linkedin },
+            { name: 'Instagram', url: PERSONAL.socials.instagram },
+            { name: 'TikTok', url: PERSONAL.socials.tiktok },
+          ].map((social) => (
+            <a
+              key={social.name}
+              href={social.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-3 py-1.5 border border-offwhite/10 rounded-sm font-mono text-caption uppercase tracking-widest text-offwhite/40 hover:text-offwhite hover:border-offwhite/30 transition-all duration-300"
+            >
+              {social.name}
+            </a>
+          ))}
+          <a
+            href={`mailto:${PERSONAL.email}`}
+            className="px-3 py-1.5 border border-offwhite/10 rounded-sm font-mono text-caption uppercase tracking-widest text-offwhite/40 hover:text-amber hover:border-amber/30 transition-all duration-300"
+          >
+            Email
+          </a>
+          <a
+            href={PERSONAL.socials.bookCall}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-3 py-1.5 bg-amber/10 border border-amber/30 rounded-sm font-mono text-caption uppercase tracking-widest text-amber hover:bg-amber/20 transition-all duration-300"
+          >
+            Book a Call
+          </a>
+        </motion.div>
       </div>
 
       {/* Scroll indicator */}

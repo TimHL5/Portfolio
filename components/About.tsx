@@ -14,11 +14,11 @@ export default function About() {
     <section
       id="about"
       ref={sectionRef}
-      className="relative py-32 md:py-48 px-6 md:px-12 lg:px-24"
+      className="relative py-20 md:py-32 lg:py-48 px-6 md:px-12 lg:px-24"
     >
       {/* Section label */}
       <motion.div
-        className="font-mono text-caption text-offwhite/30 uppercase tracking-[0.3em] mb-20"
+        className="font-mono text-caption text-offwhite/30 uppercase tracking-[0.3em] mb-10 md:mb-20"
         initial={{ opacity: 0 }}
         animate={sectionInView ? { opacity: 1 } : {}}
         transition={{ duration: 0.8 }}
@@ -87,7 +87,7 @@ export default function About() {
           {/* Stats dashboard */}
           <div ref={statsRef} className="mt-16">
             <motion.div
-              className="grid grid-cols-3 md:grid-cols-5 gap-px bg-offwhite/5 rounded-sm overflow-hidden"
+              className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-px bg-offwhite/5 rounded-sm overflow-hidden"
               initial={{ opacity: 0, y: 20 }}
               animate={statsInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.2, duration: 0.8 }}
