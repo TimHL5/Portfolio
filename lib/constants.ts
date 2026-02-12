@@ -95,6 +95,7 @@ export const EXPERIENCE = [
     description:
       "Building MLV full time \u2014 scaled edtech startup with team of 50 from concept to $50K+ in revenue. Secured $10K pre-seed from SSC Venture Partners. Launched international case competition with 460+ participants across 10 countries.",
     status: "active" as const,
+    location: "Hong Kong",
   },
   {
     company: "Boston College",
@@ -103,6 +104,7 @@ export const EXPERIENCE = [
     description:
       "Leading technology transformation projects for the research center.",
     status: "active" as const,
+    location: "Boston",
   },
   {
     company: "PwC",
@@ -111,6 +113,7 @@ export const EXPERIENCE = [
     description:
       "Created an AI tool that increased testing efficiency by ~15%. Executed testing on 20+ IT and business process controls for Fortune 500 client for SOX compliance.",
     status: "completed" as const,
+    location: "Boston",
   },
   {
     company: "OOCL",
@@ -119,6 +122,7 @@ export const EXPERIENCE = [
     description:
       "Researched 30+ international digital payment solutions for $11B shipping company. Delivered 64-slide strategy deck to senior management on financial transformation initiatives.",
     status: "completed" as const,
+    location: "Hong Kong",
   },
   {
     company: "Messina College",
@@ -127,6 +131,7 @@ export const EXPERIENCE = [
     description:
       "Mentored 20 students in underserved communities through weekly academic tutoring. Designed and led weekly cooking lessons teaching essential life skills.",
     status: "active" as const,
+    location: "Boston",
   },
   {
     company: "UCL London",
@@ -135,6 +140,7 @@ export const EXPERIENCE = [
     description:
       "Studied entrepreneurial finance at University College London while building MLV remotely.",
     status: "completed" as const,
+    location: "London",
   },
 ];
 

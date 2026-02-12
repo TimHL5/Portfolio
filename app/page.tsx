@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Hero from '@/components/Hero';
 import About from '@/components/About';
 import Ventures from '@/components/Ventures';
-import Timeline from '@/components/Timeline';
+import Globe from '@/components/globe/Globe';
 import Skills from '@/components/Skills';
 import Leadership from '@/components/Leadership';
 import Contact from '@/components/Contact';
@@ -78,7 +78,7 @@ export default function Home() {
             <div className="section-divider" />
             <Ventures />
             <div className="section-divider" />
-            <Timeline />
+            <Globe />
             <div className="section-divider" />
             <Skills />
             <div className="section-divider" />
