@@ -90,7 +90,7 @@ export default function Globe() {
   const scrollProgress = useSectionScroll(scrollRef);
   const [activeLocation, setActiveLocation] = useState<LocationGroup | null>(null);
   const [targetLocationName, setTargetLocationName] = useState<string | undefined>(undefined);
-  const isMobile = useIsMobile();
+  const isMobile = useIsMobile(1024);
   const locations = useMemo(() => groupExperiencesByLocation(), []);
 
   // Share ref between useInView and useSectionScroll
@@ -170,21 +170,21 @@ export default function Globe() {
                   <button
                     key={loc.name}
                     onClick={() => handleCityClick(loc)}
-                    className={`group relative text-left px-4 py-3 rounded-sm transition-all duration-400 ${
+                    className={`group relative text-left px-4 py-3 rounded-sm transition-all duration-300 ${
                       isActive
                         ? 'bg-[#FF9500]/10 border border-[#FF9500]/30'
                         : 'border border-transparent hover:bg-offwhite/[0.03] hover:border-offwhite/5'
                     }`}
                   >
                     <div
-                      className={`font-mono text-[11px] uppercase tracking-widest transition-colors duration-400 ${
+                      className={`font-mono text-[11px] uppercase tracking-widest transition-colors duration-300 ${
                         isActive ? 'text-[#FF9500]' : 'text-offwhite/30 group-hover:text-offwhite/50'
                       }`}
                     >
                       {loc.name}
                     </div>
                     <div
-                      className={`font-mono text-[10px] mt-0.5 transition-colors duration-400 ${
+                      className={`font-mono text-[10px] mt-0.5 transition-colors duration-300 ${
                         isActive ? 'text-[#FF9500]/50' : 'text-offwhite/15'
                       }`}
                     >
@@ -192,7 +192,7 @@ export default function Globe() {
                     </div>
                     {/* Active indicator bar */}
                     <div
-                      className={`absolute left-0 top-1/2 -translate-y-1/2 w-[2px] rounded-full transition-all duration-400 ${
+                      className={`absolute left-0 top-1/2 -translate-y-1/2 w-[2px] rounded-full transition-all duration-300 ${
                         isActive ? 'h-6 bg-[#FF9500]' : 'h-0 bg-transparent'
                       }`}
                     />
