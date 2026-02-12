@@ -7,7 +7,7 @@ export const PERSONAL = {
   location: "Boston, MA",
   tagline: "Builder. Founder. Creator. Maker.",
   roles: ["Builder", "Founder", "Creator", "Maker"],
-  bio: "Tim Liu is a senior at Boston College studying Finance, Entrepreneurship, and Computer Science. At 21, he co-founded MLV \u2014 an edtech company that\u2019s taught 500+ students across 6 countries how to build real startups. He\u2019s interned at PwC (where he built an AI tool that improved SOX testing efficiency by 15%) and OOCL in Hong Kong. He speaks three languages, studied at UCL London, and has a habit of turning side projects into revenue-generating businesses. He\u2019s currently building MLV full time.",
+  bio: "Tim Liu is a senior at Boston College studying Finance, Entrepreneurship, and Computer Science. At 18, he co-founded MLV, an edtech company that\u2019s taught 500+ students across 6 countries how to build real startups. He\u2019s interned at PwC Consulting in Boston as well as OOCL and MTR in Hong Kong. He speaks three languages, studied at UCL London, and has a habit of turning side projects into revenue-generating businesses. He\u2019s currently building MLV full time.",
   pullQuote: "I don\u2019t wait for permission to build things.",
   stats: [
     { label: "GPA", value: 3.93, prefix: "", suffix: "", decimals: 2 },

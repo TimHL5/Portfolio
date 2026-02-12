@@ -204,7 +204,7 @@ export default function Hero() {
           animate={loaded ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 1.8, duration: 0.8 }}
         >
-          Senior at Boston College. Co-founder of MLV. Incoming PwC Technology Consultant.
+          Senior at Boston College. Co-founder of MLV.
           Building things that matter.
         </motion.p>
       </div>
