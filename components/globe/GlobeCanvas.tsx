@@ -5,14 +5,12 @@ import GlobeScene from './GlobeScene';
 import { LocationGroup } from './utils';
 
 interface GlobeCanvasProps {
-  scrollProgress: number;
   onActiveLocationChange: (location: LocationGroup) => void;
   activeLocationName: string;
   targetLocationName?: string;
 }
 
 export default function GlobeCanvas({
-  scrollProgress,
   onActiveLocationChange,
   activeLocationName,
   targetLocationName,
@@ -25,7 +23,6 @@ export default function GlobeCanvas({
       style={{ background: 'transparent' }}
     >
       <GlobeScene
-        scrollProgress={scrollProgress}
         onActiveLocationChange={onActiveLocationChange}
         activeLocationName={activeLocationName}
         targetLocationName={targetLocationName}

@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { LEADERSHIP } from '@/lib/constants';
 import { useInView } from '@/hooks/useInView';
 
-const icons = ['\u2606', '\u25C8', '\u2302', '\u2605', '\u25CE', '\u2691', '\u2726'];
+const icons = ['\u25C8', '\u2302', '\u2605', '\u25CE', '\u2691', '\u2726'];
 
 export default function Leadership() {
   const [sectionRef, sectionInView] = useInView<HTMLElement>({ threshold: 0.1 });

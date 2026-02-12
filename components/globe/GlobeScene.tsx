@@ -9,20 +9,17 @@ import LocationPin from './LocationPin';
 import { groupExperiencesByLocation, latLngToVector3, GLOBE_RADIUS, LocationGroup } from './utils';
 
 interface GlobeSceneProps {
-  scrollProgress: number;
   onActiveLocationChange: (location: LocationGroup) => void;
   activeLocationName: string;
   targetLocationName?: string;
 }
 
 export default function GlobeScene({
-  scrollProgress,
   onActiveLocationChange,
   activeLocationName,
   targetLocationName,
 }: GlobeSceneProps) {
   const groupRef = useRef<THREE.Group>(null);
-  const prevScrollRef = useRef(scrollProgress);
   const activeIndexRef = useRef(0);
   const locations = useMemo(() => groupExperiencesByLocation(), []);
 
@@ -68,10 +65,7 @@ export default function GlobeScene({
         groupRef.current.rotation.y += diff * 0.08;
       }
     } else {
-      // Idle: slow constant spin + scroll-driven rotation
-      const delta = scrollProgress - prevScrollRef.current;
-      prevScrollRef.current = scrollProgress;
-      groupRef.current.rotation.y += delta * Math.PI * 0.8;
+      // Idle: slow constant spin
       groupRef.current.rotation.y += 0.002;
     }
 

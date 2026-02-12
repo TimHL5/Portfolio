@@ -180,7 +180,6 @@ export const SKILLS = {
 };
 
 export const LEADERSHIP = [
-  { title: "Co-President", org: "BC Consulting Club" },
   { title: "Member", org: "Alpha Sigma Nu (Jesuit Honor Society)" },
   { title: "Executive Board", org: "BC Cooking Club" },
   { title: "Winner", org: "AlphaSights Case Challenge" },
