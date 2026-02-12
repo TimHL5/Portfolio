@@ -24,7 +24,6 @@ export default function GlobeScene({
   const groupRef = useRef<THREE.Group>(null);
   const prevScrollRef = useRef(scrollProgress);
   const activeIndexRef = useRef(0);
-  const targetRotationRef = useRef<number | null>(null);
   const locations = useMemo(() => groupExperiencesByLocation(), []);
 
   // Pre-compute pin positions (in local space)
@@ -45,38 +44,35 @@ export default function GlobeScene({
     [locations, onActiveLocationChange]
   );
 
-  // Compute target rotation when targetLocationName changes
+  // Find target location index
   const targetIndex = useMemo(() => {
     if (!targetLocationName) return -1;
     return locations.findIndex((l) => l.name === targetLocationName);
   }, [targetLocationName, locations]);
 
-  // Scroll-driven rotation + active location detection + target rotation
   useFrame(({ camera }) => {
     if (!groupRef.current) return;
 
-    // If we have a target location, compute and smoothly rotate to it
     if (targetIndex >= 0 && pinPositions[targetIndex]) {
+      // Rotate globe to face the target location toward the camera
       const pin = pinPositions[targetIndex];
-      // Target Y rotation to face this pin toward camera (+Z direction)
       const targetY = -Math.atan2(pin.x, pin.z);
 
-      // Normalize current rotation to [-PI, PI] range for shortest path
       let currentY = groupRef.current.rotation.y;
-      // Compute shortest angular distance
       let diff = targetY - currentY;
-      // Wrap to [-PI, PI]
+      // Wrap to [-PI, PI] for shortest path
       diff = ((diff + Math.PI) % (Math.PI * 2)) - Math.PI;
       if (diff < -Math.PI) diff += Math.PI * 2;
 
-      if (Math.abs(diff) > 0.01) {
-        groupRef.current.rotation.y += diff * 0.06;
+      if (Math.abs(diff) > 0.005) {
+        groupRef.current.rotation.y += diff * 0.08;
       }
     } else {
-      // Apply scroll-driven rotation only when not targeting
+      // Idle: slow constant spin + scroll-driven rotation
       const delta = scrollProgress - prevScrollRef.current;
       prevScrollRef.current = scrollProgress;
       groupRef.current.rotation.y += delta * Math.PI * 0.8;
+      groupRef.current.rotation.y += 0.002;
     }
 
     // Detect which location faces the camera most directly
@@ -120,8 +116,6 @@ export default function GlobeScene({
         rotateSpeed={0.5}
         minPolarAngle={Math.PI * 0.2}
         maxPolarAngle={Math.PI * 0.8}
-        autoRotate
-        autoRotateSpeed={0.5}
       />
 
       <group ref={groupRef}>

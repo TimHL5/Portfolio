@@ -26,7 +26,7 @@ export const PERSONAL = {
     { name: "Boston", lat: 42.3601, lng: -71.0589 },
     { name: "Hong Kong", lat: 22.3193, lng: 114.1694 },
     { name: "London", lat: 51.5074, lng: -0.1278 },
-    { name: "Ho Chi Minh City", lat: 10.8231, lng: 106.6297 },
+    { name: "Vietnam", lat: 10.8231, lng: 106.6297 },
     { name: "Singapore", lat: 1.3521, lng: 103.8198 },
   ],
 };
@@ -95,14 +95,41 @@ export const EXPERIENCE = [
     description:
       "Building MLV full time \u2014 scaled edtech startup with team of 50 from concept to $50K+ in revenue. Secured $10K pre-seed from SSC Venture Partners. Launched international case competition with 460+ participants across 10 countries.",
     status: "active" as const,
+    location: "Vietnam",
+  },
+  {
+    company: "Island School",
+    role: "High School",
+    period: "2017 \u2013 2021",
+    description:
+      "Attended one of Hong Kong\u2019s top international schools. Developed early interests in entrepreneurship, finance, and technology.",
+    status: "completed" as const,
+    location: "Hong Kong",
+  },
+  {
+    company: "OOCL",
+    role: "Corporate Finance Intern",
+    period: "Summer 2023",
+    description:
+      "Researched 30+ international digital payment solutions for $11B shipping company. Delivered 64-slide strategy deck to senior management on financial transformation initiatives.",
+    status: "completed" as const,
+    location: "Hong Kong",
+  },
+  {
+    company: "MTR Corporation",
+    role: "Intern",
+    period: "Summer 2022",
+    description:
+      "Interned at Hong Kong\u2019s major railway and property conglomerate, gaining exposure to large-scale infrastructure operations and corporate strategy.",
+    status: "completed" as const,
     location: "Hong Kong",
   },
   {
     company: "Boston College",
-    role: "Data Analyst \u2014 Center for Corporate Citizenship",
-    period: "2024 \u2013 Present",
+    role: "Student \u2014 Finance, Entrepreneurship & Computer Science",
+    period: "2021 \u2013 Present",
     description:
-      "Leading technology transformation projects for the research center.",
+      "Pursuing a triple concentration at Boston College\u2019s Carroll School of Management. 3.93 GPA.",
     status: "active" as const,
     location: "Boston",
   },
@@ -116,20 +143,11 @@ export const EXPERIENCE = [
     location: "Boston",
   },
   {
-    company: "OOCL",
-    role: "Corporate Finance Intern \u2014 Hong Kong",
-    period: "Summer 2023",
-    description:
-      "Researched 30+ international digital payment solutions for $11B shipping company. Delivered 64-slide strategy deck to senior management on financial transformation initiatives.",
-    status: "completed" as const,
-    location: "Hong Kong",
-  },
-  {
     company: "Messina College",
-    role: "Volunteer Success Coach",
+    role: "Tutor",
     period: "Sep 2022 \u2013 Present",
     description:
-      "Mentored 20 students in underserved communities through weekly academic tutoring. Designed and led weekly cooking lessons teaching essential life skills.",
+      "Mentoring 20 students in underserved communities through weekly academic tutoring. Designing and leading weekly cooking lessons teaching essential life skills.",
     status: "active" as const,
     location: "Boston",
   },

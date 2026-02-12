@@ -100,9 +100,10 @@ export default function Globe() {
   };
 
   const handleCityClick = (loc: LocationGroup) => {
+    setActiveLocation(loc);
     setTargetLocationName(loc.name);
     // Clear target after globe has had time to rotate, so auto-rotate resumes
-    setTimeout(() => setTargetLocationName(undefined), 2000);
+    setTimeout(() => setTargetLocationName(undefined), 2500);
   };
 
   return (
