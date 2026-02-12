@@ -6,10 +6,15 @@ import { LocationGroup } from './utils';
 
 interface GlobeCanvasProps {
   scrollProgress: number;
-  onPinClick: (location: LocationGroup) => void;
+  onActiveLocationChange: (location: LocationGroup) => void;
+  activeLocationName: string;
 }
 
-export default function GlobeCanvas({ scrollProgress, onPinClick }: GlobeCanvasProps) {
+export default function GlobeCanvas({
+  scrollProgress,
+  onActiveLocationChange,
+  activeLocationName,
+}: GlobeCanvasProps) {
   return (
     <Canvas
       camera={{ position: [0, 0, 4], fov: 45 }}
@@ -17,7 +22,11 @@ export default function GlobeCanvas({ scrollProgress, onPinClick }: GlobeCanvasP
       gl={{ antialias: true, alpha: true }}
       style={{ background: 'transparent' }}
     >
-      <GlobeScene scrollProgress={scrollProgress} onPinClick={onPinClick} />
+      <GlobeScene
+        scrollProgress={scrollProgress}
+        onActiveLocationChange={onActiveLocationChange}
+        activeLocationName={activeLocationName}
+      />
     </Canvas>
   );
 }

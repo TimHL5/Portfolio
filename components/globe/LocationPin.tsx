@@ -1,26 +1,24 @@
 'use client';
 
-import { useMemo } from 'react';
+import { useRef, useMemo } from 'react';
 import * as THREE from 'three';
-import { useThree, ThreeEvent } from '@react-three/fiber';
+import { useFrame } from '@react-three/fiber';
 import { Html } from '@react-three/drei';
 import { latLngToVector3, GLOBE_RADIUS, LocationGroup } from './utils';
 
 interface LocationPinProps {
   location: LocationGroup;
-  onClick: () => void;
+  isActive: boolean;
 }
 
 const PIN_COLOR = '#FF9500';
-const POLE_HEIGHT = 0.15;
+const POLE_HEIGHT = 0.18;
 
-export default function LocationPin({ location, onClick }: LocationPinProps) {
+export default function LocationPin({ location, isActive }: LocationPinProps) {
   const position = useMemo(
     () => latLngToVector3(location.lat, location.lng, GLOBE_RADIUS, 0.01),
     [location.lat, location.lng]
   );
-
-  const { camera } = useThree();
 
   // Orient group so local Z points outward from globe center
   const quaternion = useMemo(() => {
@@ -31,36 +29,49 @@ export default function LocationPin({ location, onClick }: LocationPinProps) {
     );
   }, [position]);
 
-  // Pole as a Three.js Line object
+  const dotRef = useRef<THREE.Mesh>(null);
+  const lightRef = useRef<THREE.PointLight>(null);
+  const scaleRef = useRef(1);
+
+  // Pole as a Three.js Line object (avoids SVG <line> conflict)
   const poleLine = useMemo(() => {
     const geo = new THREE.BufferGeometry();
     const vertices = new Float32Array([0, 0, 0, 0, 0, POLE_HEIGHT]);
     geo.setAttribute('position', new THREE.BufferAttribute(vertices, 3));
-    const mat = new THREE.LineBasicMaterial({ color: PIN_COLOR, transparent: true, opacity: 0.5 });
+    const mat = new THREE.LineBasicMaterial({
+      color: PIN_COLOR,
+      transparent: true,
+      opacity: 0.3,
+    });
     return new THREE.Line(geo, mat);
   }, []);
 
-  const handleClick = (e: ThreeEvent<MouseEvent>) => {
-    e.stopPropagation();
-    // Back-face check: ignore clicks on pins behind the globe
-    const normal = position.clone().normalize();
-    const cameraDir = camera.position.clone().normalize();
-    if (normal.dot(cameraDir) < 0) return;
-    onClick();
-  };
+  // Smooth lerped transitions for active/inactive states
+  useFrame(() => {
+    const targetScale = isActive ? 1.8 : 1;
+    const targetPoleOpacity = isActive ? 0.8 : 0.3;
+    const targetLightIntensity = isActive ? 0.6 : 0.1;
 
-  const handleLabelClick = () => {
-    // Back-face check for HTML label clicks too
-    const normal = position.clone().normalize();
-    const cameraDir = camera.position.clone().normalize();
-    if (normal.dot(cameraDir) < 0) return;
-    onClick();
-  };
+    scaleRef.current += (targetScale - scaleRef.current) * 0.08;
+    if (dotRef.current) {
+      dotRef.current.scale.setScalar(scaleRef.current);
+    }
+
+    if (poleLine.material instanceof THREE.LineBasicMaterial) {
+      poleLine.material.opacity +=
+        (targetPoleOpacity - poleLine.material.opacity) * 0.08;
+    }
+
+    if (lightRef.current) {
+      lightRef.current.intensity +=
+        (targetLightIntensity - lightRef.current.intensity) * 0.08;
+    }
+  });
 
   return (
     <group position={position} quaternion={quaternion}>
       {/* Base dot on globe surface */}
-      <mesh onClick={handleClick}>
+      <mesh ref={dotRef}>
         <sphereGeometry args={[0.02, 8, 8]} />
         <meshBasicMaterial color={PIN_COLOR} />
       </mesh>
@@ -69,33 +80,49 @@ export default function LocationPin({ location, onClick }: LocationPinProps) {
       <primitive object={poleLine} />
 
       {/* Point light for subtle glow */}
-      <pointLight color={PIN_COLOR} intensity={0.2} distance={0.4} />
+      <pointLight
+        ref={lightRef}
+        color={PIN_COLOR}
+        intensity={0.1}
+        distance={0.5}
+      />
 
       {/* City label at top of pole */}
       <Html
         position={[0, 0, POLE_HEIGHT + 0.02]}
         center
         occlude
-        style={{ pointerEvents: 'auto' }}
+        style={{ pointerEvents: 'none' }}
       >
         <div
-          onClick={handleLabelClick}
-          className="flex items-center gap-1.5 px-2 py-1 bg-[#0A0A0A]/80 backdrop-blur border border-[#FF9500]/30 rounded cursor-pointer whitespace-nowrap hover:border-[#FF9500]/60 hover:bg-[#0A0A0A]/95 transition-colors select-none"
+          className={`flex items-center gap-1.5 px-2 py-1 rounded whitespace-nowrap select-none transition-all duration-500 ${
+            isActive
+              ? 'bg-[#0A0A0A]/90 border border-[#FF9500]/60 shadow-[0_0_12px_rgba(255,149,0,0.2)]'
+              : 'bg-[#0A0A0A]/60 border border-offwhite/10'
+          }`}
+          style={{
+            transform: `scale(${isActive ? 1.1 : 0.85})`,
+            transition: 'transform 0.5s ease',
+          }}
         >
-          <span className="font-mono text-[10px] uppercase tracking-wider text-[#FF9500]">
+          <span
+            className={`font-mono text-[10px] uppercase tracking-wider transition-colors duration-500 ${
+              isActive ? 'text-[#FF9500]' : 'text-offwhite/30'
+            }`}
+          >
             {location.name}
           </span>
-          <span className="w-4 h-4 rounded-full bg-[#FF9500]/20 text-[#FF9500] text-[9px] flex items-center justify-center font-mono">
+          <span
+            className={`w-4 h-4 rounded-full text-[9px] flex items-center justify-center font-mono transition-colors duration-500 ${
+              isActive
+                ? 'bg-[#FF9500]/20 text-[#FF9500]'
+                : 'bg-offwhite/5 text-offwhite/20'
+            }`}
+          >
             {location.experiences.length}
           </span>
         </div>
       </Html>
-
-      {/* Invisible larger hitbox for easier clicking on 3D elements */}
-      <mesh onClick={handleClick} visible={false}>
-        <boxGeometry args={[0.1, 0.1, POLE_HEIGHT + 0.05]} />
-        <meshBasicMaterial />
-      </mesh>
     </group>
   );
 }
