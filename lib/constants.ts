@@ -18,8 +18,8 @@ export const PERSONAL = {
   ],
   socials: {
     linkedin: "https://www.linkedin.com/in/timothyhaiyiliu",
-    instagram: "https://www.instagram.com/timhliu",
-    tiktok: "https://www.tiktok.com/@timhliu",
+    instagram: "https://www.instagram.com/timh.liu",
+    tiktok: "https://www.tiktok.com/@timh.liu",
     bookCall: "https://cal.com/timh.liu/intro",
   },
   places: [
