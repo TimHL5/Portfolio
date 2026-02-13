@@ -23,11 +23,11 @@ export const PERSONAL = {
     bookCall: "https://cal.com/timh.liu/intro",
   },
   places: [
-    { name: "Boston", lat: 42.3601, lng: -71.0589 },
-    { name: "Hong Kong", lat: 22.3193, lng: 114.1694 },
-    { name: "London", lat: 51.5074, lng: -0.1278 },
-    { name: "Vietnam", lat: 10.8231, lng: 106.6297 },
-    { name: "Singapore", lat: 1.3521, lng: 103.8198 },
+    { name: "Boston", lat: 42.3601, lng: -71.0589, flag: "\uD83C\uDDFA\uD83C\uDDF8" },
+    { name: "Hong Kong", lat: 22.3193, lng: 114.1694, flag: "\uD83C\uDDED\uD83C\uDDF0" },
+    { name: "London", lat: 51.5074, lng: -0.1278, flag: "\uD83C\uDDEC\uD83C\uDDE7" },
+    { name: "Vietnam", lat: 10.8231, lng: 106.6297, flag: "\uD83C\uDDFB\uD83C\uDDF3" },
+    { name: "Singapore", lat: 1.3521, lng: 103.8198, flag: "\uD83C\uDDF8\uD83C\uDDEC" },
   ],
 };
 

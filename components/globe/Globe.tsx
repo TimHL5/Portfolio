@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo, Suspense } from 'react';
+import { useState, useMemo, useRef, useCallback, Suspense } from 'react';
 import dynamic from 'next/dynamic';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from '@/hooks/useInView';
@@ -90,12 +90,16 @@ export default function Globe() {
   const isMobile = useIsMobile(1024);
   const locations = useMemo(() => groupExperiencesByLocation(), []);
 
-  const handleCityClick = (loc: LocationGroup) => {
+  const resumeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const handleCityClick = useCallback((loc: LocationGroup) => {
     setActiveLocation(loc);
     setTargetLocationName(loc.name);
-    // Clear target after globe has had time to rotate, so idle spin resumes
-    setTimeout(() => setTargetLocationName(undefined), 2500);
-  };
+    // Clear any existing timer so re-clicks reset the 30s countdown
+    if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current);
+    // Resume idle spin after 30s of inactivity
+    resumeTimerRef.current = setTimeout(() => setTargetLocationName(undefined), 30000);
+  }, []);
 
   return (
     <section
@@ -180,6 +184,7 @@ export default function Globe() {
                           : 'text-offwhite/30 hover:text-offwhite/50 hover:bg-offwhite/[0.03]'
                       }`}
                     >
+                      <span className="mr-1">{loc.flag}</span>
                       {loc.name}
                       {/* Active underline */}
                       <div

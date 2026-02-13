@@ -105,6 +105,7 @@ export default function LocationPin({ location, isActive }: LocationPinProps) {
             transition: 'transform 0.5s ease',
           }}
         >
+          <span className="text-[12px] leading-none">{location.flag}</span>
           <span
             className={`font-mono text-[10px] uppercase tracking-wider transition-colors duration-500 ${
               isActive ? 'text-[#FF9500]' : 'text-offwhite/30'

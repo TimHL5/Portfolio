@@ -7,6 +7,7 @@ export interface LocationGroup {
   name: string;
   lat: number;
   lng: number;
+  flag: string;
   experiences: (typeof EXPERIENCE)[number][];
 }
 
@@ -29,7 +30,7 @@ export function latLngToVector3(
 
 export function groupExperiencesByLocation(): LocationGroup[] {
   const placeMap = new Map(
-    PERSONAL.places.map((p) => [p.name, { lat: p.lat, lng: p.lng }])
+    PERSONAL.places.map((p) => [p.name, { lat: p.lat, lng: p.lng, flag: p.flag }])
   );
 
   const groups = new Map<string, LocationGroup>();
@@ -43,6 +44,7 @@ export function groupExperiencesByLocation(): LocationGroup[] {
         name: exp.location,
         lat: coords.lat,
         lng: coords.lng,
+        flag: coords.flag,
         experiences: [],
       });
     }
