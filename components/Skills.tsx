@@ -1,239 +1,342 @@
 'use client';
 
-import { useState, useMemo, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useMemo, useRef, useEffect } from 'react';
+import { motion, AnimatePresence, useMotionValue, useTransform, animate } from 'framer-motion';
 import { SKILLS } from '@/lib/constants';
 import { useInView } from '@/hooks/useInView';
 import { useParallax } from '@/hooks/useParallax';
 import { useIsMobile } from '@/hooks/useIsMobile';
+import MagneticHeading from './MagneticHeading';
 
 const categories = [
-  { key: 'programming' as const, label: 'Programming', color: '#FF9500', cx: 200, cy: 140 },
-  { key: 'tools' as const, label: 'Tools', color: '#00C9A7', cx: 620, cy: 140 },
-  { key: 'business' as const, label: 'Business', color: '#6366F1', cx: 200, cy: 380 },
-  { key: 'languages' as const, label: 'Languages', color: '#F5F0EB', cx: 620, cy: 380 },
+  { key: 'programming' as const, label: 'Programming', color: '#FF9500' },
+  { key: 'tools' as const, label: 'Tools', color: '#00C9A7' },
+  { key: 'business' as const, label: 'Business', color: '#6366F1' },
+  { key: 'languages' as const, label: 'Languages', color: '#F5F0EB' },
 ];
 
 type CategoryKey = (typeof categories)[number]['key'];
 
-interface SkillNode {
-  name: string;
-  category: CategoryKey;
-  color: string;
-  x: number;
-  y: number;
-  size: number;
+function getItems(key: CategoryKey): string[] {
+  if (key === 'languages') return SKILLS.languages.map((l) => `${l.name} (${l.level})`);
+  return SKILLS[key] as string[];
 }
 
-// Deterministic spread: place nodes in a circular pattern around cluster center
-function buildNodes(): SkillNode[] {
-  const nodes: SkillNode[] = [];
+// Proficiency levels for radar (0-1 scale, used for polygon shape)
+const proficiency: Record<CategoryKey, number> = {
+  programming: 0.8,
+  tools: 0.85,
+  business: 0.75,
+  languages: 0.7,
+};
 
-  const addCategory = (key: CategoryKey, items: string[], color: string, cx: number, cy: number) => {
-    const count = items.length;
-    items.forEach((name, i) => {
-      const angle = (2 * Math.PI * i) / count - Math.PI / 2;
-      const radius = 55 + (i % 2) * 30;
-      nodes.push({
-        name,
-        category: key,
-        color,
-        x: cx + Math.cos(angle) * radius,
-        y: cy + Math.sin(angle) * radius,
-        size: 5 + (count - i) * 0.4,
-      });
-    });
-  };
-
-  addCategory('programming', SKILLS.programming, '#FF9500', 200, 140);
-  addCategory('tools', SKILLS.tools, '#00C9A7', 620, 140);
-  addCategory('business', SKILLS.business, '#6366F1', 200, 380);
-  addCategory('languages', SKILLS.languages.map((l) => `${l.name} (${l.level})`), '#F5F0EB', 620, 380);
-
-  return nodes;
-}
-
-function Constellation({
+function RadarChart({
   sectionInView,
   activeCategory,
   setActiveCategory,
-  hoveredNode,
-  setHoveredNode,
+  hoveredAxis,
+  setHoveredAxis,
 }: {
   sectionInView: boolean;
   activeCategory: CategoryKey | null;
   setActiveCategory: (key: CategoryKey | null) => void;
-  hoveredNode: string | null;
-  setHoveredNode: (name: string | null) => void;
+  hoveredAxis: CategoryKey | null;
+  setHoveredAxis: (key: CategoryKey | null) => void;
 }) {
-  const nodes = useMemo(() => buildNodes(), []);
+  const cx = 200;
+  const cy = 200;
+  const maxR = 160;
+  const levels = 4;
+  const angleStep = (Math.PI * 2) / categories.length;
+  const startAngle = -Math.PI / 2; // Top
 
-  // Build edges: connect nodes within the same category
-  const edges = useMemo(() => {
-    const result: { from: SkillNode; to: SkillNode }[] = [];
-    for (const cat of categories) {
-      const catNodes = nodes.filter((n) => n.category === cat.key);
-      for (let i = 0; i < catNodes.length; i++) {
-        // Connect to next node (ring)
-        const next = catNodes[(i + 1) % catNodes.length];
-        result.push({ from: catNodes[i], to: next });
-        // Connect to center for star pattern
-        if (i % 2 === 0 && catNodes.length > 3) {
-          const opposite = catNodes[(i + Math.floor(catNodes.length / 2)) % catNodes.length];
-          result.push({ from: catNodes[i], to: opposite });
-        }
-      }
+  const progress = useMotionValue(0);
+  const hasAnimated = useRef(false);
+
+  useEffect(() => {
+    if (sectionInView && !hasAnimated.current) {
+      hasAnimated.current = true;
+      animate(progress, 1, { duration: 1.2, ease: [0.23, 1, 0.32, 1] });
     }
-    return result;
-  }, [nodes]);
+  }, [sectionInView, progress]);
 
-  const isNodeHighlighted = useCallback((node: SkillNode) => {
-    if (hoveredNode) return node.name === hoveredNode;
-    if (activeCategory) return node.category === activeCategory;
-    return true;
-  }, [hoveredNode, activeCategory]);
+  // Compute axis endpoints
+  const axes = useMemo(
+    () =>
+      categories.map((cat, i) => {
+        const angle = startAngle + i * angleStep;
+        return {
+          ...cat,
+          angle,
+          x: cx + Math.cos(angle) * maxR,
+          y: cy + Math.sin(angle) * maxR,
+          labelX: cx + Math.cos(angle) * (maxR + 28),
+          labelY: cy + Math.sin(angle) * (maxR + 28),
+        };
+      }),
+    [startAngle, angleStep]
+  );
 
-  const isEdgeHighlighted = useCallback((edge: { from: SkillNode; to: SkillNode }) => {
-    if (hoveredNode) return edge.from.name === hoveredNode || edge.to.name === hoveredNode;
-    if (activeCategory) return edge.from.category === activeCategory;
-    return true;
-  }, [hoveredNode, activeCategory]);
+  // Build polygon points for proficiency shape
+  const polygonPoints = useMemo(
+    () =>
+      axes
+        .map((ax) => {
+          const r = maxR * proficiency[ax.key];
+          const px = cx + Math.cos(ax.angle) * r;
+          const py = cy + Math.sin(ax.angle) * r;
+          return `${px},${py}`;
+        })
+        .join(' '),
+    [axes]
+  );
+
+  // Animated polygon
+  const animatedPolygon = useTransform(progress, (p) =>
+    axes
+      .map((ax) => {
+        const r = maxR * proficiency[ax.key] * p;
+        const px = cx + Math.cos(ax.angle) * r;
+        const py = cy + Math.sin(ax.angle) * r;
+        return `${px},${py}`;
+      })
+      .join(' ')
+  );
+
+  const current = activeCategory ?? hoveredAxis;
 
   return (
     <motion.svg
-      viewBox="0 0 820 520"
-      className="w-full h-auto max-h-[500px]"
+      viewBox="0 0 400 400"
+      className="w-full h-auto max-w-[400px]"
       initial={{ opacity: 0 }}
       animate={sectionInView ? { opacity: 1 } : {}}
-      transition={{ delay: 0.4, duration: 1 }}
+      transition={{ delay: 0.3, duration: 0.8 }}
     >
-      {/* Edges */}
-      {edges.map((edge, i) => (
-        <motion.line
-          key={`e-${i}`}
-          x1={edge.from.x}
-          y1={edge.from.y}
-          x2={edge.to.x}
-          y2={edge.to.y}
-          stroke={edge.from.color}
-          strokeWidth={0.5}
-          initial={{ pathLength: 0, opacity: 0 }}
-          animate={sectionInView ? {
-            pathLength: 1,
-            opacity: isEdgeHighlighted(edge) ? 0.15 : 0.03,
-          } : {}}
-          transition={{ delay: 0.8 + i * 0.02, duration: 0.6 }}
-        />
-      ))}
+      <defs>
+        <radialGradient id="radar-fill" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor="#FF9500" stopOpacity="0.15" />
+          <stop offset="100%" stopColor="#FF9500" stopOpacity="0.03" />
+        </radialGradient>
+      </defs>
 
-      {/* Category labels */}
-      {categories.map((cat) => (
-        <g key={cat.key}>
-          <text
-            x={cat.cx}
-            y={cat.cy - 100}
-            textAnchor="middle"
-            className="cursor-pointer select-none"
-            fill={activeCategory === cat.key ? cat.color : 'rgba(245,240,235,0.25)'}
-            fontSize="10"
-            fontFamily="monospace"
-            letterSpacing="0.15em"
-            style={{ textTransform: 'uppercase', transition: 'fill 0.3s' }}
-            onClick={() => setActiveCategory(activeCategory === cat.key ? null : cat.key)}
-          >
-            {cat.label}
-          </text>
-        </g>
-      ))}
-
-      {/* Nodes */}
-      {nodes.map((node, i) => {
-        const highlighted = isNodeHighlighted(node);
+      {/* Concentric rings */}
+      {Array.from({ length: levels }, (_, i) => {
+        const r = (maxR / levels) * (i + 1);
         return (
-          <g
-            key={node.name}
-            className="cursor-pointer"
-            onMouseEnter={() => setHoveredNode(node.name)}
-            onMouseLeave={() => setHoveredNode(null)}
-          >
-            {/* Glow ring on highlight */}
-            {highlighted && (hoveredNode === node.name || activeCategory === node.category) && (
-              <motion.circle
-                cx={node.x}
-                cy={node.y}
-                r={node.size + 8}
-                fill="none"
-                stroke={node.color}
-                strokeWidth={0.5}
-                initial={{ opacity: 0, scale: 0.5 }}
-                animate={{ opacity: 0.3, scale: 1 }}
-                transition={{ duration: 0.3 }}
-              />
-            )}
-            {/* Main dot */}
-            <motion.circle
-              cx={node.x}
-              cy={node.y}
-              r={node.size}
-              fill={node.color}
-              initial={{ cx: 410, cy: 260, r: 0, opacity: 0 }}
-              animate={sectionInView ? {
-                cx: node.x,
-                cy: node.y,
-                r: node.size,
-                opacity: highlighted ? 0.9 : 0.15,
-              } : {}}
-              transition={{
-                delay: 0.5 + i * 0.04,
-                duration: 0.8,
-                ease: [0.23, 1, 0.32, 1],
-                opacity: { duration: 0.3 },
-              }}
+          <motion.polygon
+            key={`ring-${i}`}
+            points={axes
+              .map((ax) => `${cx + Math.cos(ax.angle) * r},${cy + Math.sin(ax.angle) * r}`)
+              .join(' ')}
+            fill="none"
+            stroke="rgba(245,240,235,0.06)"
+            strokeWidth={0.5}
+            initial={{ opacity: 0 }}
+            animate={sectionInView ? { opacity: 1 } : {}}
+            transition={{ delay: 0.4 + i * 0.1, duration: 0.6 }}
+          />
+        );
+      })}
+
+      {/* Axis lines */}
+      {axes.map((ax) => {
+        const isHighlighted = current === ax.key;
+        return (
+          <motion.line
+            key={ax.key}
+            x1={cx}
+            y1={cy}
+            x2={ax.x}
+            y2={ax.y}
+            stroke={isHighlighted ? ax.color : 'rgba(245,240,235,0.08)'}
+            strokeWidth={isHighlighted ? 1.5 : 0.5}
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={sectionInView ? { pathLength: 1, opacity: 1 } : {}}
+            transition={{ delay: 0.5, duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
+            style={{ transition: 'stroke 0.3s, stroke-width 0.3s' }}
+          />
+        );
+      })}
+
+      {/* Filled proficiency polygon */}
+      <motion.polygon
+        points={animatedPolygon}
+        fill="url(#radar-fill)"
+        stroke="#FF9500"
+        strokeWidth={1}
+        strokeOpacity={0.4}
+        initial={{ opacity: 0 }}
+        animate={sectionInView ? { opacity: 1 } : {}}
+        transition={{ delay: 0.6, duration: 0.8 }}
+      />
+
+      {/* Data points on polygon vertices */}
+      {axes.map((ax) => {
+        const r = maxR * proficiency[ax.key];
+        const px = cx + Math.cos(ax.angle) * r;
+        const py = cy + Math.sin(ax.angle) * r;
+        const isHighlighted = current === ax.key;
+        return (
+          <motion.circle
+            key={`dot-${ax.key}`}
+            cx={px}
+            cy={py}
+            r={isHighlighted ? 5 : 3.5}
+            fill={isHighlighted ? ax.color : '#FF9500'}
+            stroke={isHighlighted ? ax.color : 'transparent'}
+            strokeWidth={isHighlighted ? 8 : 0}
+            strokeOpacity={0.15}
+            initial={{ r: 0, opacity: 0 }}
+            animate={sectionInView ? { r: isHighlighted ? 5 : 3.5, opacity: 1 } : {}}
+            transition={{ delay: 1, duration: 0.4 }}
+            style={{ transition: 'r 0.3s, fill 0.3s, stroke 0.3s, stroke-width 0.3s' }}
+          />
+        );
+      })}
+
+      {/* Axis labels + hover zones */}
+      {axes.map((ax) => {
+        const isHighlighted = current === ax.key;
+        const anchor =
+          Math.abs(ax.angle - startAngle) < 0.1 || Math.abs(ax.angle - startAngle - Math.PI * 2) < 0.1
+            ? 'middle'
+            : ax.labelX > cx
+              ? 'start'
+              : 'end';
+        const dy =
+          Math.abs(ax.angle - startAngle) < 0.1
+            ? -8
+            : Math.abs(ax.angle - Math.PI / 2) < 0.1
+              ? 16
+              : 4;
+        return (
+          <g key={`label-${ax.key}`}>
+            {/* Invisible larger hit area */}
+            <circle
+              cx={ax.labelX}
+              cy={ax.labelY}
+              r={30}
+              fill="transparent"
+              className="cursor-pointer"
+              onMouseEnter={() => setHoveredAxis(ax.key)}
+              onMouseLeave={() => setHoveredAxis(null)}
+              onClick={() => setActiveCategory(activeCategory === ax.key ? null : ax.key)}
             />
-            {/* Label on hover */}
-            {hoveredNode === node.name && (
-              <motion.g
-                initial={{ opacity: 0, y: 5 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.2 }}
-              >
-                <rect
-                  x={node.x - 50}
-                  y={node.y - node.size - 24}
-                  width={100}
-                  height={18}
-                  rx={3}
-                  fill="rgba(10,10,10,0.9)"
-                  stroke={node.color}
-                  strokeWidth={0.5}
-                />
-                <text
-                  x={node.x}
-                  y={node.y - node.size - 12}
-                  textAnchor="middle"
-                  fill={node.color}
-                  fontSize="9"
-                  fontFamily="monospace"
-                >
-                  {node.name}
-                </text>
-              </motion.g>
-            )}
+            <text
+              x={ax.labelX}
+              y={ax.labelY + dy}
+              textAnchor={anchor}
+              fill={isHighlighted ? ax.color : 'rgba(245,240,235,0.35)'}
+              fontSize="11"
+              fontFamily="monospace"
+              letterSpacing="0.12em"
+              className="cursor-pointer select-none uppercase"
+              style={{ transition: 'fill 0.3s' }}
+              onMouseEnter={() => setHoveredAxis(ax.key)}
+              onMouseLeave={() => setHoveredAxis(null)}
+              onClick={() => setActiveCategory(activeCategory === ax.key ? null : ax.key)}
+            >
+              {ax.label}
+            </text>
           </g>
         );
       })}
+
+      {/* Subtle pulse animation on polygon */}
+      <motion.polygon
+        points={polygonPoints}
+        fill="none"
+        stroke="#FF9500"
+        strokeWidth={0.5}
+        strokeOpacity={0}
+        animate={
+          sectionInView
+            ? {
+                strokeOpacity: [0, 0.3, 0],
+                scale: [1, 1.02, 1],
+              }
+            : {}
+        }
+        transition={{
+          repeat: Infinity,
+          duration: 3,
+          delay: 2,
+          ease: 'easeInOut',
+        }}
+        style={{ transformOrigin: `${cx}px ${cy}px` }}
+      />
     </motion.svg>
+  );
+}
+
+function SkillCards({
+  categoryKey,
+  sectionInView,
+}: {
+  categoryKey: CategoryKey | null;
+  sectionInView: boolean;
+}) {
+  const displayKey = categoryKey ?? 'programming';
+  const items = getItems(displayKey);
+  const cat = categories.find((c) => c.key === displayKey)!;
+
+  return (
+    <AnimatePresence mode="wait">
+      <motion.div
+        key={displayKey}
+        className="grid grid-cols-2 gap-3"
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        exit={{ opacity: 0, x: -20 }}
+        transition={{ duration: 0.35, ease: [0.23, 1, 0.32, 1] }}
+      >
+        {/* Category header */}
+        <motion.div
+          className="col-span-2 flex items-center gap-3 mb-1"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.05 }}
+        >
+          <div className="w-2 h-2 rounded-full" style={{ backgroundColor: cat.color }} />
+          <span className="font-mono text-caption uppercase tracking-widest" style={{ color: cat.color }}>
+            {cat.label}
+          </span>
+          <div className="flex-1 h-px bg-offwhite/5" />
+          <span className="font-mono text-caption text-offwhite/20">{items.length} skills</span>
+        </motion.div>
+
+        {items.map((item, i) => (
+          <motion.div
+            key={item}
+            className="group relative bg-charcoal-mid/80 border border-offwhite/5 rounded-sm p-4 hover:border-offwhite/15 hover:-translate-y-0.5 transition-all duration-300"
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.08 + i * 0.04, duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
+          >
+            {/* Accent bar */}
+            <div
+              className="absolute top-0 left-0 w-full h-[2px] rounded-t-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              style={{ backgroundColor: cat.color }}
+            />
+            {/* Glow on hover */}
+            <div
+              className="absolute inset-0 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+              style={{ boxShadow: `inset 0 0 20px ${cat.color}08, 0 0 15px ${cat.color}05` }}
+            />
+            <span className="relative font-sans text-body text-offwhite/70 group-hover:text-offwhite/90 transition-colors duration-300">
+              {item}
+            </span>
+          </motion.div>
+        ))}
+      </motion.div>
+    </AnimatePresence>
   );
 }
 
 function MobileSkills({ sectionInView }: { sectionInView: boolean }) {
   const [activeCategory, setActiveCategory] = useState<CategoryKey>('programming');
   const activeConfig = categories.find((c) => c.key === activeCategory)!;
-
-  const getItems = (key: CategoryKey): string[] => {
-    if (key === 'languages') return SKILLS.languages.map((l) => `${l.name} (${l.level})`);
-    return SKILLS[key] as string[];
-  };
 
   return (
     <div>
@@ -293,7 +396,9 @@ export default function Skills() {
   const { ref: parallaxRef, labelX, decorY } = useParallax();
   const isMobile = useIsMobile(768);
   const [activeCategory, setActiveCategory] = useState<CategoryKey | null>(null);
-  const [hoveredNode, setHoveredNode] = useState<string | null>(null);
+  const [hoveredAxis, setHoveredAxis] = useState<CategoryKey | null>(null);
+
+  const displayCategory = activeCategory ?? hoveredAxis;
 
   return (
     <section
@@ -314,71 +419,79 @@ export default function Skills() {
       >
         S.05 &mdash; Skills
       </motion.div>
-      <motion.h2
-        className="text-heading font-serif mb-10 md:mb-16"
-        initial={{ opacity: 0, y: 30 }}
-        animate={sectionInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ delay: 0.2, duration: 0.8 }}
-      >
-        Toolkit
-      </motion.h2>
+      <MagneticHeading>
+        <motion.h2
+          className="text-heading font-serif mb-10 md:mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          animate={sectionInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.2, duration: 0.8 }}
+        >
+          Toolkit
+        </motion.h2>
+      </MagneticHeading>
 
       {isMobile ? (
         <MobileSkills sectionInView={sectionInView} />
       ) : (
         <div className="max-w-5xl">
-          {/* Category filter buttons */}
-          <motion.div
-            className="flex flex-wrap gap-2 mb-6"
-            initial={{ opacity: 0 }}
-            animate={sectionInView ? { opacity: 1 } : {}}
-            transition={{ delay: 0.3, duration: 0.8 }}
-          >
-            {categories.map((cat) => (
-              <button
-                key={cat.key}
-                onClick={() => setActiveCategory(activeCategory === cat.key ? null : cat.key)}
-                className={`font-mono text-caption uppercase tracking-widest px-3 py-1.5 rounded-sm border transition-all duration-300 ${
-                  activeCategory === cat.key
-                    ? 'border-current bg-offwhite/5'
-                    : 'border-offwhite/10 text-offwhite/30 hover:text-offwhite/50 hover:border-offwhite/20'
-                }`}
-                style={activeCategory === cat.key ? { borderColor: cat.color, color: cat.color } : undefined}
+          <div className="grid grid-cols-[auto_1fr] gap-8 lg:gap-12 items-start">
+            {/* Left: Radar Chart */}
+            <div className="w-[340px] lg:w-[400px] flex-shrink-0">
+              <RadarChart
+                sectionInView={sectionInView}
+                activeCategory={activeCategory}
+                setActiveCategory={setActiveCategory}
+                hoveredAxis={hoveredAxis}
+                setHoveredAxis={setHoveredAxis}
+              />
+              {/* Instruction text */}
+              <motion.p
+                className="font-mono text-caption text-offwhite/20 text-center mt-3"
+                initial={{ opacity: 0 }}
+                animate={sectionInView ? { opacity: 1 } : {}}
+                transition={{ delay: 1.2, duration: 0.6 }}
               >
-                {cat.label}
-              </button>
-            ))}
-            {activeCategory && (
-              <button
-                onClick={() => setActiveCategory(null)}
-                className="font-mono text-caption uppercase tracking-widest px-3 py-1.5 text-offwhite/30 hover:text-offwhite/50 transition-colors duration-300"
-              >
-                Clear
-              </button>
-            )}
-          </motion.div>
+                Hover or click an axis to explore
+              </motion.p>
+            </div>
 
-          {/* Constellation SVG */}
-          <Constellation
-            sectionInView={sectionInView}
-            activeCategory={activeCategory}
-            setActiveCategory={setActiveCategory}
-            hoveredNode={hoveredNode}
-            setHoveredNode={setHoveredNode}
-          />
+            {/* Right: Skill Cards */}
+            <motion.div
+              className="min-h-[300px]"
+              initial={{ opacity: 0 }}
+              animate={sectionInView ? { opacity: 1 } : {}}
+              transition={{ delay: 0.6, duration: 0.8 }}
+            >
+              <SkillCards categoryKey={displayCategory} sectionInView={sectionInView} />
+            </motion.div>
+          </div>
 
           {/* Legend */}
           <motion.div
-            className="mt-6 flex flex-wrap gap-4"
+            className="mt-10 flex flex-wrap gap-6"
             initial={{ opacity: 0 }}
             animate={sectionInView ? { opacity: 1 } : {}}
             transition={{ delay: 0.8, duration: 0.8 }}
           >
             {categories.map((cat) => (
-              <div key={cat.key} className="flex items-center gap-2">
-                <div className="w-2 h-2 rounded-full" style={{ backgroundColor: cat.color }} />
-                <span className="font-mono text-caption text-offwhite/40">{cat.label}</span>
-              </div>
+              <button
+                key={cat.key}
+                onClick={() => setActiveCategory(activeCategory === cat.key ? null : cat.key)}
+                className="flex items-center gap-2 group cursor-pointer"
+              >
+                <div
+                  className="w-2 h-2 rounded-full transition-transform duration-300 group-hover:scale-150"
+                  style={{ backgroundColor: cat.color }}
+                />
+                <span
+                  className={`font-mono text-caption transition-colors duration-300 ${
+                    displayCategory === cat.key ? '' : 'text-offwhite/40 group-hover:text-offwhite/60'
+                  }`}
+                  style={displayCategory === cat.key ? { color: cat.color } : undefined}
+                >
+                  {cat.label}
+                </span>
+              </button>
             ))}
           </motion.div>
         </div>

@@ -1,5 +1,6 @@
 'use client';
 
+import { useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import MagneticButton from './MagneticButton';
 
@@ -48,6 +49,21 @@ export default function VentureCard({
   isActive,
   onOpenCaseStudy,
 }: VentureCardProps) {
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    cardRef.current.style.transform = `perspective(800px) rotateY(${x * 6}deg) rotateX(${-y * 6}deg)`;
+  }, []);
+
+  const handleMouseLeave = useCallback(() => {
+    if (!cardRef.current) return;
+    cardRef.current.style.transform = 'perspective(800px) rotateY(0deg) rotateX(0deg)';
+  }, []);
+
   return (
     <motion.div
       className="min-w-[85vw] md:min-w-[600px] lg:min-w-[700px] snap-center"
@@ -56,9 +72,14 @@ export default function VentureCard({
       transition={{ duration: 0.5 }}
     >
       <div
+        ref={cardRef}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
         className="relative rounded-sm overflow-hidden p-5 md:p-8 lg:p-12 h-full border border-offwhite/5"
         style={{
           background: `linear-gradient(135deg, rgba(${hexToRgb(accentColor)}, 0.05) 0%, rgba(20,20,20,1) 60%)`,
+          transition: 'transform 0.3s cubic-bezier(0.23, 1, 0.32, 1)',
+          willChange: 'transform',
         }}
       >
         {/* Status indicator */}

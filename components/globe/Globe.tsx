@@ -7,6 +7,7 @@ import { useInView } from '@/hooks/useInView';
 import { useParallax } from '@/hooks/useParallax';
 import { useIsMobile } from '@/hooks/useIsMobile';
 import MobileExperience from './MobileExperience';
+import MagneticHeading from '../MagneticHeading';
 import { LocationGroup, groupExperiencesByLocation } from './utils';
 
 const GlobeCanvas = dynamic(() => import('./GlobeCanvas'), { ssr: false });
@@ -122,14 +123,16 @@ export default function Globe() {
       >
         S.04 &mdash; Experience
       </motion.div>
-      <motion.h2
-        className="text-heading font-serif mb-6 md:mb-10"
-        initial={{ opacity: 0, y: 30 }}
-        animate={sectionInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ delay: 0.2, duration: 0.8 }}
-      >
-        Flight Log
-      </motion.h2>
+      <MagneticHeading>
+        <motion.h2
+          className="text-heading font-serif mb-6 md:mb-10"
+          initial={{ opacity: 0, y: 30 }}
+          animate={sectionInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.2, duration: 0.8 }}
+        >
+          Flight Log
+        </motion.h2>
+      </MagneticHeading>
       <motion.p
         className="text-body-lg text-offwhite/40 font-sans mb-8 md:mb-12 max-w-lg"
         initial={{ opacity: 0 }}

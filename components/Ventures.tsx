@@ -7,6 +7,7 @@ import { useInView } from '@/hooks/useInView';
 import { useParallax } from '@/hooks/useParallax';
 import VentureCard from './VentureCard';
 import VentureCaseStudy from './VentureCaseStudy';
+import MagneticHeading from './MagneticHeading';
 
 export default function Ventures() {
   const [sectionRef, sectionInView] = useInView<HTMLElement>({ threshold: 0.05 });
@@ -83,14 +84,16 @@ export default function Ventures() {
         >
           S.03 &mdash; Ventures
         </motion.div>
-        <motion.h2
-          className="text-heading font-serif"
-          initial={{ opacity: 0, y: 30 }}
-          animate={sectionInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.2, duration: 0.8 }}
-        >
-          What I&rsquo;m Building
-        </motion.h2>
+        <MagneticHeading>
+          <motion.h2
+            className="text-heading font-serif"
+            initial={{ opacity: 0, y: 30 }}
+            animate={sectionInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.2, duration: 0.8 }}
+          >
+            What I&rsquo;m Building
+          </motion.h2>
+        </MagneticHeading>
         <motion.p
           className="text-body-lg text-offwhite/40 font-sans mt-4 max-w-lg"
           initial={{ opacity: 0 }}

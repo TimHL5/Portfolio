@@ -67,35 +67,36 @@ export default function GlobeScene({
     } else {
       // Idle: slow constant spin
       groupRef.current.rotation.y += 0.002;
-    }
 
-    // Detect which location faces the camera most directly
-    const cameraDir = camera.position.clone().normalize();
-    let bestIndex = 0;
-    let bestDot = -Infinity;
+      // Only detect which location faces the camera during idle spin
+      // (skip during targeted rotation to avoid overriding user's city selection)
+      const cameraDir = camera.position.clone().normalize();
+      let bestIndex = 0;
+      let bestDot = -Infinity;
 
-    for (let i = 0; i < pinPositions.length; i++) {
-      tempVec.copy(pinPositions[i]);
-      groupRef.current.localToWorld(tempVec);
-      tempVec.normalize();
+      for (let i = 0; i < pinPositions.length; i++) {
+        tempVec.copy(pinPositions[i]);
+        groupRef.current.localToWorld(tempVec);
+        tempVec.normalize();
 
-      const dot = tempVec.dot(cameraDir);
-      if (dot > bestDot) {
-        bestDot = dot;
-        bestIndex = i;
+        const dot = tempVec.dot(cameraDir);
+        if (dot > bestDot) {
+          bestDot = dot;
+          bestIndex = i;
+        }
       }
-    }
 
-    // Hysteresis: only switch if new location is meaningfully more "in front"
-    const currentDot = (() => {
-      tempVec.copy(pinPositions[activeIndexRef.current]);
-      groupRef.current.localToWorld(tempVec);
-      tempVec.normalize();
-      return tempVec.dot(cameraDir);
-    })();
+      // Hysteresis: only switch if new location is meaningfully more "in front"
+      const currentDot = (() => {
+        tempVec.copy(pinPositions[activeIndexRef.current]);
+        groupRef.current.localToWorld(tempVec);
+        tempVec.normalize();
+        return tempVec.dot(cameraDir);
+      })();
 
-    if (bestIndex !== activeIndexRef.current && bestDot > currentDot + 0.05) {
-      handleActiveChange(bestIndex);
+      if (bestIndex !== activeIndexRef.current && bestDot > currentDot + 0.05) {
+        handleActiveChange(bestIndex);
+      }
     }
   });
 

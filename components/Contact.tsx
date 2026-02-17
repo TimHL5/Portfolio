@@ -1,16 +1,42 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { PERSONAL } from '@/lib/constants';
 import { useInView } from '@/hooks/useInView';
 import { useParallax } from '@/hooks/useParallax';
 import MagneticButton from './MagneticButton';
+import MagneticHeading from './MagneticHeading';
+
+function useTypingEffect(text: string, enabled: boolean, speed: number = 60) {
+  const [displayed, setDisplayed] = useState('');
+  const [showCursor, setShowCursor] = useState(true);
+  const hasTyped = useRef(false);
+
+  useEffect(() => {
+    if (!enabled || hasTyped.current) return;
+    hasTyped.current = true;
+    let i = 0;
+    const interval = setInterval(() => {
+      i++;
+      setDisplayed(text.slice(0, i));
+      if (i >= text.length) {
+        clearInterval(interval);
+        // Blink cursor a few times then hide
+        setTimeout(() => setShowCursor(false), 1500);
+      }
+    }, speed);
+    return () => clearInterval(interval);
+  }, [enabled, text, speed]);
+
+  return { displayed: hasTyped.current ? displayed : '', showCursor: hasTyped.current && showCursor };
+}
 
 export default function Contact() {
   const [sectionRef, sectionInView] = useInView<HTMLElement>({ threshold: 0.1 });
   const { ref: parallaxRef, labelX } = useParallax();
   const [copied, setCopied] = useState(false);
+  const { displayed: typedEmail, showCursor } = useTypingEffect(PERSONAL.email, sectionInView, 50);
 
   const copyEmail = () => {
     navigator.clipboard.writeText(PERSONAL.email).then(() => {
@@ -44,15 +70,17 @@ export default function Contact() {
         </motion.div>
 
         {/* Large CTA text */}
-        <motion.h2
-          className="text-display font-serif mb-6 md:mb-8 max-w-4xl"
-          initial={{ opacity: 0, y: 40 }}
-          animate={sectionInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.2, duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
-        >
-          Let&rsquo;s build<br />
-          <span className="text-gradient-amber">something.</span>
-        </motion.h2>
+        <MagneticHeading>
+          <motion.h2
+            className="text-display font-serif mb-6 md:mb-8 max-w-4xl"
+            initial={{ opacity: 0, y: 40 }}
+            animate={sectionInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.2, duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
+          >
+            Let&rsquo;s build<br />
+            <span className="text-gradient-amber">something.</span>
+          </motion.h2>
+        </MagneticHeading>
 
         {/* Email */}
         <motion.div
@@ -63,9 +91,16 @@ export default function Contact() {
         >
           <a
             href={`mailto:${PERSONAL.email}`}
-            className="font-sans text-subheading text-offwhite/60 hover:text-amber transition-colors duration-300"
+            className="font-mono text-subheading text-offwhite/60 hover:text-amber transition-colors duration-300"
           >
-            {PERSONAL.email}
+            {typedEmail}
+            {showCursor && (
+              <motion.span
+                className="inline-block w-[2px] h-[0.8em] bg-amber ml-0.5 align-middle"
+                animate={{ opacity: [1, 0] }}
+                transition={{ repeat: Infinity, duration: 0.6, ease: 'steps(1)' }}
+              />
+            )}
           </a>
           <button
             onClick={copyEmail}

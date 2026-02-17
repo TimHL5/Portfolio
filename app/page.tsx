@@ -15,6 +15,7 @@ import CursorSpotlight from '@/components/CursorSpotlight';
 import GrainOverlay from '@/components/GrainOverlay';
 import EasterEgg from '@/components/EasterEgg';
 import CommandPalette from '@/components/CommandPalette';
+import AnimatedDivider from '@/components/AnimatedDivider';
 
 function LoadingScreen({ onComplete }: { onComplete: () => void }) {
   useEffect(() => {
@@ -79,17 +80,17 @@ export default function Home() {
           <Navigation />
           <main>
             <Hero />
-            <div className="section-divider" />
+            <AnimatedDivider />
             <About />
-            <div className="section-divider" />
+            <AnimatedDivider />
             <Ventures />
-            <div className="section-divider" />
+            <AnimatedDivider />
             <Globe />
-            <div className="section-divider" />
+            <AnimatedDivider />
             <Skills />
-            <div className="section-divider" />
+            <AnimatedDivider />
             <Leadership />
-            <div className="section-divider" />
+            <AnimatedDivider />
             <Contact />
           </main>
         </>
