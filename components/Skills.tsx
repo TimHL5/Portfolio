@@ -22,7 +22,6 @@ function getItems(key: CategoryKey): string[] {
   return SKILLS[key] as string[];
 }
 
-// Proficiency levels for radar (0-1 scale, used for polygon shape)
 const proficiency: Record<CategoryKey, number> = {
   programming: 0.8,
   tools: 0.85,
@@ -43,12 +42,13 @@ function RadarChart({
   hoveredAxis: CategoryKey | null;
   setHoveredAxis: (key: CategoryKey | null) => void;
 }) {
-  const cx = 200;
-  const cy = 200;
-  const maxR = 160;
+  const cx = 250;
+  const cy = 240;
+  const maxR = 140;
   const levels = 4;
-  const angleStep = (Math.PI * 2) / categories.length;
-  const startAngle = -Math.PI / 2; // Top
+  const numAxes = categories.length;
+  const angleStep = (Math.PI * 2) / numAxes;
+  const startAngle = -Math.PI / 2;
 
   const progress = useMotionValue(0);
   const hasAnimated = useRef(false);
@@ -60,45 +60,67 @@ function RadarChart({
     }
   }, [sectionInView, progress]);
 
-  // Compute axis endpoints
-  const axes = useMemo(
-    () =>
-      categories.map((cat, i) => {
-        const angle = startAngle + i * angleStep;
-        return {
-          ...cat,
-          angle,
-          x: cx + Math.cos(angle) * maxR,
-          y: cy + Math.sin(angle) * maxR,
-          labelX: cx + Math.cos(angle) * (maxR + 28),
-          labelY: cy + Math.sin(angle) * (maxR + 28),
-        };
-      }),
-    [startAngle, angleStep]
-  );
+  const axes = useMemo(() => {
+    const labelOffset = 24;
+    return categories.map((cat, i) => {
+      const angle = startAngle + i * angleStep;
+      const endX = cx + Math.cos(angle) * maxR;
+      const endY = cy + Math.sin(angle) * maxR;
 
-  // Build polygon points for proficiency shape
+      // Position labels further out with per-axis adjustments
+      let lx = cx + Math.cos(angle) * (maxR + labelOffset);
+      let ly = cy + Math.sin(angle) * (maxR + labelOffset);
+      let anchor: 'middle' | 'start' | 'end' = 'middle';
+
+      // Top axis
+      if (i === 0) {
+        ly -= 6;
+        anchor = 'middle';
+      }
+      // Right axis
+      else if (i === 1) {
+        lx += 4;
+        anchor = 'start';
+      }
+      // Bottom axis
+      else if (i === 2) {
+        ly += 14;
+        anchor = 'middle';
+      }
+      // Left axis
+      else if (i === 3) {
+        lx -= 4;
+        anchor = 'end';
+      }
+
+      return {
+        ...cat,
+        angle,
+        x: endX,
+        y: endY,
+        labelX: lx,
+        labelY: ly,
+        anchor,
+      };
+    });
+  }, [startAngle, angleStep]);
+
   const polygonPoints = useMemo(
     () =>
       axes
         .map((ax) => {
           const r = maxR * proficiency[ax.key];
-          const px = cx + Math.cos(ax.angle) * r;
-          const py = cy + Math.sin(ax.angle) * r;
-          return `${px},${py}`;
+          return `${cx + Math.cos(ax.angle) * r},${cy + Math.sin(ax.angle) * r}`;
         })
         .join(' '),
     [axes]
   );
 
-  // Animated polygon
   const animatedPolygon = useTransform(progress, (p) =>
     axes
       .map((ax) => {
         const r = maxR * proficiency[ax.key] * p;
-        const px = cx + Math.cos(ax.angle) * r;
-        const py = cy + Math.sin(ax.angle) * r;
-        return `${px},${py}`;
+        return `${cx + Math.cos(ax.angle) * r},${cy + Math.sin(ax.angle) * r}`;
       })
       .join(' ')
   );
@@ -107,20 +129,20 @@ function RadarChart({
 
   return (
     <motion.svg
-      viewBox="0 0 400 400"
-      className="w-full h-auto max-w-[400px]"
+      viewBox="0 0 500 480"
+      className="w-full h-auto"
       initial={{ opacity: 0 }}
       animate={sectionInView ? { opacity: 1 } : {}}
       transition={{ delay: 0.3, duration: 0.8 }}
     >
       <defs>
         <radialGradient id="radar-fill" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="#FF9500" stopOpacity="0.15" />
-          <stop offset="100%" stopColor="#FF9500" stopOpacity="0.03" />
+          <stop offset="0%" stopColor="#FF9500" stopOpacity="0.18" />
+          <stop offset="100%" stopColor="#FF9500" stopOpacity="0.02" />
         </radialGradient>
       </defs>
 
-      {/* Concentric rings */}
+      {/* Concentric diamond rings */}
       {Array.from({ length: levels }, (_, i) => {
         const r = (maxR / levels) * (i + 1);
         return (
@@ -134,7 +156,7 @@ function RadarChart({
             strokeWidth={0.5}
             initial={{ opacity: 0 }}
             animate={sectionInView ? { opacity: 1 } : {}}
-            transition={{ delay: 0.4 + i * 0.1, duration: 0.6 }}
+            transition={{ delay: 0.4 + i * 0.08, duration: 0.6 }}
           />
         );
       })}
@@ -171,7 +193,7 @@ function RadarChart({
         transition={{ delay: 0.6, duration: 0.8 }}
       />
 
-      {/* Data points on polygon vertices */}
+      {/* Data point dots */}
       {axes.map((ax) => {
         const r = maxR * proficiency[ax.key];
         const px = cx + Math.cos(ax.angle) * r;
@@ -190,33 +212,20 @@ function RadarChart({
             initial={{ r: 0, opacity: 0 }}
             animate={sectionInView ? { r: isHighlighted ? 5 : 3.5, opacity: 1 } : {}}
             transition={{ delay: 1, duration: 0.4 }}
-            style={{ transition: 'r 0.3s, fill 0.3s, stroke 0.3s, stroke-width 0.3s' }}
+            style={{ transition: 'fill 0.3s, stroke 0.3s, stroke-width 0.3s' }}
           />
         );
       })}
 
-      {/* Axis labels + hover zones */}
+      {/* Axis labels + hit zones */}
       {axes.map((ax) => {
         const isHighlighted = current === ax.key;
-        const anchor =
-          Math.abs(ax.angle - startAngle) < 0.1 || Math.abs(ax.angle - startAngle - Math.PI * 2) < 0.1
-            ? 'middle'
-            : ax.labelX > cx
-              ? 'start'
-              : 'end';
-        const dy =
-          Math.abs(ax.angle - startAngle) < 0.1
-            ? -8
-            : Math.abs(ax.angle - Math.PI / 2) < 0.1
-              ? 16
-              : 4;
         return (
           <g key={`label-${ax.key}`}>
-            {/* Invisible larger hit area */}
             <circle
               cx={ax.labelX}
               cy={ax.labelY}
-              r={30}
+              r={35}
               fill="transparent"
               className="cursor-pointer"
               onMouseEnter={() => setHoveredAxis(ax.key)}
@@ -225,8 +234,9 @@ function RadarChart({
             />
             <text
               x={ax.labelX}
-              y={ax.labelY + dy}
-              textAnchor={anchor}
+              y={ax.labelY}
+              textAnchor={ax.anchor}
+              dominantBaseline="middle"
               fill={isHighlighted ? ax.color : 'rgba(245,240,235,0.35)'}
               fontSize="11"
               fontFamily="monospace"
@@ -243,7 +253,7 @@ function RadarChart({
         );
       })}
 
-      {/* Subtle pulse animation on polygon */}
+      {/* Subtle pulse */}
       <motion.polygon
         points={polygonPoints}
         fill="none"
@@ -252,18 +262,10 @@ function RadarChart({
         strokeOpacity={0}
         animate={
           sectionInView
-            ? {
-                strokeOpacity: [0, 0.3, 0],
-                scale: [1, 1.02, 1],
-              }
+            ? { strokeOpacity: [0, 0.3, 0], scale: [1, 1.02, 1] }
             : {}
         }
-        transition={{
-          repeat: Infinity,
-          duration: 3,
-          delay: 2,
-          ease: 'easeInOut',
-        }}
+        transition={{ repeat: Infinity, duration: 3, delay: 2, ease: 'easeInOut' }}
         style={{ transformOrigin: `${cx}px ${cy}px` }}
       />
     </motion.svg>
@@ -272,10 +274,8 @@ function RadarChart({
 
 function SkillCards({
   categoryKey,
-  sectionInView,
 }: {
   categoryKey: CategoryKey | null;
-  sectionInView: boolean;
 }) {
   const displayKey = categoryKey ?? 'programming';
   const items = getItems(displayKey);
@@ -285,50 +285,41 @@ function SkillCards({
     <AnimatePresence mode="wait">
       <motion.div
         key={displayKey}
-        className="grid grid-cols-2 gap-3"
-        initial={{ opacity: 0, x: 20 }}
+        initial={{ opacity: 0, x: 16 }}
         animate={{ opacity: 1, x: 0 }}
-        exit={{ opacity: 0, x: -20 }}
-        transition={{ duration: 0.35, ease: [0.23, 1, 0.32, 1] }}
+        exit={{ opacity: 0, x: -16 }}
+        transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }}
       >
         {/* Category header */}
-        <motion.div
-          className="col-span-2 flex items-center gap-3 mb-1"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.05 }}
-        >
+        <div className="flex items-center gap-3 mb-4">
           <div className="w-2 h-2 rounded-full" style={{ backgroundColor: cat.color }} />
           <span className="font-mono text-caption uppercase tracking-widest" style={{ color: cat.color }}>
             {cat.label}
           </span>
           <div className="flex-1 h-px bg-offwhite/5" />
-          <span className="font-mono text-caption text-offwhite/20">{items.length} skills</span>
-        </motion.div>
+          <span className="font-mono text-caption text-offwhite/20">{items.length}</span>
+        </div>
 
-        {items.map((item, i) => (
-          <motion.div
-            key={item}
-            className="group relative bg-charcoal-mid/80 border border-offwhite/5 rounded-sm p-4 hover:border-offwhite/15 hover:-translate-y-0.5 transition-all duration-300"
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.08 + i * 0.04, duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
-          >
-            {/* Accent bar */}
-            <div
-              className="absolute top-0 left-0 w-full h-[2px] rounded-t-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-              style={{ backgroundColor: cat.color }}
-            />
-            {/* Glow on hover */}
-            <div
-              className="absolute inset-0 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-              style={{ boxShadow: `inset 0 0 20px ${cat.color}08, 0 0 15px ${cat.color}05` }}
-            />
-            <span className="relative font-sans text-body text-offwhite/70 group-hover:text-offwhite/90 transition-colors duration-300">
-              {item}
-            </span>
-          </motion.div>
-        ))}
+        {/* Skill items */}
+        <div className="grid grid-cols-2 xl:grid-cols-3 gap-2">
+          {items.map((item, i) => (
+            <motion.div
+              key={item}
+              className="group relative bg-charcoal-mid/60 border border-offwhite/5 rounded-sm px-3 py-2.5 hover:border-offwhite/15 hover:-translate-y-px transition-all duration-300"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.05 + i * 0.03, duration: 0.35, ease: [0.23, 1, 0.32, 1] }}
+            >
+              <div
+                className="absolute top-0 left-0 w-full h-[2px] rounded-t-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                style={{ backgroundColor: cat.color }}
+              />
+              <span className="relative font-sans text-body text-offwhite/60 group-hover:text-offwhite/85 transition-colors duration-300">
+                {item}
+              </span>
+            </motion.div>
+          ))}
+        </div>
       </motion.div>
     </AnimatePresence>
   );
@@ -434,9 +425,9 @@ export default function Skills() {
         <MobileSkills sectionInView={sectionInView} />
       ) : (
         <div className="max-w-5xl">
-          <div className="grid grid-cols-[auto_1fr] gap-8 lg:gap-12 items-start">
+          <div className="grid grid-cols-[minmax(280px,360px)_1fr] gap-6 lg:gap-10 items-start">
             {/* Left: Radar Chart */}
-            <div className="w-[340px] lg:w-[400px] flex-shrink-0">
+            <div>
               <RadarChart
                 sectionInView={sectionInView}
                 activeCategory={activeCategory}
@@ -444,9 +435,8 @@ export default function Skills() {
                 hoveredAxis={hoveredAxis}
                 setHoveredAxis={setHoveredAxis}
               />
-              {/* Instruction text */}
               <motion.p
-                className="font-mono text-caption text-offwhite/20 text-center mt-3"
+                className="font-mono text-caption text-offwhite/20 text-center -mt-2"
                 initial={{ opacity: 0 }}
                 animate={sectionInView ? { opacity: 1 } : {}}
                 transition={{ delay: 1.2, duration: 0.6 }}
@@ -457,18 +447,18 @@ export default function Skills() {
 
             {/* Right: Skill Cards */}
             <motion.div
-              className="min-h-[300px]"
+              className="pt-4"
               initial={{ opacity: 0 }}
               animate={sectionInView ? { opacity: 1 } : {}}
               transition={{ delay: 0.6, duration: 0.8 }}
             >
-              <SkillCards categoryKey={displayCategory} sectionInView={sectionInView} />
+              <SkillCards categoryKey={displayCategory} />
             </motion.div>
           </div>
 
           {/* Legend */}
           <motion.div
-            className="mt-10 flex flex-wrap gap-6"
+            className="mt-8 flex flex-wrap gap-6"
             initial={{ opacity: 0 }}
             animate={sectionInView ? { opacity: 1 } : {}}
             transition={{ delay: 0.8, duration: 0.8 }}
