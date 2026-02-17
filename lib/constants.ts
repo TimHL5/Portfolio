@@ -55,6 +55,18 @@ export const VENTURES = [
     press: "Featured in The Heights (Boston College)",
     status: "active" as const,
     accentColor: "#FF9500",
+    caseStudy: {
+      problem: "Millions of ambitious high school students in Asia want to become entrepreneurs, but existing programs are either purely theoretical or prohibitively expensive. There\u2019s no hands-on, affordable path that takes students from zero to a real, revenue-generating startup.",
+      solution: "MLV designed intensive, project-based programs where students don\u2019t just learn about business \u2014 they build actual companies with real customers. Through MLV Ignite (2-week virtual accelerator) and MLV Sprint (48-hour challenge), students go from idea to MVP to first revenue, mentored by college entrepreneurs who\u2019ve done it themselves.",
+      milestones: [
+        { date: "Jun 2023", event: "Co-founded MLV with initial team of 5" },
+        { date: "Aug 2023", event: "First cohort: 30 students, 6 startups launched" },
+        { date: "Jan 2024", event: "Secured $10K pre-seed from SSC Venture Partners" },
+        { date: "Jun 2024", event: "Expanded to Vietnam and Singapore" },
+        { date: "Dec 2024", event: "Surpassed 500 students and $50K revenue" },
+        { date: "Mar 2025", event: "Launched international case competition (460+ participants, 10 countries)" },
+      ],
+    },
   },
   {
     name: "Reach Admissions",
@@ -70,6 +82,15 @@ export const VENTURES = [
     link: "https://www.reachadmissions.app/",
     status: "building" as const,
     accentColor: "#00C9A7",
+    caseStudy: {
+      problem: "College admissions consulting costs $5,000\u201350,000+, leaving most families without access to expert guidance. Students from non-target backgrounds are at a severe disadvantage, even if they\u2019re equally talented.",
+      solution: "Reach uses AI trained on admissions data to provide personalized, expert-level guidance at 1/100th the cost. From school list building to essay review to interview prep, Reach gives every student a fighting chance at their dream school.",
+      milestones: [
+        { date: "Sep 2025", event: "Concept validated with 50+ student interviews" },
+        { date: "Dec 2025", event: "MVP built and beta testing with early users" },
+        { date: "Spring 2026", event: "Public launch at $199/year" },
+      ],
+    },
   },
   {
     name: "Consulting Mentorship",
@@ -84,6 +105,15 @@ export const VENTURES = [
     link: "https://cal.com/timh.liu/intro",
     status: "active" as const,
     accentColor: "#6366F1",
+    caseStudy: {
+      problem: "Most consulting prep focuses solely on case interviews. But the real bottleneck is getting the interview in the first place \u2014 students need a standout profile with genuine proof of impact, not just polished resumes.",
+      solution: "This mentorship goes beyond case prep. It\u2019s strategic positioning: identifying your unique angle, building proof-of-impact projects, crafting a narrative that makes recruiters say yes. 1-on-1 coaching from someone who navigated 15+ interview rounds and landed a top choice offer.",
+      milestones: [
+        { date: "2024", event: "Navigated 15+ consulting interview rounds" },
+        { date: "2024", event: "Landed top choice consulting offer" },
+        { date: "2025", event: "Began mentoring other students through the process" },
+      ],
+    },
   },
 ];
 

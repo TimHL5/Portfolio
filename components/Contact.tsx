@@ -4,10 +4,12 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { PERSONAL } from '@/lib/constants';
 import { useInView } from '@/hooks/useInView';
+import { useParallax } from '@/hooks/useParallax';
 import MagneticButton from './MagneticButton';
 
 export default function Contact() {
   const [sectionRef, sectionInView] = useInView<HTMLElement>({ threshold: 0.1 });
+  const { ref: parallaxRef, labelX } = useParallax();
   const [copied, setCopied] = useState(false);
 
   const copyEmail = () => {
@@ -20,7 +22,10 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      ref={sectionRef}
+      ref={(el) => {
+        (sectionRef as React.MutableRefObject<HTMLElement | null>).current = el;
+        (parallaxRef as React.MutableRefObject<HTMLElement | null>).current = el;
+      }}
       className="relative min-h-screen flex flex-col justify-center px-6 md:px-12 lg:px-24 py-20 md:py-32"
     >
       {/* Background gradient */}
@@ -33,6 +38,7 @@ export default function Contact() {
           initial={{ opacity: 0 }}
           animate={sectionInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.8 }}
+          style={{ x: labelX }}
         >
           S.07 &mdash; Contact
         </motion.div>

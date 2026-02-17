@@ -28,6 +28,7 @@ interface VentureCardProps {
   accentColor: string;
   index: number;
   isActive: boolean;
+  onOpenCaseStudy?: () => void;
 }
 
 export default function VentureCard({
@@ -45,6 +46,7 @@ export default function VentureCard({
   accentColor,
   index,
   isActive,
+  onOpenCaseStudy,
 }: VentureCardProps) {
   return (
     <motion.div
@@ -163,31 +165,45 @@ export default function VentureCard({
           </div>
         )}
 
-        {/* Link */}
-        {link && (
-          <MagneticButton
-            href={link}
-            className="inline-flex items-center gap-2 px-4 py-2.5 md:px-6 md:py-3 border rounded-sm text-body font-mono uppercase tracking-widest transition-colors duration-300"
-            strength={0.2}
-          >
-            <span style={{ color: accentColor, borderColor: `${accentColor}33` }}>
-              Learn More
-            </span>
-            <svg
-              width="14"
-              height="14"
-              viewBox="0 0 14 14"
-              fill="none"
-              style={{ color: accentColor }}
+        {/* Actions */}
+        <div className="flex items-center gap-3 flex-wrap">
+          {onOpenCaseStudy && (
+            <button
+              onClick={(e) => { e.stopPropagation(); onOpenCaseStudy(); }}
+              className="inline-flex items-center gap-2 px-4 py-2.5 md:px-6 md:py-3 rounded-sm text-body font-mono uppercase tracking-widest transition-all duration-300 border"
+              style={{ color: accentColor, borderColor: `${accentColor}40`, backgroundColor: `${accentColor}10` }}
             >
-              <path
-                d="M1 13L13 1M13 1H5M13 1V9"
-                stroke="currentColor"
-                strokeWidth="1.5"
-              />
-            </svg>
-          </MagneticButton>
-        )}
+              Case Study
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </button>
+          )}
+          {link && (
+            <MagneticButton
+              href={link}
+              className="inline-flex items-center gap-2 px-4 py-2.5 md:px-6 md:py-3 border rounded-sm text-body font-mono uppercase tracking-widest transition-colors duration-300"
+              strength={0.2}
+            >
+              <span style={{ color: accentColor, borderColor: `${accentColor}33` }}>
+                Learn More
+              </span>
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 14 14"
+                fill="none"
+                style={{ color: accentColor }}
+              >
+                <path
+                  d="M1 13L13 1M13 1H5M13 1V9"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                />
+              </svg>
+            </MagneticButton>
+          )}
+        </div>
       </div>
     </motion.div>
   );

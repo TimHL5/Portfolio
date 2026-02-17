@@ -11,7 +11,10 @@ import Leadership from '@/components/Leadership';
 import Contact from '@/components/Contact';
 import Navigation from '@/components/Navigation';
 import CustomCursor from '@/components/CustomCursor';
+import CursorSpotlight from '@/components/CursorSpotlight';
 import GrainOverlay from '@/components/GrainOverlay';
+import EasterEgg from '@/components/EasterEgg';
+import CommandPalette from '@/components/CommandPalette';
 
 function LoadingScreen({ onComplete }: { onComplete: () => void }) {
   useEffect(() => {
@@ -60,7 +63,10 @@ export default function Home() {
   return (
     <>
       <CustomCursor />
+      <CursorSpotlight />
       <GrainOverlay />
+      <EasterEgg />
+      <CommandPalette />
 
       <AnimatePresence mode="wait">
         {loading && (

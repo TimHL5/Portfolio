@@ -1,17 +1,29 @@
 'use client';
 
-import { useRef, useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { useRef, useState, useEffect, useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { VENTURES } from '@/lib/constants';
 import { useInView } from '@/hooks/useInView';
+import { useParallax } from '@/hooks/useParallax';
 import VentureCard from './VentureCard';
+import VentureCaseStudy from './VentureCaseStudy';
 
 export default function Ventures() {
   const [sectionRef, sectionInView] = useInView<HTMLElement>({ threshold: 0.05 });
+  const { ref: parallaxRef, labelX, decorY } = useParallax();
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
+  const [openCaseStudy, setOpenCaseStudy] = useState<number | null>(null);
   const dragStart = useRef({ x: 0, scrollLeft: 0 });
+
+  const handleOpenCaseStudy = useCallback((index: number) => {
+    setOpenCaseStudy(index);
+  }, []);
+
+  const handleCloseCaseStudy = useCallback(() => {
+    setOpenCaseStudy(null);
+  }, []);
 
   useEffect(() => {
     const container = scrollContainerRef.current;
@@ -54,7 +66,10 @@ export default function Ventures() {
   return (
     <section
       id="ventures"
-      ref={sectionRef}
+      ref={(el) => {
+        (sectionRef as React.MutableRefObject<HTMLElement | null>).current = el;
+        (parallaxRef as React.MutableRefObject<HTMLElement | null>).current = el;
+      }}
       className="relative py-20 md:py-32 lg:py-48"
     >
       {/* Section header */}
@@ -64,6 +79,7 @@ export default function Ventures() {
           initial={{ opacity: 0 }}
           animate={sectionInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.8 }}
+          style={{ x: labelX }}
         >
           S.03 &mdash; Ventures
         </motion.div>
@@ -104,6 +120,7 @@ export default function Ventures() {
             {...venture}
             index={i}
             isActive={i === activeIndex}
+            onOpenCaseStudy={'caseStudy' in venture ? () => handleOpenCaseStudy(i) : undefined}
           />
         ))}
         {/* Spacer for scroll padding */}
@@ -127,9 +144,27 @@ export default function Ventures() {
       </div>
 
       {/* Decorative */}
-      <div className="absolute bottom-6 right-6 md:right-12 lg:right-24 font-mono text-caption text-offwhite/15">
+      <motion.div className="absolute bottom-6 right-6 md:right-12 lg:right-24 font-mono text-caption text-offwhite/15" style={{ y: decorY }}>
         <div>S.03</div>
-      </div>
+      </motion.div>
+
+      {/* Case Study Overlay */}
+      <AnimatePresence>
+        {openCaseStudy !== null && VENTURES[openCaseStudy]?.caseStudy && (
+          <VentureCaseStudy
+            key={VENTURES[openCaseStudy].name}
+            name={VENTURES[openCaseStudy].name}
+            fullName={'fullName' in VENTURES[openCaseStudy] ? (VENTURES[openCaseStudy] as { fullName?: string }).fullName : undefined}
+            tagline={VENTURES[openCaseStudy].tagline}
+            role={VENTURES[openCaseStudy].role}
+            description={VENTURES[openCaseStudy].description}
+            metrics={VENTURES[openCaseStudy].metrics}
+            accentColor={VENTURES[openCaseStudy].accentColor}
+            caseStudy={VENTURES[openCaseStudy].caseStudy}
+            onClose={handleCloseCaseStudy}
+          />
+        )}
+      </AnimatePresence>
     </section>
   );
 }

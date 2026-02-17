@@ -3,17 +3,22 @@
 import { motion } from 'framer-motion';
 import { PERSONAL, EDUCATION } from '@/lib/constants';
 import { useInView } from '@/hooks/useInView';
+import { useParallax } from '@/hooks/useParallax';
 import CountUp from './CountUp';
 
 export default function About() {
   const [sectionRef, sectionInView] = useInView<HTMLElement>({ threshold: 0.1 });
+  const { ref: parallaxRef, labelX, headingY, decorY } = useParallax();
   const [quoteRef, quoteInView] = useInView<HTMLDivElement>({ threshold: 0.3 });
   const [statsRef, statsInView] = useInView<HTMLDivElement>({ threshold: 0.3 });
 
   return (
     <section
       id="about"
-      ref={sectionRef}
+      ref={(el) => {
+        (sectionRef as React.MutableRefObject<HTMLElement | null>).current = el;
+        (parallaxRef as React.MutableRefObject<HTMLElement | null>).current = el;
+      }}
       className="relative py-20 md:py-32 lg:py-48 px-6 md:px-12 lg:px-24"
     >
       {/* Section label */}
@@ -22,6 +27,7 @@ export default function About() {
         initial={{ opacity: 0 }}
         animate={sectionInView ? { opacity: 1 } : {}}
         transition={{ duration: 0.8 }}
+        style={{ x: labelX }}
       >
         S.02 &mdash; About
       </motion.div>
@@ -119,9 +125,9 @@ export default function About() {
       </div>
 
       {/* Decorative corner element */}
-      <div className="absolute bottom-6 right-6 md:right-12 lg:right-24 font-mono text-caption text-offwhite/15">
+      <motion.div className="absolute bottom-6 right-6 md:right-12 lg:right-24 font-mono text-caption text-offwhite/15" style={{ y: decorY }}>
         <div>S.02</div>
-      </div>
+      </motion.div>
     </section>
   );
 }

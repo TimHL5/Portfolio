@@ -1,13 +1,15 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion';
 import { NAV_SECTIONS } from '@/lib/constants';
 import { useScrollProgress } from '@/hooks/useScrollProgress';
 
 export default function Navigation() {
   const { activeSection } = useScrollProgress();
   const [menuOpen, setMenuOpen] = useState(false);
+  const { scrollYProgress } = useScroll();
+  const smoothProgress = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
 
   useEffect(() => {
     if (menuOpen) {
@@ -28,28 +30,45 @@ export default function Navigation() {
 
   return (
     <>
-      {/* Dot navigation - right side */}
-      <nav className="fixed right-6 top-1/2 -translate-y-1/2 z-[100] hidden lg:flex flex-col gap-3">
-        {NAV_SECTIONS.map((section) => (
-          <button
-            key={section.id}
-            onClick={() => scrollToSection(section.id)}
-            className="group relative flex items-center justify-end"
-            aria-label={`Navigate to ${section.label}`}
-          >
-            <span className="absolute right-6 font-mono text-caption uppercase tracking-widest text-offwhite/0 group-hover:text-offwhite/60 transition-all duration-300 whitespace-nowrap">
-              {section.label}
-            </span>
-            <span
-              className={`block rounded-full transition-all duration-300 ${
-                activeSection === section.id
-                  ? 'w-3 h-3 bg-amber'
-                  : 'w-2 h-2 bg-offwhite/20 group-hover:bg-offwhite/50'
-              }`}
-            />
-          </button>
-        ))}
-      </nav>
+      {/* Mobile scroll progress bar */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-[2px] bg-amber/80 origin-left z-[200] lg:hidden"
+        style={{ scaleX: smoothProgress }}
+      />
+
+      {/* Desktop vertical scroll progress */}
+      <div className="fixed right-6 top-1/2 -translate-y-1/2 z-[100] hidden lg:flex items-center gap-3">
+        {/* Progress line */}
+        <div className="relative h-[200px] w-px bg-offwhite/5 overflow-hidden">
+          <motion.div
+            className="absolute top-0 left-0 w-full bg-amber origin-top"
+            style={{ height: '100%', scaleY: smoothProgress, boxShadow: '0 0 8px rgba(255,149,0,0.4)' }}
+          />
+        </div>
+
+        {/* Dot nav */}
+        <nav className="flex flex-col gap-3">
+          {NAV_SECTIONS.map((section) => (
+            <button
+              key={section.id}
+              onClick={() => scrollToSection(section.id)}
+              className="group relative flex items-center justify-end"
+              aria-label={`Navigate to ${section.label}`}
+            >
+              <span className="absolute right-6 font-mono text-caption uppercase tracking-widest text-offwhite/0 group-hover:text-offwhite/60 transition-all duration-300 whitespace-nowrap">
+                {section.label}
+              </span>
+              <span
+                className={`block rounded-full transition-all duration-300 ${
+                  activeSection === section.id
+                    ? 'w-3 h-3 bg-amber'
+                    : 'w-2 h-2 bg-offwhite/20 group-hover:bg-offwhite/50'
+                }`}
+              />
+            </button>
+          ))}
+        </nav>
+      </div>
 
       {/* Hamburger button */}
       <button

@@ -4,6 +4,7 @@ import { useState, useMemo, useRef, useCallback, Suspense } from 'react';
 import dynamic from 'next/dynamic';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from '@/hooks/useInView';
+import { useParallax } from '@/hooks/useParallax';
 import { useIsMobile } from '@/hooks/useIsMobile';
 import MobileExperience from './MobileExperience';
 import { LocationGroup, groupExperiencesByLocation } from './utils';
@@ -85,6 +86,7 @@ function DetailPanel({ location }: { location: LocationGroup }) {
 
 export default function Globe() {
   const [sectionRef, sectionInView] = useInView<HTMLElement>({ threshold: 0.05 });
+  const { ref: parallaxRef, labelX, decorY } = useParallax();
   const [activeLocation, setActiveLocation] = useState<LocationGroup | null>(null);
   const [targetLocationName, setTargetLocationName] = useState<string | undefined>(undefined);
   const isMobile = useIsMobile(1024);
@@ -104,7 +106,10 @@ export default function Globe() {
   return (
     <section
       id="experience"
-      ref={sectionRef}
+      ref={(el) => {
+        (sectionRef as React.MutableRefObject<HTMLElement | null>).current = el;
+        (parallaxRef as React.MutableRefObject<HTMLElement | null>).current = el;
+      }}
       className="relative py-20 md:py-32 lg:py-48 px-6 md:px-12 lg:px-24"
     >
       {/* Section header */}
@@ -113,6 +118,7 @@ export default function Globe() {
         initial={{ opacity: 0 }}
         animate={sectionInView ? { opacity: 1 } : {}}
         transition={{ duration: 0.8 }}
+        style={{ x: labelX }}
       >
         S.04 &mdash; Experience
       </motion.div>
@@ -240,9 +246,9 @@ export default function Globe() {
       )}
 
       {/* Decorative */}
-      <div className="absolute bottom-6 right-6 md:right-12 lg:right-24 font-mono text-caption text-offwhite/15">
+      <motion.div className="absolute bottom-6 right-6 md:right-12 lg:right-24 font-mono text-caption text-offwhite/15" style={{ y: decorY }}>
         <div>S.04</div>
-      </div>
+      </motion.div>
     </section>
   );
 }
