@@ -74,7 +74,7 @@ export default function Ventures() {
       className="relative py-20 md:py-32 lg:py-48"
     >
       {/* Section header */}
-      <div className="px-6 md:px-12 lg:px-24 mb-10 md:mb-16">
+      <div className="max-w-[1440px] mx-auto px-8 md:px-16 lg:px-32 mb-10 md:mb-16">
         <motion.div
           className="font-mono text-caption text-offwhite/30 uppercase tracking-[0.3em] mb-6"
           initial={{ opacity: 0 }}
@@ -107,7 +107,7 @@ export default function Ventures() {
       {/* Horizontal scroll container */}
       <motion.div
         ref={scrollContainerRef}
-        className="flex gap-4 md:gap-6 px-6 md:px-12 lg:px-24 overflow-x-auto horizontal-scroll snap-x snap-mandatory pb-8"
+        className="flex gap-4 md:gap-6 px-8 md:px-16 lg:px-32 overflow-x-auto horizontal-scroll snap-x snap-mandatory pb-8 max-w-[1440px] mx-auto"
         style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
@@ -147,7 +147,7 @@ export default function Ventures() {
       </div>
 
       {/* Decorative */}
-      <motion.div className="absolute bottom-6 right-6 md:right-12 lg:right-24 font-mono text-caption text-offwhite/15" style={{ y: decorY }}>
+      <motion.div className="absolute bottom-6 right-8 md:right-16 lg:right-32 font-mono text-caption text-offwhite/15" style={{ y: decorY }}>
         <div>S.03</div>
       </motion.div>
 

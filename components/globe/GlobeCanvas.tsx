@@ -8,12 +8,14 @@ interface GlobeCanvasProps {
   onActiveLocationChange: (location: LocationGroup) => void;
   activeLocationName: string;
   targetLocationName?: string;
+  onCityClick?: (location: LocationGroup) => void;
 }
 
 export default function GlobeCanvas({
   onActiveLocationChange,
   activeLocationName,
   targetLocationName,
+  onCityClick,
 }: GlobeCanvasProps) {
   return (
     <Canvas
@@ -26,6 +28,7 @@ export default function GlobeCanvas({
         onActiveLocationChange={onActiveLocationChange}
         activeLocationName={activeLocationName}
         targetLocationName={targetLocationName}
+        onCityClick={onCityClick}
       />
     </Canvas>
   );

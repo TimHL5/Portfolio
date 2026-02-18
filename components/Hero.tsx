@@ -120,7 +120,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex flex-col justify-center px-6 md:px-12 lg:px-24 overflow-hidden"
+      className="relative min-h-screen flex flex-col justify-center overflow-hidden"
     >
       {/* Ambient background */}
       <ParticleField />
@@ -140,7 +140,7 @@ export default function Hero() {
       </div>
 
       {/* Top bar - coordinates and clock */}
-      <div className="absolute top-6 left-6 md:left-12 lg:left-24 flex items-center gap-6">
+      <div className="absolute top-6 left-8 md:left-16 lg:left-32 flex items-center gap-6">
         <BostonClock />
         <span className="hidden sm:inline font-mono text-caption text-offwhite/20 tracking-widest">
           42.3601°N 71.0589°W
@@ -148,7 +148,7 @@ export default function Hero() {
       </div>
 
       {/* Main content */}
-      <div className="relative z-10 mt-20 md:mt-0">
+      <div className="relative z-10 mt-20 md:mt-0 max-w-[1440px] mx-auto w-full px-8 md:px-16 lg:px-32">
         {/* Small label above name */}
         <motion.div
           className="font-mono text-caption text-offwhite/40 uppercase tracking-[0.15em] md:tracking-[0.3em] mb-6"
@@ -298,7 +298,7 @@ export default function Hero() {
       </motion.div>
 
       {/* Decorative corner element */}
-      <div className="absolute bottom-6 right-6 md:right-12 lg:right-24 font-mono text-caption text-offwhite/15">
+      <div className="absolute bottom-6 right-8 md:right-16 lg:right-32 font-mono text-caption text-offwhite/15">
         <div>S.01</div>
       </div>
     </section>

@@ -12,12 +12,14 @@ interface GlobeSceneProps {
   onActiveLocationChange: (location: LocationGroup) => void;
   activeLocationName: string;
   targetLocationName?: string;
+  onCityClick?: (location: LocationGroup) => void;
 }
 
 export default function GlobeScene({
   onActiveLocationChange,
   activeLocationName,
   targetLocationName,
+  onCityClick,
 }: GlobeSceneProps) {
   const groupRef = useRef<THREE.Group>(null);
   const activeIndexRef = useRef(0);
@@ -120,6 +122,7 @@ export default function GlobeScene({
             key={loc.name}
             location={loc}
             isActive={loc.name === activeLocationName}
+            onClick={() => onCityClick?.(loc)}
           />
         ))}
       </group>

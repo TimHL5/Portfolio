@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useMemo } from 'react';
+import { useRef, useMemo, useCallback } from 'react';
 import * as THREE from 'three';
 import { useFrame } from '@react-three/fiber';
 import { Html } from '@react-three/drei';
@@ -9,12 +9,13 @@ import { latLngToVector3, GLOBE_RADIUS, LocationGroup } from './utils';
 interface LocationPinProps {
   location: LocationGroup;
   isActive: boolean;
+  onClick?: () => void;
 }
 
 const PIN_COLOR = '#FF9500';
 const POLE_HEIGHT = 0.18;
 
-export default function LocationPin({ location, isActive }: LocationPinProps) {
+export default function LocationPin({ location, isActive, onClick }: LocationPinProps) {
   const position = useMemo(
     () => latLngToVector3(location.lat, location.lng, GLOBE_RADIUS, 0.01),
     [location.lat, location.lng]
@@ -45,6 +46,25 @@ export default function LocationPin({ location, isActive }: LocationPinProps) {
     });
     return new THREE.Line(geo, mat);
   }, []);
+
+  // Drag-vs-click detection
+  const pointerDownPos = useRef<{ x: number; y: number } | null>(null);
+
+  const handlePointerDown = useCallback((e: React.PointerEvent) => {
+    pointerDownPos.current = { x: e.clientX, y: e.clientY };
+  }, []);
+
+  const handleClick = useCallback((e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (pointerDownPos.current) {
+      const dx = Math.abs(e.clientX - pointerDownPos.current.x);
+      const dy = Math.abs(e.clientY - pointerDownPos.current.y);
+      if (dx + dy < 5) {
+        onClick?.();
+      }
+    }
+    pointerDownPos.current = null;
+  }, [onClick]);
 
   // Smooth lerped transitions for active/inactive states
   useFrame(() => {
@@ -92,13 +112,15 @@ export default function LocationPin({ location, isActive }: LocationPinProps) {
         position={[0, 0, POLE_HEIGHT + 0.02]}
         center
         occlude
-        style={{ pointerEvents: 'none' }}
+        style={{ pointerEvents: 'auto', cursor: 'pointer' }}
       >
         <div
-          className={`flex items-center gap-1.5 px-2 py-1 rounded whitespace-nowrap select-none transition-all duration-500 ${
+          onPointerDown={handlePointerDown}
+          onClick={handleClick}
+          className={`flex items-center gap-1.5 px-2 py-1 rounded whitespace-nowrap select-none transition-all duration-500 cursor-pointer ${
             isActive
               ? 'bg-[#0A0A0A]/90 border border-[#FF9500]/60 shadow-[0_0_12px_rgba(255,149,0,0.2)]'
-              : 'bg-[#0A0A0A]/60 border border-offwhite/10'
+              : 'bg-[#0A0A0A]/60 border border-offwhite/10 hover:border-offwhite/30'
           }`}
           style={{
             transform: `scale(${isActive ? 1.1 : 0.85})`,

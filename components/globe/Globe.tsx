@@ -111,8 +111,9 @@ export default function Globe() {
         (sectionRef as React.MutableRefObject<HTMLElement | null>).current = el;
         (parallaxRef as React.MutableRefObject<HTMLElement | null>).current = el;
       }}
-      className="relative py-20 md:py-32 lg:py-48 px-6 md:px-12 lg:px-24"
+      className="relative py-20 md:py-32 lg:py-48"
     >
+      <div className="max-w-[1440px] mx-auto px-8 md:px-16 lg:px-32">
       {/* Section header */}
       <motion.div
         className="font-mono text-caption text-offwhite/30 uppercase tracking-[0.3em] mb-6"
@@ -173,6 +174,7 @@ export default function Globe() {
                   onActiveLocationChange={setActiveLocation}
                   activeLocationName={activeLocation?.name ?? ''}
                   targetLocationName={targetLocationName}
+                  onCityClick={handleCityClick}
                 />
               </Suspense>
             </div>
@@ -247,9 +249,10 @@ export default function Globe() {
           </div>
         </motion.div>
       )}
+      </div>
 
       {/* Decorative */}
-      <motion.div className="absolute bottom-6 right-6 md:right-12 lg:right-24 font-mono text-caption text-offwhite/15" style={{ y: decorY }}>
+      <motion.div className="absolute bottom-6 right-8 md:right-16 lg:right-32 font-mono text-caption text-offwhite/15" style={{ y: decorY }}>
         <div>S.04</div>
       </motion.div>
     </section>

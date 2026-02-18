@@ -52,12 +52,12 @@ export default function Contact() {
         (sectionRef as React.MutableRefObject<HTMLElement | null>).current = el;
         (parallaxRef as React.MutableRefObject<HTMLElement | null>).current = el;
       }}
-      className="relative min-h-screen flex flex-col justify-center px-6 md:px-12 lg:px-24 py-20 md:py-32"
+      className="relative min-h-screen flex flex-col justify-center py-20 md:py-32"
     >
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal to-transparent" />
 
-      <div className="relative z-10">
+      <div className="relative z-10 max-w-[1440px] mx-auto w-full px-8 md:px-16 lg:px-32">
         {/* Section label */}
         <motion.div
           className="font-mono text-caption text-offwhite/30 uppercase tracking-[0.15em] md:tracking-[0.3em] mb-8 md:mb-12"
